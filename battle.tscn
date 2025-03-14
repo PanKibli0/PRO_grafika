@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=12 format=3 uid="uid://gioqd05hgd0g"]
 
 [ext_resource type="Script" uid="uid://fkkqunly1lwo" path="res://grid_map.gd" id="1_ip7xm"]
 [ext_resource type="Script" uid="uid://c5jjg114m8suk" path="res://camera_3d.gd" id="2_oxp8w"]
 [ext_resource type="PackedScene" uid="uid://bq2ur7tssc2y3" path="res://units/unit.tscn" id="3_7sfm4"]
+[ext_resource type="Script" uid="uid://cwjc26o4o80ou" path="res://unit_list.gd" id="4_6t8i5"]
+[ext_resource type="Script" uid="uid://dp6upvyfg4eqi" path="res://mouse_controller.gd" id="4_i431l"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w7wwj"]
 albedo_color = Color(1, 0, 1, 0.564706)
@@ -51,12 +53,24 @@ data = {
 script = ExtResource("1_ip7xm")
 metadata/_editor_floor_ = Vector3(0, -1, 0)
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera" type="Camera3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4, 0)
 script = ExtResource("2_oxp8w")
 
-[node name="Unit" parent="." instance=ExtResource("3_7sfm4")]
+[node name="MouseController" type="Node" parent="Camera"]
+unique_name_in_owner = true
+script = ExtResource("4_i431l")
+
+[node name="Units" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_6t8i5")
+
+[node name="Unit1" parent="Units" instance=ExtResource("3_7sfm4")]
 unique_name_in_owner = true
 
-[node name="UnitList" type="Node3D" parent="."]
+[node name="Unit2" parent="Units" instance=ExtResource("3_7sfm4")]
+unique_name_in_owner = true
+
+[node name="Unit3" parent="Units" instance=ExtResource("3_7sfm4")]
+unique_name_in_owner = true
