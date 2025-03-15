@@ -12,13 +12,12 @@ func _input(event):
 		
 		_select_cell(cell)
 
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		#and unit.target_position == unit.position
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and !unit.has_moved:
 		var cell = _get_tile_at_mouse_position(event.position)
 		
 		if cell != Vector3i(unit.target_position):
-			print("ruch")
 			unit.target_position = grid.map_to_local(cell)
+			grid.hide()
 
 func _get_tile_at_mouse_position(mouse_position) -> Vector3i:
 	var space_state = camera.get_world_3d().direct_space_state
