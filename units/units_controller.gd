@@ -1,6 +1,6 @@
 extends Node
 
-@onready var units = %Units
+
 @onready var mouseController = %MouseController
 @onready var grid = %Grid
 
@@ -42,7 +42,6 @@ func _compare_initiative(unit1: Node, unit2: Node) -> int:
 func _change_active_unit():
 	_set_active_unit()
 	
-	
 	grid.set_cell_item(change_cell, 0)
 		
 	active_unit_index = (active_unit_index + 1) % units_list.size()
@@ -50,7 +49,7 @@ func _change_active_unit():
 	
 	change_cell = grid.local_to_map(units_list[active_unit_index].global_transform.origin)
 	grid.set_cell_item(change_cell, 2)
-	grid.show()
+
 	
 func _set_active_unit():
 	for i in range(units_list.size()):

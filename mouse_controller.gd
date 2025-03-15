@@ -17,7 +17,7 @@ func _input(event):
 		
 		if cell != Vector3i(unit.target_position):
 			unit.target_position = grid.map_to_local(cell)
-			grid.hide()
+			
 
 func _get_tile_at_mouse_position(mouse_position) -> Vector3i:
 	var space_state = camera.get_world_3d().direct_space_state
