@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci06386ybhtnl"]
+
+[ext_resource type="MeshLibrary" uid="uid://dp5mwa4qff5ye" path="res://grid_mesh.tres" id="1_65i6o"]
+[ext_resource type="Script" uid="uid://fkkqunly1lwo" path="res://grid.gd" id="2_sle3t"]
+
+[node name="Grid" type="GridMap"]
+mesh_library = ExtResource("1_65i6o")
+cell_size = Vector3(1, 1, 1)
+script = ExtResource("2_sle3t")

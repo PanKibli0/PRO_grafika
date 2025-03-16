@@ -1,6 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq2ur7tssc2y3"]
+[gd_scene load_steps=8 format=3 uid="uid://bq2ur7tssc2y3"]
 
 [ext_resource type="Script" uid="uid://c4we5ic1upvog" path="res://units/unit.gd" id="1_btf8p"]
+[ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="2_gxe1c"]
+
+[sub_resource type="Resource" id="Resource_xx66i"]
+script = ExtResource("2_gxe1c")
+name = "Unit Name"
+max_health = 0
+attack = 0
+defense = 0
+damage_min = 0
+damage_max = 0
+initiative = 0
+movement = 0
+color = Color(0, 0, 0, 0.0117647)
+metadata/_custom_type_script = "uid://cukyhyanl175x"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k4y1u"]
 
@@ -15,6 +29,7 @@ height = 1.0
 
 [node name="Unit" type="CharacterBody3D"]
 script = ExtResource("1_btf8p")
+stats = SubResource("Resource_xx66i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

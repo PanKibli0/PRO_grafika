@@ -24,8 +24,8 @@ func _ready():
 # USUNAC LOSOWA POZYCJA
 func _get_random_grid_position() -> Vector3:
 	var grid_size = grid.gridSize
-	var random_x = randi_range(0, grid_size - 1)
-	var random_z = randi_range(0, grid_size - 1)
+	var random_x = randi_range(0, grid_size.x - 1)
+	var random_z = randi_range(0, grid_size.y - 1)
 	var local_position = grid.map_to_local(Vector3i(random_x, 0, random_z))
 	return Vector3(local_position.x, 0, local_position.z)
 	

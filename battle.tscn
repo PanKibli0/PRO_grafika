@@ -1,28 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=8 format=3 uid="uid://gioqd05hgd0g"]
 
-[ext_resource type="Script" uid="uid://fkkqunly1lwo" path="res://grid_map.gd" id="1_ip7xm"]
-[ext_resource type="MeshLibrary" uid="uid://dp5mwa4qff5ye" path="res://grid_mesh.tres" id="1_mhv3b"]
-[ext_resource type="Script" uid="uid://c5jjg114m8suk" path="res://camera_3d.gd" id="2_oxp8w"]
+[ext_resource type="Script" uid="uid://c5jjg114m8suk" path="res://camera.gd" id="2_oxp8w"]
 [ext_resource type="PackedScene" uid="uid://bq2ur7tssc2y3" path="res://units/unit.tscn" id="3_7sfm4"]
 [ext_resource type="Script" uid="uid://cwjc26o4o80ou" path="res://units/units_controller.gd" id="4_6t8i5"]
 [ext_resource type="Script" uid="uid://dp6upvyfg4eqi" path="res://mouse_controller.gd" id="4_i431l"]
 [ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/Faction1/knight.tres" id="6_0npn6"]
 [ext_resource type="Resource" uid="uid://bs3x3pt3d36gx" path="res://units/Faction1/peasant.tres" id="7_0npn6"]
+[ext_resource type="PackedScene" uid="uid://ci06386ybhtnl" path="res://grid.tscn" id="7_mhv3b"]
 
 [node name="Battle" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 0)
 
-[node name="Grid" type="GridMap" parent="."]
-unique_name_in_owner = true
-mesh_library = ExtResource("1_mhv3b")
-cell_size = Vector3(1, 1, 1)
-script = ExtResource("1_ip7xm")
-
 [node name="Camera" type="Camera3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4, 0)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 4, 6, 8)
+keep_aspect = 0
+fov = 105.0
 script = ExtResource("2_oxp8w")
 
 [node name="MouseController" type="Node" parent="Camera"]
@@ -44,3 +39,6 @@ stats = ExtResource("7_0npn6")
 [node name="Unit3" parent="Units" instance=ExtResource("3_7sfm4")]
 unique_name_in_owner = true
 stats = ExtResource("7_0npn6")
+
+[node name="Grid" parent="." instance=ExtResource("7_mhv3b")]
+unique_name_in_owner = true

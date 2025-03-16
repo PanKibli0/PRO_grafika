@@ -9,14 +9,15 @@ var actual_health: int
 @export var stats: UnitStats
 @onready var model = %Model
 
-@onready var grid: GridMap
 var has_moved = false
 
 
 func _ready():
+	print(self.name)
 	print(stats)
 	
 	self.set_process(false)
+	
 	actual_health = stats.max_health
 	
 	# KOLOR DLA JEDNOSTKI
@@ -29,6 +30,7 @@ func _ready():
 func _physics_process(_delta):
 	var direction = (target_position - global_transform.origin).normalized()
 	
+	
 	if global_transform.origin.distance_to(target_position) > 0.1:  
 		if direction.length() > 0.1:
 			look_at(target_position, Vector3.UP)
@@ -38,6 +40,7 @@ func _physics_process(_delta):
 		velocity = Vector3.ZERO
 		if has_moved:  
 			has_moved = false
+			global_transform.origin = target_position
 			emit_signal("movement_finished")
 			
 		
