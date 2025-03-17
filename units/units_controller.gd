@@ -40,8 +40,12 @@ func _compare_initiative(unit1: Node, unit2: Node) -> int:
 	return 0
 	
 func _change_active_unit():
+	
+	print(change_cell)
 	_set_active_unit()
 	
+	
+#	RYSWNIAE KOKNRETNEGO RUCHU i ATKAU DLA JEDNOSTKEK
 	grid.set_cell_item(change_cell, 0)
 		
 	active_unit_index = (active_unit_index + 1) % units_list.size()
