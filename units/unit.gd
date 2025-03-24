@@ -5,18 +5,17 @@ signal movement_finished
 
 var target_position: Vector3 
 var actual_health: int 
-@export_range(1.0, 10.0) var speed = 8.0
+var speed = 8.0
 @export var stats: UnitStats
 @onready var model = %Model
 
-var has_moved = false
-
+var has_moved := false
 
 func _ready():
-	print(self.name)
-	print(stats)
+	#print(self.name)
+	#print(stats)
 	
-	self.set_process(false)
+	self.set_physics_process(false)
 	
 	actual_health = stats.max_health
 	
@@ -28,21 +27,21 @@ func _ready():
 		
 	
 func _physics_process(_delta):
-	var direction = (target_position - global_transform.origin).normalized()
 	
+	target_position.y = global_transform.origin.y
+	var direction = (target_position - global_transform.origin)
+	look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
 	
-	if global_transform.origin.distance_to(target_position) > 0.1:  
-		if direction.length() > 0.1:
-			look_at(target_position, Vector3.UP)
+	if direction.length() > 0.1:	
+		direction = direction.normalized()
 		velocity = direction * speed
 		has_moved = true
 	else:
 		velocity = Vector3.ZERO
-		if has_moved:  
+		if has_moved:
 			has_moved = false
 			global_transform.origin = target_position
 			emit_signal("movement_finished")
-			
-		
+
 	move_and_slide()
 	

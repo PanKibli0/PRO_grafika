@@ -16,31 +16,33 @@ movement = 0
 color = Color(0, 0, 0, 0.0117647)
 metadata/_custom_type_script = "uid://cukyhyanl175x"
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k4y1u"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_gxe1c"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btf8p"]
-albedo_color = Color(1, 0.647059, 0.0392157, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_gxe1c"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ctwoc"]
-material = SubResource("StandardMaterial3D_btf8p")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gxe1c"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_2atv2"]
-height = 1.0
+[sub_resource type="BoxMesh" id="BoxMesh_xx66i"]
+material = SubResource("StandardMaterial3D_gxe1c")
+size = Vector3(1, 2, 1)
 
 [node name="Unit" type="CharacterBody3D"]
+motion_mode = 1
 script = ExtResource("1_btf8p")
 stats = SubResource("Resource_xx66i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_k4y1u")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
+shape = SubResource("BoxShape3D_gxe1c")
 disabled = true
+
+[node name="Eye" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, -0.4)
+mesh = SubResource("BoxMesh_gxe1c")
+skeleton = NodePath("../Model")
 
 [node name="Model" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_ctwoc")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.3)
-mesh = SubResource("CapsuleMesh_2atv2")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
+layers = 2
+mesh = SubResource("BoxMesh_xx66i")

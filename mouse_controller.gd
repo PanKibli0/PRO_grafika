@@ -9,15 +9,16 @@ var selected_cell: Vector3i = Vector3i.ZERO
 func _input(event):
 	if event is InputEventMouseMotion:  
 		var cell = _get_tile_at_mouse_position(event.position)
-		
 		_select_cell(cell)
 
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and !unit.has_moved:
+	if event.is_action_pressed("LMB") and !unit.has_moved:
 		var cell = _get_tile_at_mouse_position(event.position)
 		
 		if cell != Vector3i(unit.target_position):
-			unit.target_position = grid.map_to_local(cell)
-			
+			var target_position =  grid.map_to_local(cell)
+			unit.target_position = target_position
+			print(cell)
+		
 
 func _get_tile_at_mouse_position(mouse_position) -> Vector3i:
 	var space_state = camera.get_world_3d().direct_space_state
@@ -33,7 +34,7 @@ func _get_tile_at_mouse_position(mouse_position) -> Vector3i:
 	return selected_cell
 		
 func _select_cell(cell: Vector3i):
-	if selected_cell != cell:
+	if cell != selected_cell:
 		grid.set_cell_item(selected_cell, 0) 
 		selected_cell = cell
 		grid.set_cell_item(selected_cell, 1)  
