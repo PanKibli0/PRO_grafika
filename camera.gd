@@ -13,6 +13,8 @@ func _input(event):
 		transform.origin.y -= move_speed
 		zoom -= 0.1
 
+	transform.origin = standard_postion.lerp(transform.origin, zoom)
+
 	if zoom != 1.0:
 		if event.is_action_pressed("ui_right"):
 			transform.origin.x += move_speed
