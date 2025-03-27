@@ -1,5 +1,6 @@
 extends Node
 
+signal change_active_unit(position)
 
 @onready var mouseController = %MouseController
 @onready var grid = %Grid
@@ -38,7 +39,6 @@ func _get_random_grid_position() -> Vector3:
 	return Vector3(local_position.x, 0, local_position.z)
 	
 
-	
 func _change_active_unit():
 #	RYSWNIAE KOKNRETNEGO RUCHU i ATKAU DLA JEDNOSTKEK
 	grid.set_cell_item(change_cell, 0)

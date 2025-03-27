@@ -30,9 +30,11 @@ func _physics_process(_delta):
 	
 	target_position.y = global_transform.origin.y
 	var direction = (target_position - global_transform.origin)
-	look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
+	
+	
 	
 	if direction.length() > 0.1:	
+		look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
 		direction = direction.normalized()
 		velocity = direction * speed
 		has_moved = true

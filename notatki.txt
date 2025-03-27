@@ -1,2 +1,3 @@
-look_at => niekiedy gdzie indziej się patrzy (odraca zwrok)
-chyba jak masz po innej stornie myszke niż kierunek
+
+
+zoom nie dzialac
