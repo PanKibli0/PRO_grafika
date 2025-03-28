@@ -1,6 +1,5 @@
 extends Node
 
-signal change_active_unit(position)
 
 @onready var mouseController = %MouseController
 @onready var grid = %Grid
@@ -21,8 +20,6 @@ func _ready():
 		
 	_change_active_unit()
 	
-		
-		
 func _compare_initiative(unit1: Node, unit2: Node) -> int:
 	if unit1.stats.initiative > unit2.stats.initiative:
 		return 1
@@ -41,21 +38,12 @@ func _get_random_grid_position() -> Vector3:
 
 func _change_active_unit():
 #	RYSWNIAE KOKNRETNEGO RUCHU i ATKAU DLA JEDNOSTKEK
-	grid.set_cell_item(change_cell, 0)
+#	WYWOALNIE FUNKCJI Z GRID (REFERENCJA)
+	grid.set_cell_item(change_cell, 0) # wyjebac
 		
 	active_unit_index = (active_unit_index + 1) % units_list.size()
-	_set_active_unit()
 	mouseController.unit = units_list[active_unit_index]
 	
 	change_cell = grid.local_to_map(units_list[active_unit_index].global_transform.origin)
-	grid.set_cell_item(change_cell, 2)
-
-	
-func _set_active_unit():
-	for i in range(units_list.size()):
-		if i == active_unit_index:
-			units_list[i].set_physics_process(true) 
-		else:
-			units_list[i].set_physics_process(false)
-		
+	grid.set_cell_item(change_cell, 2) # wyjebac
 	
