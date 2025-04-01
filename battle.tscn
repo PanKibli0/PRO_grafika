@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=10 format=3 uid="uid://gioqd05hgd0g"]
 
 [ext_resource type="Script" uid="uid://c5jjg114m8suk" path="res://camera.gd" id="2_oxp8w"]
 [ext_resource type="PackedScene" uid="uid://bq2ur7tssc2y3" path="res://units/unit.tscn" id="3_7sfm4"]
@@ -7,6 +7,14 @@
 [ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/Faction1/knight.tres" id="6_0npn6"]
 [ext_resource type="Resource" uid="uid://bs3x3pt3d36gx" path="res://units/Faction1/peasant.tres" id="7_0npn6"]
 [ext_resource type="PackedScene" uid="uid://ci06386ybhtnl" path="res://grid.tscn" id="7_mhv3b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0npn6"]
+albedo_color = Color(0.454902, 0.172549, 0.0862745, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mhv3b"]
+material = SubResource("StandardMaterial3D_0npn6")
+size = Vector2(14, 12)
+center_offset = Vector3(7, 0, 6)
 
 [node name="Battle" type="Node3D"]
 
@@ -39,6 +47,10 @@ stats = ExtResource("7_0npn6")
 [node name="Unit3" parent="Units" instance=ExtResource("3_7sfm4")]
 unique_name_in_owner = true
 stats = ExtResource("7_0npn6")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.5)
+mesh = SubResource("PlaneMesh_mhv3b")
 
 [node name="Grid" parent="." instance=ExtResource("7_mhv3b")]
 unique_name_in_owner = true

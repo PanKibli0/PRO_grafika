@@ -10,17 +10,17 @@ size = Vector2(0.8, 0.8)
 [sub_resource type="BoxShape3D" id="BoxShape3D_oxp8w"]
 size = Vector3(1, 0.1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oxp8w"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdu5q"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_7sfm4"]
-material = SubResource("StandardMaterial3D_oxp8w")
+[sub_resource type="PlaneMesh" id="PlaneMesh_wbk4s"]
+material = SubResource("StandardMaterial3D_jdu5q")
 size = Vector2(0.8, 0.8)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0npn6"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iuoxi"]
 albedo_color = Color(0, 1, 1, 1)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_mhv3b"]
-material = SubResource("StandardMaterial3D_0npn6")
+[sub_resource type="PlaneMesh" id="PlaneMesh_pd1wx"]
+material = SubResource("StandardMaterial3D_iuoxi")
 size = Vector2(0.8, 0.8)
 
 [resource]
@@ -32,14 +32,14 @@ item/0/shapes = [SubResource("BoxShape3D_oxp8w"), Transform3D(1, 0, 0, 0, 1, 0, 
 item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/navigation_layers = 1
 item/1/name = ""
-item/1/mesh = SubResource("PlaneMesh_7sfm4")
+item/1/mesh = SubResource("PlaneMesh_wbk4s")
 item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/mesh_cast_shadow = 1
 item/1/shapes = []
 item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/navigation_layers = 1
 item/2/name = ""
-item/2/mesh = SubResource("PlaneMesh_mhv3b")
+item/2/mesh = SubResource("PlaneMesh_pd1wx")
 item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/2/mesh_cast_shadow = 1
 item/2/shapes = []

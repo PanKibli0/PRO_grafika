@@ -6,7 +6,7 @@ extends Node
 
 var active_unit_index = -1
 var units_list = []
-var change_cell: Vector3
+
 
 func _ready():
 	units_list = get_children()
@@ -29,7 +29,7 @@ func _compare_initiative(unit1: Node, unit2: Node) -> int:
 	
 # USUNAC LOSOWA POZYCJA
 func _get_random_grid_position() -> Vector3:
-	var grid_size = grid.gridSize
+	var grid_size = grid.grid_size
 	var random_x = randi_range(0, grid_size.x - 1)
 	var random_z = randi_range(0, grid_size.y - 1)
 	var local_position = grid.map_to_local(Vector3i(random_x, 0, random_z))
@@ -37,13 +37,13 @@ func _get_random_grid_position() -> Vector3:
 	
 
 func _change_active_unit():
-#	RYSWNIAE KOKNRETNEGO RUCHU i ATKAU DLA JEDNOSTKEK
-#	WYWOALNIE FUNKCJI Z GRID (REFERENCJA)
-	grid.set_cell_item(change_cell, 0) # wyjebac
+	grid.clear_grid()
 		
 	active_unit_index = (active_unit_index + 1) % units_list.size()
 	mouseController.unit = units_list[active_unit_index]
 	
-	change_cell = grid.local_to_map(units_list[active_unit_index].global_transform.origin)
-	grid.set_cell_item(change_cell, 2) # wyjebac
+	var unit_position = grid.local_to_map(units_list[active_unit_index].global_transform.origin)
+	grid.draw_move(unit_position, units_list[active_unit_index].stats.movement)
+	
+	
 	
