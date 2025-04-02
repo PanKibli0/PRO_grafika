@@ -8,6 +8,7 @@ signal movement_finished
 
 var target_position: Vector3 
 var actual_health: int 
+var amount: int = 1
 var speed = 8.0
 var is_moving := false
 var tween: Tween = null
