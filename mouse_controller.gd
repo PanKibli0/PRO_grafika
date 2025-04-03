@@ -11,7 +11,7 @@ func _input(event):
 		
 	if event.is_action_pressed("LMB") and !unit.is_moving:
 		var cell = _get_tile_at_mouse_position(event.position)
-		#grid.selected_cell = Vector3i(-1,-1,-1)
+		
 		if cell != Vector3i(unit.target_position):
 			var target_position = grid.map_to_local(cell)
 			unit.move(target_position) # PORUSZANIE AKTYWNA JEDNSOTKA
