@@ -1,3 +1,4 @@
+*UNIT>TEXT => ZROBIC ABY ZWSZE BYL TAKI SAM
+albo postawic na canvas i wtedyr ruch znika i sie opjawia jak skonczyl ale nw
 
-
-zoom nie dzialac
+*Cell poza grid i nie ostani sleected

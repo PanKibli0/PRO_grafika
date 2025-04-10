@@ -12,7 +12,7 @@ func _input(event):
 	if event.is_action_pressed("LMB") and !unit.is_moving:
 		var cell = _get_tile_at_mouse_position(event.position)
 		
-		if cell != Vector3i(unit.target_position):
+		if cell != Vector3i(unit.target_position) and cell != Vector3i(-1,-1,-1):
 			var target_position = grid.map_to_local(cell)
 			unit.move(target_position) # PORUSZANIE AKTYWNA JEDNSOTKA
 			print(cell)
@@ -25,6 +25,7 @@ func _get_tile_at_mouse_position(mouse_position) -> Vector3i:
 	
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	var result = space_state.intersect_ray(query)
+	
 	
 	if result.has("position"):
 		return grid.local_to_map(result.position)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bq2ur7tssc2y3"]
+[gd_scene load_steps=11 format=3 uid="uid://bq2ur7tssc2y3"]
 
 [ext_resource type="Script" uid="uid://c4we5ic1upvog" path="res://units/unit.gd" id="1_btf8p"]
 [ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="2_gxe1c"]
@@ -29,6 +29,23 @@ size = Vector3(1, 2, 1)
 [sub_resource type="ViewportTexture" id="ViewportTexture_xx66i"]
 viewport_path = NodePath("HP/SubViewport")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hkgx6"]
+bg_color = Color(0.988235, 0.6, 0.6, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 45
+corner_radius_top_right = 45
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 45
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="GDScript" id="GDScript_gxe1c"]
+
 [node name="Unit" type="CharacterBody3D"]
 motion_mode = 1
 script = ExtResource("1_btf8p")
@@ -58,3 +75,25 @@ texture = SubResource("ViewportTexture_xx66i")
 [node name="SubViewport" type="SubViewport" parent="HP"]
 disable_3d = true
 transparent_bg = true
+size = Vector2i(100, 50)
+
+[node name="AmountLabel" type="Label" parent="HP/SubViewport"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -19.5
+offset_right = 37.5
+offset_bottom = 19.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_hkgx6")
+text = "99999"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("GDScript_gxe1c")

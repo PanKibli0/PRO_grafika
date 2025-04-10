@@ -5,6 +5,7 @@ signal movement_finished
 
 @export var stats: UnitStats
 @onready var model = %Model
+@onready var amountLabel = %AmountLabel
 
 var target_position: Vector3 
 var actual_health: int 
@@ -14,6 +15,8 @@ var is_moving := false
 var tween: Tween = null
 
 func _ready():
+	amount = randi_range(1,100000)
+	amountLabel.text = str(amount)
 	self.set_physics_process(false)
 	actual_health = stats.max_health
 	

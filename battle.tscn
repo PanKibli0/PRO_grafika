@@ -49,7 +49,9 @@ unique_name_in_owner = true
 stats = ExtResource("7_0npn6")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.5)
+layers = 524288
 mesh = SubResource("PlaneMesh_mhv3b")
 
 [node name="Grid" parent="." instance=ExtResource("7_mhv3b")]
