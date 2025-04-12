@@ -16,16 +16,6 @@ movement = 0
 color = Color(0, 0, 0, 0.0117647)
 metadata/_custom_type_script = "uid://cukyhyanl175x"
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gxe1c"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_gxe1c"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gxe1c"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_xx66i"]
-material = SubResource("StandardMaterial3D_gxe1c")
-size = Vector3(1, 2, 1)
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_xx66i"]
 viewport_path = NodePath("HP/SubViewport")
 
@@ -46,29 +36,24 @@ expand_margin_bottom = 5.0
 
 [sub_resource type="GDScript" id="GDScript_gxe1c"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gxe1c"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gxe1c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gxe1c"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xx66i"]
+material = SubResource("StandardMaterial3D_gxe1c")
+size = Vector3(1, 2, 1)
+
 [node name="Unit" type="CharacterBody3D"]
+input_ray_pickable = false
 motion_mode = 1
 script = ExtResource("1_btf8p")
 stats = SubResource("Resource_xx66i")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
-shape = SubResource("BoxShape3D_gxe1c")
-disabled = true
-
-[node name="Eye" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, -0.4)
-mesh = SubResource("BoxMesh_gxe1c")
-skeleton = NodePath("../Model")
-
-[node name="Model" type="MeshInstance3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
-layers = 2
-mesh = SubResource("BoxMesh_xx66i")
-
 [node name="HP" type="Sprite3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2, 0)
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 1.6, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_xx66i")
 
@@ -97,3 +82,19 @@ text = "99999"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = SubResource("GDScript_gxe1c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
+shape = SubResource("BoxShape3D_gxe1c")
+disabled = true
+
+[node name="Eye" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, -0.4)
+mesh = SubResource("BoxMesh_gxe1c")
+skeleton = NodePath("../Model")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
+layers = 2
+mesh = SubResource("BoxMesh_xx66i")

@@ -1,5 +1,6 @@
 extends Node
 
+signal units_loaded
 
 @onready var mouseController = %MouseController
 @onready var grid = %Grid
@@ -11,7 +12,8 @@ var units_list = []
 func _ready():
 	units_list = get_children()
 	units_list.sort_custom(Callable(self, "_compare_initiative"))
-		
+	emit_signal("units_loaded")
+	
 	for unit in units_list:
 		unit.connect("movement_finished", Callable(self, "_change_active_unit"))
 		var r_pos = _get_random_grid_position()
@@ -45,5 +47,4 @@ func _change_active_unit():
 	var unit_position = grid.local_to_map(units_list[active_unit_index].global_transform.origin)
 	grid.draw_move(unit_position, units_list[active_unit_index].stats.movement)
 	
-	
-	
+#func 

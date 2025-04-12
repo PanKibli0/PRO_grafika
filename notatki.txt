@@ -2,3 +2,9 @@
 albo postawic na canvas i wtedyr ruch znika i sie opjawia jak skonczyl ale nw
 
 *Cell poza grid i nie ostani sleected
+
+==============================
+
+POZYCJA ZAPISANA W PAMIECI => ABY NIE MOZNA BYLO SIE RUSZYC 
+
+ALBO DOSTEP W %UNITS ablo w ouse_controller do units.posiitoin
