@@ -2,6 +2,7 @@ extends GridMap
 
 var grid_size: Vector2i = Vector2i(12, 10)
 var selected_cell: Vector3i = Vector3i(-1,-1,-1)
+var occupied_cells: Dictionary = {}
 
 func draw_move(middle: Vector3i, movement: int):
 	for x in range(-movement,movement+1):
@@ -11,7 +12,7 @@ func draw_move(middle: Vector3i, movement: int):
 				if cell_pos.x >= 0 and cell_pos.x < grid_size.x and cell_pos.z >= 0 and cell_pos.z < grid_size.y:
 					if x == 0 and y == 0:
 						set_cell_item(cell_pos, 2)  
-					else:
+					elif not is_cell_occupied(cell_pos):
 						set_cell_item(cell_pos, 0)
 					
 			
@@ -28,3 +29,15 @@ func select_cell(cell: Vector3i):
 			set_cell_item(selected_cell, 0)
 		selected_cell = cell
 		set_cell_item(selected_cell, 1)
+
+
+
+func is_cell_occupied(cell): return occupied_cells.has(cell)
+
+func occupy_cell(cell, unit): occupied_cells[cell] = unit
+	
+
+func free_oc_cell(cell):
+	if is_cell_occupied(cell):
+		occupied_cells.erase(cell)
+		

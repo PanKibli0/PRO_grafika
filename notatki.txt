@@ -5,6 +5,10 @@ albo postawic na canvas i wtedyr ruch znika i sie opjawia jak skonczyl ale nw
 
 ==============================
 
-POZYCJA ZAPISANA W PAMIECI => ABY NIE MOZNA BYLO SIE RUSZYC 
+DODAWANIE UNIT 
+ATAK / SMIERC
 
-ALBO DOSTEP W %UNITS ablo w ouse_controller do units.posiitoin
+** ATAK => KIERUNEk POZYCJI GDZIE STANAC
+** ATAK ---> LECZENIE
+
+WAIT +> MODYFIKACJA OCCUPIED< LISTA OD NOWA OD NOWEJ TURY I CHYBA TYLED

@@ -11,14 +11,17 @@ var units_list = []
 
 func _ready():
 	units_list = get_children()
-	units_list.sort_custom(Callable(self, "_compare_initiative"))
+	units_list.sort_custom(_compare_initiative)
 	emit_signal("units_loaded")
 	
 	for unit in units_list:
-		unit.connect("movement_finished", Callable(self, "_change_active_unit"))
+		unit.connect("movement_finished", _change_active_unit)
 		var r_pos = _get_random_grid_position()
 		unit.global_transform.origin = r_pos # USUNAC 
 		unit.target_position = r_pos # USUNAC 
+		
+		var cell_pos = grid.local_to_map(r_pos)
+		grid.occupy_cell(cell_pos, unit)
 		
 	_change_active_unit()
 	
@@ -47,4 +50,49 @@ func _change_active_unit():
 	var unit_position = grid.local_to_map(units_list[active_unit_index].global_transform.origin)
 	grid.draw_move(unit_position, units_list[active_unit_index].stats.movement)
 	
-#func 
+	print(units_list)
+	
+func _add_unit():
+	var new_unit_scene = preload("res://units/Unit.tscn")  # podmień ścieżkę
+	var unit = new_unit_scene.instantiate()
+	
+	var stats = UnitStats.new()
+	stats.name = "Debug Unit"
+	stats.max_health = 100
+	stats.attack = 10
+	stats.defense = 5
+	stats.damage_min = 4
+	stats.damage_max = 7
+	stats.initiative = randi_range(1, 20)
+	stats.movement = 3
+	stats.color = Color(randf(), randf(), randf())  # losowy kolor
+
+	unit.stats = stats
+
+	add_child(unit)
+
+	var r_pos = _get_random_grid_position()
+	unit.global_transform.origin = r_pos
+	unit.target_position = r_pos
+
+	var cell_pos = grid.local_to_map(r_pos)
+	grid.occupy_cell(cell_pos, unit)
+
+	unit.connect("movement_finished", _change_active_unit)
+	units_list.append(unit)
+	units_list.sort_custom(_compare_initiative)
+	
+	
+func _input(event: InputEvent):
+	if event.is_action_pressed("DEBUG1"):
+		_add_unit()
+	if event.is_action_pressed("WAIT") and units_list[active_unit_index].player == true:
+		print(units_list)
+		
+		print("WAIT")
+		units_list.append(units_list[active_unit_index])
+		units_list.remove_at(active_unit_index)
+		print(units_list)
+		
+	if event.is_action_pressed("DEFENSE") and units_list[active_unit_index].player == true:
+		_change_active_unit()

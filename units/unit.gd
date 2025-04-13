@@ -7,6 +7,7 @@ signal movement_finished
 @onready var model = %Model
 @onready var amountLabel = %AmountLabel
 
+var player = true
 var target_position: Vector3 
 var actual_health: int 
 var amount: int = 1
@@ -16,8 +17,7 @@ var tween: Tween = null
 
 func _ready():
 	amount = randi_range(1,100000)
-	amountLabel.text = str(amount)
-	self.set_physics_process(false)
+	amountLabel.text = str(amount)	
 	actual_health = stats.max_health
 	
 	# KOLOR DLA JEDNOSTKI
