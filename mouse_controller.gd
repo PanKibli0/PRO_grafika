@@ -33,13 +33,6 @@ func _get_tile_at_mouse_position(mouse_position) -> Vector3i:
 	
 
 	if result.has("position"):
-		#print_rich("\t[color=red] POS:", grid.local_to_map(result.position), "[/color]")
 		return grid.local_to_map(result.position)
 
-	
-	
 	return grid.selected_cell
-		
-		
-
-		

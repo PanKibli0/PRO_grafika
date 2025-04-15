@@ -17,10 +17,8 @@ func draw_move(middle: Vector3i, movement: int):
 					
 			
 func clear_grid():
-	var used_cells = get_used_cells()
 	selected_cell = Vector3i(-1,-1,-1)
-	for cell in used_cells:
-		set_cell_item(cell, -1)
+	clear()
 
 
 func select_cell(cell: Vector3i):
@@ -36,7 +34,6 @@ func is_cell_occupied(cell): return occupied_cells.has(cell)
 
 func occupy_cell(cell, unit): occupied_cells[cell] = unit
 	
-
 func free_oc_cell(cell):
 	if is_cell_occupied(cell):
 		occupied_cells.erase(cell)
