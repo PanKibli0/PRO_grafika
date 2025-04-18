@@ -1,4 +1,4 @@
-[gd_resource type="MeshLibrary" load_steps=8 format=3 uid="uid://dp5mwa4qff5ye"]
+[gd_resource type="MeshLibrary" load_steps=10 format=3 uid="uid://dp5mwa4qff5ye"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w7wwj"]
 albedo_color = Color(1, 0, 1, 0.564706)
@@ -23,6 +23,13 @@ albedo_color = Color(0, 1, 1, 1)
 material = SubResource("StandardMaterial3D_iuoxi")
 size = Vector2(0.8, 0.8)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbk4s"]
+albedo_color = Color(1, 0.411765, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iuoxi"]
+material = SubResource("StandardMaterial3D_wbk4s")
+size = Vector2(0.8, 0.8)
+
 [resource]
 item/0/name = ""
 item/0/mesh = SubResource("PlaneMesh_ip7xm")
@@ -45,3 +52,10 @@ item/2/mesh_cast_shadow = 1
 item/2/shapes = []
 item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/2/navigation_layers = 1
+item/3/name = ""
+item/3/mesh = SubResource("PlaneMesh_iuoxi")
+item/3/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/3/mesh_cast_shadow = 1
+item/3/shapes = []
+item/3/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/3/navigation_layers = 1

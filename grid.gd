@@ -14,7 +14,9 @@ func draw_move(middle: Vector3i, movement: int):
 						set_cell_item(cell_pos, 2)  
 					elif not is_cell_occupied(cell_pos):
 						set_cell_item(cell_pos, 0)
-					
+					else:
+						unit_on_cell(cell_pos)
+						set_cell_item(cell_pos, 3)
 			
 func clear_grid():
 	selected_cell = Vector3i(-1,-1,-1)
@@ -28,7 +30,9 @@ func select_cell(cell: Vector3i):
 		selected_cell = cell
 		set_cell_item(selected_cell, 1)
 
-
+func unit_on_cell(cell):
+	if occupied_cells[cell] is Unit:
+		print("UNIT")
 
 func is_cell_occupied(cell): return occupied_cells.has(cell)
 

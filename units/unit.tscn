@@ -17,7 +17,7 @@ color = Color(0, 0, 0, 0.0117647)
 metadata/_custom_type_script = "uid://cukyhyanl175x"
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xx66i"]
-viewport_path = NodePath("HP/SubViewport")
+viewport_path = NodePath("Amount/SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hkgx6"]
 bg_color = Color(0.988235, 0.6, 0.6, 1)
@@ -52,17 +52,17 @@ motion_mode = 1
 script = ExtResource("1_btf8p")
 stats = SubResource("Resource_xx66i")
 
-[node name="HP" type="Sprite3D" parent="."]
+[node name="Amount" type="Sprite3D" parent="."]
 transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 1.6, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_xx66i")
 
-[node name="SubViewport" type="SubViewport" parent="HP"]
+[node name="SubViewport" type="SubViewport" parent="Amount"]
 disable_3d = true
 transparent_bg = true
 size = Vector2i(100, 50)
 
-[node name="AmountLabel" type="Label" parent="HP/SubViewport"]
+[node name="AmountLabel" type="Label" parent="Amount/SubViewport"]
 unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -98,3 +98,9 @@ unique_name_in_owner = true
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
 layers = 2
 mesh = SubResource("BoxMesh_xx66i")
+
+[node name="HP_DEBUG" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+text = "HP:"

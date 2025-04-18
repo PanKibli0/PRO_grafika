@@ -7,18 +7,24 @@ signal movement_finished
 @onready var model = %Model
 @onready var amountLabel = %AmountLabel
 
-var player = true
+@onready var hp_d = %HP_DEBUG
+
 var target_position: Vector3 
 var actual_health: int 
 var amount: int = 1
 var speed = 8.0
+var player: bool = randi_range(1,2) % 2 
 var is_moving := false
 var tween: Tween = null
+
 
 func _ready():
 	amount = randi_range(1,100000)
 	amountLabel.text = str(amount)	
 	actual_health = stats.max_health
+	
+	hp_d.text = str(actual_health) +" / "+ str(stats.max_health)
+	
 	
 	# KOLOR DLA JEDNOSTKI
 	if model and model.get_active_material(0):
@@ -45,3 +51,22 @@ func _movement_finished():
 	is_moving = false
 	emit_signal("movement_finished")
 	
+func take_damage(enemy_amount, damage ,enemy_attack):
+	var act_damage
+	if enemy_attack > stats.attack:
+		act_damage = enemy_amount * damage * (1 + (enemy_attack-stats.defense) * 0.05 )
+	else:
+		act_damage = enemy_amount * damage * (1 + (enemy_attack-stats.defense) * 0.05 )
+		
+	change_amount((act_damage - actual_health) % stats.max_health)
+	hp_d.text = actual_health / stats.max_health
+	pass
+	
+func change_amount(change):
+	amount -= change
+	
+	amountLabel = amount
+	
+func killed():
+	print("KILLED")
+	pass
