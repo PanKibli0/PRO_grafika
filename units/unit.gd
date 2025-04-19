@@ -3,24 +3,27 @@ extends CharacterBody3D
 
 signal movement_finished
 
-@export var stats: UnitStats
+@onready var hp_d = %HP_DEBUG
+
 @onready var model = %Model
 @onready var amountLabel = %AmountLabel
 
-@onready var hp_d = %HP_DEBUG
+@export var stats: UnitStats
+var amount: int = 100
+var player: bool = randi_range(1,2) % 2 
+
 
 var target_position: Vector3 
 var actual_health: int 
-var amount: int = 1
-var speed = 8.0
-var player: bool = randi_range(1,2) % 2 
+var actual_amount: int = 1
+
 var is_moving := false
 var tween: Tween = null
 
 
 func _ready():
-	amount = randi_range(1,100000)
-	amountLabel.text = str(amount)	
+	actual_amount = randi_range(1,100000)
+	amountLabel.text = str(actual_amount)	
 	actual_health = stats.max_health
 	
 	hp_d.text = str(actual_health) +" / "+ str(stats.max_health)
@@ -43,7 +46,7 @@ func move(new_position: Vector3):
 		tween.kill()
 
 	tween = create_tween()
-	tween.tween_property(self, "global_transform:origin", target_position, target_position.distance_to(global_transform.origin) / speed).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "global_transform:origin", target_position, target_position.distance_to(global_transform.origin) / 8.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.finished.connect(_movement_finished)
 
 func _movement_finished():
@@ -59,7 +62,7 @@ func take_damage(enemy_amount, damage ,enemy_attack):
 		act_damage = enemy_amount * damage * (1 + (enemy_attack-stats.defense) * 0.05 )
 		
 	change_amount((act_damage - actual_health) % stats.max_health)
-	hp_d.text = actual_health / stats.max_health
+	hp_d.text = int( actual_health / stats.max_health)
 	pass
 	
 func change_amount(change):
