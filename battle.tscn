@@ -1,13 +1,23 @@
-[gd_scene load_steps=11 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=13 format=3 uid="uid://gioqd05hgd0g"]
 
-[ext_resource type="Script" uid="uid://c7e27ukvbsxub" path="res://battle.gd" id="1_mhv3b"]
-[ext_resource type="Script" uid="uid://c5jjg114m8suk" path="res://camera.gd" id="2_oxp8w"]
 [ext_resource type="PackedScene" uid="uid://bq2ur7tssc2y3" path="res://units/unit.tscn" id="3_7sfm4"]
 [ext_resource type="Script" uid="uid://cwjc26o4o80ou" path="res://units/units_controller.gd" id="4_6t8i5"]
 [ext_resource type="Script" uid="uid://dp6upvyfg4eqi" path="res://mouse_controller.gd" id="4_i431l"]
 [ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/Faction1/knight.tres" id="6_0npn6"]
 [ext_resource type="Resource" uid="uid://bs3x3pt3d36gx" path="res://units/Faction1/peasant.tres" id="7_0npn6"]
 [ext_resource type="PackedScene" uid="uid://ci06386ybhtnl" path="res://grid.tscn" id="7_mhv3b"]
+
+[sub_resource type="GDScript" id="GDScript_dw4jg"]
+
+[sub_resource type="GDScript" id="GDScript_0npn6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhv3b"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lcjiy"]
+material = SubResource("StandardMaterial3D_mhv3b")
+radius = 0.1
+height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0npn6"]
 albedo_color = Color(0.454902, 0.172549, 0.0862745, 1)
@@ -18,7 +28,7 @@ size = Vector2(14, 12)
 center_offset = Vector3(7, 0, 6)
 
 [node name="Battle" type="Node3D"]
-script = ExtResource("1_mhv3b")
+script = SubResource("GDScript_dw4jg")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 0)
@@ -28,11 +38,14 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 6, 7, 10)
 keep_aspect = 0
 fov = 105.0
-script = ExtResource("2_oxp8w")
+script = SubResource("GDScript_0npn6")
 
 [node name="MouseController" type="Node" parent="Camera"]
 unique_name_in_owner = true
 script = ExtResource("4_i431l")
+
+[node name="Marker" type="MeshInstance3D" parent="Camera/MouseController"]
+mesh = SubResource("SphereMesh_lcjiy")
 
 [node name="Units" type="Node" parent="."]
 unique_name_in_owner = true
@@ -50,34 +63,6 @@ stats = ExtResource("7_0npn6")
 unique_name_in_owner = true
 stats = ExtResource("7_0npn6")
 
-[node name="Unit4" parent="Units" instance=ExtResource("3_7sfm4")]
-unique_name_in_owner = true
-stats = ExtResource("7_0npn6")
-
-[node name="Unit5" parent="Units" instance=ExtResource("3_7sfm4")]
-unique_name_in_owner = true
-stats = ExtResource("7_0npn6")
-
-[node name="Unit6" parent="Units" instance=ExtResource("3_7sfm4")]
-unique_name_in_owner = true
-stats = ExtResource("7_0npn6")
-
-[node name="Unit7" parent="Units" instance=ExtResource("3_7sfm4")]
-unique_name_in_owner = true
-stats = ExtResource("7_0npn6")
-
-[node name="Unit8" parent="Units" instance=ExtResource("3_7sfm4")]
-unique_name_in_owner = true
-stats = ExtResource("7_0npn6")
-
-[node name="Unit9" parent="Units" instance=ExtResource("3_7sfm4")]
-unique_name_in_owner = true
-stats = ExtResource("7_0npn6")
-
-[node name="Unit10" parent="Units" instance=ExtResource("3_7sfm4")]
-unique_name_in_owner = true
-stats = ExtResource("7_0npn6")
-
 [node name="Floor" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.5)
@@ -86,3 +71,4 @@ mesh = SubResource("PlaneMesh_mhv3b")
 
 [node name="Grid" parent="." instance=ExtResource("7_mhv3b")]
 unique_name_in_owner = true
+cell_size = Vector3(1, 0.1, 1)

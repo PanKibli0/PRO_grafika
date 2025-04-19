@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=3 uid="uid://cxpfc44838ipi"]
+
+[ext_resource type="Script" uid="uid://72vwdrxq1yju" path="res://move_cell.gd" id="1_86x0r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4b74"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_86x0r"]
+material = SubResource("StandardMaterial3D_b4b74")
+size = Vector2(0.8, 0.8)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2lwrf"]
+points = PackedVector3Array(-0.4, 0, -0.4, -0.4, 0, 0.4, 0.4, 0, -0.4, 0.4, 0, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2x71"]
+albedo_color = Color(1, 0.996078, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6vnaw"]
+material = SubResource("StandardMaterial3D_f2x71")
+size = Vector2(0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nb82m"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fulmq"]
+material = SubResource("StandardMaterial3D_nb82m")
+size = Vector2(0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ah3f"]
+albedo_color = Color(1, 0.423529, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fbhnk"]
+material = SubResource("StandardMaterial3D_2ah3f")
+size = Vector2(0.8, 0.8)
+
+[node name="grid_mesh" type="Node3D"]
+
+[node name="MOVE_CELL" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_86x0r")
+skeleton = NodePath("")
+script = ExtResource("1_86x0r")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MOVE_CELL"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MOVE_CELL/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_2lwrf")
+
+[node name="SELECT_CELL" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_6vnaw")
+skeleton = NodePath("")
+
+[node name="UNIT_CELL" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_fulmq")
+skeleton = NodePath("")
+
+[node name="ENEMY_CELL" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_fbhnk")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ENEMY_CELL"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ENEMY_CELL/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_2lwrf")

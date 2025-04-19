@@ -23,7 +23,7 @@ var tween: Tween = null
 
 func _ready():
 	actual_amount = randi_range(1,100000)
-	amountLabel.text = str(actual_amount)	
+	amountLabel.text = str(stats.name)
 	actual_health = stats.max_health
 	
 	hp_d.text = str(actual_health) +" / "+ str(stats.max_health)

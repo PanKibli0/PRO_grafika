@@ -4,6 +4,7 @@ extends Node
 @onready var camera =  %Camera
 @onready var unit: Unit = null
 
+@onready var marker = $Marker
 
 func _input(event):
 	if event is InputEventMouseMotion:  
@@ -31,8 +32,22 @@ func _get_tile_at_mouse_position(mouse_position) -> Vector3i:
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	var result = space_state.intersect_ray(query)
 	
+		
+	
+	var hit_position: Vector3
+	if result.has("position"):
+		hit_position = result.position
+	else:
+		var ray_dir = (to - from).normalized()
+		var t = -from.y / ray_dir.y 
+		hit_position = from + ray_dir * t
+
+	marker.position = hit_position
 
 	if result.has("position"):
+		#print_rich("[color=yellow]",result.position,"[/color]")
+		#print_rich("[color=red]",grid.local_to_map(result.position),"[/color]")
 		return grid.local_to_map(result.position)
-
+	
+	
 	return grid.selected_cell

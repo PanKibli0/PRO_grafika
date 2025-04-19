@@ -1,10 +1,7 @@
 *Cell poza grid i nie ostani sleected
 
+* graficznie sie cos rozjechalo postawic UNIT na OK miejsce
+-- wypisac sordek cell i pivot i sordek Unit
 ==============================
 
 ATAK / SMIERC
-
-** ATAK => KIERUNEk POZYCJI GDZIE STANAC
-** ATAK ---> LECZENIE
-
-WAIT +> MODYFIKACJA OCCUPIED< LISTA OD NOWA OD NOWEJ TURY I CHYBA TYLED

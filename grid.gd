@@ -4,6 +4,8 @@ var grid_size: Vector2i = Vector2i(12, 10)
 var selected_cell: Vector3i = Vector3i(-1,-1,-1)
 var occupied_cells: Dictionary = {}
 
+
+
 func draw_move(middle: Vector3i, movement: int):
 	for x in range(-movement,movement+1):
 		for y in range(-movement,movement+1):
@@ -24,6 +26,8 @@ func clear_grid():
 
 
 func select_cell(cell: Vector3i):
+	
+		#selected_cell = Vector3i(-1, -1, -1)
 	if cell != selected_cell and get_cell_item(cell) == 0:
 		if selected_cell != Vector3i(-1, -1, -1):
 			set_cell_item(selected_cell, 0)
@@ -32,7 +36,7 @@ func select_cell(cell: Vector3i):
 
 func unit_on_cell(cell):
 	if occupied_cells[cell] is Unit:
-		print("UNIT")
+		pass
 
 func is_cell_occupied(cell): return occupied_cells.has(cell)
 
