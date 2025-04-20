@@ -20,8 +20,10 @@ func _input(event):
 		if id == 1: # ZMIENIC NA TYP CELL +> MOZE GLOBAL
 			op_move(cell)
 			
-		if id == 3: # DAC NA TYP CELL +> MOZE GLOBAB
+		if id == 3: # DAC NA TYP CELL +> MOZE GLOBAL
+			print(cell)
 			op_attack(cell)
+			
 			
 func op_move(cell): 
 	var world_pos = grid.map_to_local(cell)
@@ -32,6 +34,10 @@ func op_move(cell):
 	GLOBAL.active_unit.move(world_pos) # PORUSZANIE JEDNSOTKA
 	
 func op_attack(cell):
+	var attacked_unit = grid.get_unit(cell)
+	
+	attacked_unit.take_damage()
+	print_rich("[color=red]ATACKED[/color]")
 	pass
 
 func _get_tile_at_mouse_position(mouse_position) -> Array:

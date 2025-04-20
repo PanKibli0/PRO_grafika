@@ -23,9 +23,9 @@ func draw_move(middle: Vector3i, movement: int):
 				if cell_pos.z < 0 or cell_pos.z >= grid_size[1]: continue
 				if x == 0 and y == 0:
 					set_cell_item(cell_pos, cell_type.UNIT)
-				if not is_cell_occupied(cell_pos):
+				if not _is_cell_occupied(cell_pos):
 					set_cell_item(cell_pos, cell_type.MOVE)
-				elif enemy_on_cell(cell_pos):
+				elif _enemy_on_cell(cell_pos):
 					set_cell_item(cell_pos, cell_type.ENEMY)
 
 
@@ -42,7 +42,7 @@ func select_cell(cell: Vector3i):
 		set_cell_item(selected_cell, cell_type.SELECT)
 		
 
-func enemy_on_cell(cell):
+func _enemy_on_cell(cell: Vector3i):
 	if GLOBAL.active_unit == null: return false
 	var el = occupied_cells[cell]
 	if el is Unit:
@@ -50,14 +50,18 @@ func enemy_on_cell(cell):
 			return true
 	return false
 
-func is_cell_occupied(cell): return occupied_cells.has(cell)
+func _is_cell_occupied(cell): return occupied_cells.has(cell)
 
 func occupy_cell(cell, unit): occupied_cells[cell] = unit
 	
 func free_oc_cell(cell):
-	if is_cell_occupied(cell):
+	if _is_cell_occupied(cell):
 		occupied_cells.erase(cell)
 		
+		
+func get_unit(cell: Vector3i):
+	if not _is_cell_occupied(cell): return
+	return occupied_cells[cell]
 		
 func _input(event: InputEvent):
 	if event.is_action_pressed("camera_zoom_down"):

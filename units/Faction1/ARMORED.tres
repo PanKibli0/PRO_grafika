@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=2 format=3 uid="uid://dqpijfwnnmhmb"]
+
+[ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="1_068xi"]
+
+[resource]
+script = ExtResource("1_068xi")
+name = "Peasant"
+max_health = 500
+attack = 0
+defense = 0
+damage_min = 1
+damage_max = 1
+initiative = 1
+movement = 5
+color = Color(0.766814, 0.101419, 0.512306, 1)
+metadata/_custom_type_script = "uid://cukyhyanl175x"

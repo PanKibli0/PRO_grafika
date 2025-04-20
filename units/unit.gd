@@ -10,21 +10,21 @@ signal movement_finished
 @onready var amountLabel = %AmountLabel
 
 @export var stats: UnitStats
-var amount: int = 100
+var amount: int 
 var player: bool = randi_range(1,2) % 2 
 
 
 var target_position: Vector3 
 var actual_health: int 
-var actual_amount: int = 1
+var actual_amount: int = randi_range(5,10)
 
 var is_moving := false
 var tween: Tween = null
 
 
 func _ready():
-	actual_amount = randi_range(1,100000)
-	amountLabel.text = str(stats.name)
+	amount = actual_amount
+	amountLabel.text = str(actual_amount)
 	actual_health = stats.max_health
 	
 	hp_d.text = str(actual_health) +" / "+ str(stats.max_health)
@@ -62,22 +62,53 @@ func _movement_finished():
 	is_moving = false
 	emit_signal("movement_finished")
 	
-func take_damage(enemy_amount, damage ,enemy_attack):
-	var act_damage
+func take_damage():
+	var enemy = GLOBAL.active_unit
+	var enemy_amount = enemy.actual_amount
+	var enemy_attack = enemy.stats.attack
+	var damage = randi_range(enemy.stats.damage_min, enemy.stats.damage_max)
+	
+	var act_damage: int
 	if enemy_attack > stats.attack:
-		act_damage = enemy_amount * damage * (1 + (enemy_attack-stats.defense) * 0.05 )
+		act_damage = enemy_amount * damage * (1 + (enemy_attack - stats.defense) * 0.05)
 	else:
-		act_damage = enemy_amount * damage * (1 + (enemy_attack-stats.defense) * 0.05 )
+		act_damage = enemy_amount * damage / (1 + (enemy_attack - stats.defense) * 0.05)
 		
-	change_amount((act_damage - actual_health) % stats.max_health)
-	hp_d.text = int( actual_health / stats.max_health)
-	pass
+	act_damage = max(act_damage, 0)
 	
-func change_amount(change):
-	amount -= change
+	if act_damage == 0: 
+		print_rich("[color=red]ACT DAMAGE IS 0: No damage taken![/color]")
+		return 
 	
-	amountLabel = amount
+	print_rich("[color=yellow]Before damage:[/color] actual_amount = %d, actual_health = %d, damage = %d" % [actual_amount, actual_health, act_damage])
+
+	var total_hp = (actual_amount - 1) * stats.max_health + actual_health - act_damage
+	total_hp = max(total_hp, 0)
+
+	actual_amount = int(total_hp / stats.max_health)
+	actual_health = int(total_hp % stats.max_health)
+	
+	if actual_health == 0 and actual_amount > 0:
+		actual_amount -= 1
+		actual_health = stats.max_health
+	
+	print_rich("[color=green]After damage:[/color] total_hp = %d, actual_amount = %d, actual_health = %d" % [total_hp, actual_amount, actual_health])
+	
+	amountLabel.text = str(actual_amount)
+	hp_d.text = "HP: %d / %d" % [actual_health, stats.max_health]
+		
+	if actual_amount <= 0:
+		print_rich("[color=red]All units are dead. Calling kill()![/color]")
+		kill()
+
+	print_rich("[color=blue]TAKE DAMAGE: %d[/color]" % act_damage)
+	
+
 	
 func kill():
+	print("KILLED")
+	
 	queue_free()
+	
+	get_tree().quit() # USUNAC JAK SIE PORAWI
 	pass

@@ -5,10 +5,15 @@
 
 GLOBAL INNE RZECZY DODAC
 
-adjust enemy()
+adjust  enemy() - atak obok
 
 
+atak zrobiony ale nie dokonca // HP SPRAWDZAC ITD
 
 
 ==============================
 ATAK / SMIERC
+==============================
+
+polozenie // grid => GLOBAL
+tury // unit_controller => Battle/GLOBAL

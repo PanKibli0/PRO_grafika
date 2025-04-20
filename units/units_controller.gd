@@ -47,13 +47,20 @@ func _add_unit(DV: int = 0, u_player = false):
 # DEBUG1
 
 func _ready():
+	print(units_list)
+	
 	units_list = get_children()
 	units_list.sort_custom(_compare_initiative)
 	
-	for i in range(1,21):
-		_add_unit(i)
+	print(units_list)
+	
+	#for i in range(1,11):
+		#_add_unit(i)
 	
 	for unit in units_list:
+		print(unit.stats.initiative)
+		
+		
 		unit.connect("movement_finished", _change_active_unit)
 		var r_pos = _get_position()
 		var cell_pos = Vector3(grid.local_to_map(r_pos)) + Vector3(0.5, 0, 0.5)
@@ -66,12 +73,9 @@ func _ready():
 	_change_active_unit()
 
 	
-func _compare_initiative(unit1: Node, unit2: Node) -> int:
-	if unit1.stats.initiative > unit2.stats.initiative:
-		return 1
-	elif unit1.stats.initiative < unit2.stats.initiative:
-		return -1
-	return 0
+func _compare_initiative(unit1: Node, unit2: Node):
+	return unit1.stats.initiative > unit2.stats.initiative
+
 	
 
 func _change_active_unit():
