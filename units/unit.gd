@@ -4,8 +4,9 @@ extends CharacterBody3D
 signal movement_finished
 
 @onready var hp_d = %HP_DEBUG
-
 @onready var model = %Model
+@onready var player_eye = %Eye
+
 @onready var amountLabel = %AmountLabel
 
 @export var stats: UnitStats
@@ -35,24 +36,44 @@ func _ready():
 		material.albedo_color = stats.color
 		model.set_surface_override_material(0, material)
 		
-func move(new_position: Vector3):
+	if player_eye and player_eye.get_active_material(0):
+		var material = player_eye.get_active_material(0).duplicate()
+		material.albedo_color = Color.BLUE if player else Color.RED
+		player_eye.set_surface_override_material(0, material)
+
+func move(new_position: Vector3i):
 	is_moving = true
 	target_position = new_position
-	target_position.y = global_transform.origin.y
+	target_position.y = 0.0
 	
-	look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
+	print_rich("[color=green]Unit target cell:[/color] ", new_position)
+	print_rich("[color=blue]Calculated center:[/color] ", target_position)
 	
-	if tween:
-		tween.kill()
-
-	tween = create_tween()
-	tween.tween_property(self, "global_transform:origin", target_position, target_position.distance_to(global_transform.origin) / 8.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.finished.connect(_movement_finished)
-
+	#look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
+	
+	_movement_finished()
+	
 func _movement_finished():
 	global_transform.origin = target_position 
+	print_rich("[color=magenta]FINAL UNIT POS:[/color] ", global_transform.origin)
 	is_moving = false
 	emit_signal("movement_finished")
+			
+#func move(new_position: Vector3i):
+	#is_moving = true
+	#target_position = Vector3(new_position) + Vector3(0.5, 0, 0.5)
+	#target_position.y = global_transform.origin.y
+	#
+	#look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
+	#
+	#if tween:
+		#tween.kill()
+#
+	#tween = create_tween()
+	#tween.tween_property(self, "global_transform:origin", target_position, target_position.distance_to(global_transform.origin) / 8.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	#tween.finished.connect(_movement_finished)
+
+
 	
 func take_damage(enemy_amount, damage ,enemy_attack):
 	var act_damage
@@ -70,6 +91,6 @@ func change_amount(change):
 	
 	amountLabel = amount
 	
-func killed():
-	print("KILLED")
+func kill():
+	queue_free()
 	pass

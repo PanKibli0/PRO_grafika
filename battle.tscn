@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=14 format=3 uid="uid://gioqd05hgd0g"]
 
 [ext_resource type="PackedScene" uid="uid://bq2ur7tssc2y3" path="res://units/unit.tscn" id="3_7sfm4"]
 [ext_resource type="Script" uid="uid://cwjc26o4o80ou" path="res://units/units_controller.gd" id="4_6t8i5"]
@@ -6,8 +6,11 @@
 [ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/Faction1/knight.tres" id="6_0npn6"]
 [ext_resource type="Resource" uid="uid://bs3x3pt3d36gx" path="res://units/Faction1/peasant.tres" id="7_0npn6"]
 [ext_resource type="PackedScene" uid="uid://ci06386ybhtnl" path="res://grid.tscn" id="7_mhv3b"]
+[ext_resource type="Script" uid="uid://bcl3h47eflfwd" path="res://debug.gd" id="8_mhv3b"]
 
 [sub_resource type="GDScript" id="GDScript_dw4jg"]
+script/source = "extends Node3D
+"
 
 [sub_resource type="GDScript" id="GDScript_0npn6"]
 
@@ -36,7 +39,9 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 
 [node name="Camera" type="Camera3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 6, 7, 10)
+visible = false
 keep_aspect = 0
+current = true
 fov = 105.0
 script = SubResource("GDScript_0npn6")
 
@@ -71,4 +76,11 @@ mesh = SubResource("PlaneMesh_mhv3b")
 
 [node name="Grid" parent="." instance=ExtResource("7_mhv3b")]
 unique_name_in_owner = true
-cell_size = Vector3(1, 0.1, 1)
+cell_size = Vector3(1, 0.05, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6, 8, 5)
+visible = false
+
+[node name="DEBUG" type="Node" parent="."]
+script = ExtResource("8_mhv3b")

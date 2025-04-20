@@ -1,7 +1,9 @@
 *Cell poza grid i nie ostani sleected
 
-* graficznie sie cos rozjechalo postawic UNIT na OK miejsce
--- wypisac sordek cell i pivot i sordek Unit
-==============================
+* POZYCJA COS ROZJEBANA
 
+* DOROBIC ATAK & [ SMIERC (SIGNAL) ]
+
+
+==============================
 ATAK / SMIERC

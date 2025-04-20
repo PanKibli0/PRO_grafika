@@ -2,7 +2,6 @@ extends Node
 
 @onready var grid = %Grid
 @onready var camera =  %Camera
-@onready var unit: Unit = null
 
 @onready var marker = $Marker
 
@@ -11,18 +10,23 @@ func _input(event):
 		var cell = _get_tile_at_mouse_position(event.position)
 		grid.select_cell(cell)
 		
-	if event.is_action_pressed("LMB") and !unit.is_moving:
+	if event.is_action_pressed("LMB") and !GLOBAL.active_unit.is_moving:
 		var cell = _get_tile_at_mouse_position(event.position)
+		print_rich("[color=red]Unit is in cell:[/color] ", cell)
 		
-		if cell != Vector3i(unit.target_position) and cell != Vector3i(-1,-1,-1):
-			var target_position = grid.map_to_local(cell)
+		if cell != Vector3i(-1,-1,-1):
+			var world_pos = grid.map_to_local(cell)
+			world_pos.y = GLOBAL.active_unit.global_transform.origin.y
 			
-			grid.free_oc_cell(grid.local_to_map(unit.global_transform.origin))
-			grid.occupy_cell(cell, unit)
+			grid.free_oc_cell(grid.local_to_map(GLOBAL.active_unit.global_transform.origin))
+			grid.occupy_cell(cell, GLOBAL.active_unit)
 			
-			unit.move(target_position) # PORUSZANIE AKTYWNA JEDNSOTKA
-			print(cell)
-		
+			print_rich("[color=red]CELL:[/color] ", cell)
+			print_rich("[color=blue]map_to_local(cell):[/color] ", grid.map_to_local(cell))
+			print_rich("[color=purple]GRID pos:[/color] ", grid.global_transform.origin)
+			
+			GLOBAL.active_unit.move(world_pos) # PORUSZANIE JEDNSOTKA
+			
 		
 func _get_tile_at_mouse_position(mouse_position) -> Vector3i:
 	var space_state = camera.get_world_3d().direct_space_state
@@ -31,8 +35,6 @@ func _get_tile_at_mouse_position(mouse_position) -> Vector3i:
 	
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	var result = space_state.intersect_ray(query)
-	
-		
 	
 	var hit_position: Vector3
 	if result.has("position"):
@@ -47,7 +49,8 @@ func _get_tile_at_mouse_position(mouse_position) -> Vector3i:
 	if result.has("position"):
 		#print_rich("[color=yellow]",result.position,"[/color]")
 		#print_rich("[color=red]",grid.local_to_map(result.position),"[/color]")
-		return grid.local_to_map(result.position)
+		#return grid.local_to_map(result.position)
+		return result.position
 	
 	
 	return grid.selected_cell

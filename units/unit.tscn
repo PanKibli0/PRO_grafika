@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bq2ur7tssc2y3"]
+[gd_scene load_steps=12 format=3 uid="uid://bq2ur7tssc2y3"]
 
 [ext_resource type="Script" uid="uid://c4we5ic1upvog" path="res://units/unit.gd" id="1_btf8p"]
 [ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="2_gxe1c"]
@@ -38,13 +38,17 @@ expand_margin_bottom = 5.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gxe1c"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xx66i"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_gxe1c"]
+material = SubResource("StandardMaterial3D_xx66i")
+size = Vector3(0.4, 0.4, 0.4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gxe1c"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xx66i"]
 material = SubResource("StandardMaterial3D_gxe1c")
-size = Vector3(1, 2, 1)
+size = Vector3(0.5, 1, 0.5)
 
 [node name="Unit" type="CharacterBody3D"]
 input_ray_pickable = false
@@ -89,13 +93,14 @@ shape = SubResource("BoxShape3D_gxe1c")
 disabled = true
 
 [node name="Eye" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, -0.4)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.4)
 mesh = SubResource("BoxMesh_gxe1c")
 skeleton = NodePath("../Model")
 
 [node name="Model" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 layers = 2
 mesh = SubResource("BoxMesh_xx66i")
 

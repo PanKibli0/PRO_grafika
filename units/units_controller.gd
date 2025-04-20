@@ -8,19 +8,22 @@ signal units_loaded
 var active_unit_index = -1
 var units_list = []
 
-var position_next = Vector3(0,0,0)
+var position_next = Vector3i(0,0,-1)
 
-func _get_position() -> Vector3:
-	print("\t\t",position_next)
+func _get_position() -> Vector3i:
 	#print_rich("[color=lightgreen]\t\tX={x} | Z={z}[/color]".format("x": position_next.x,"z": position_next.z ))
 	
 	if position_next.z == 10:
 		print("EGH")
-		position_next.z = 0
-		position_next.x = +1
+		position_next.z = -1
+		position_next.x += 1
 	position_next.z +=1
 	
-	return position_next
+	print("\t\t POS_NEXT: ",position_next)
+	print(grid.map_to_local(position_next))
+	
+	
+	return  Vector3i(grid.map_to_local(position_next))
 
 # DEBUG1
 func _add_unit(DV: int = 0):
@@ -43,7 +46,7 @@ func _add_unit(DV: int = 0):
 	add_child(unit)
 	
 	units_list.append(unit)
-	print(len(units_list))
+	#print(len(units_list))
 # DEBUG1
 
 func _ready():
@@ -57,17 +60,17 @@ func _ready():
 	for unit in units_list:
 		unit.connect("movement_finished", _change_active_unit)
 		var r_pos = _get_position()
-		print_rich("[color=pink]", unit.position,"<===>",r_pos, "[/color]")
+		#print_rich("[color=pink]", unit.position,"<===>",r_pos, "[/color]")
 		var cell_pos = grid.local_to_map(r_pos)
+		print(typeof(cell_pos))
 		unit.global_transform.origin = Vector3(cell_pos) # USUNAC 
 		unit.target_position = cell_pos # USUNAC 
-		print_rich("[color=purple]", unit.position,"<===>",r_pos, "[/color]")
+		print_rich("[color=purple]", cell_pos,"<===>",r_pos, "[/color]")
 		
 		grid.occupy_cell(cell_pos, unit)
 		
-		
-		
 	_change_active_unit()
+
 	
 func _compare_initiative(unit1: Node, unit2: Node) -> int:
 	if unit1.stats.initiative > unit2.stats.initiative:
@@ -81,10 +84,10 @@ func _change_active_unit():
 	grid.clear_grid()
 		
 	active_unit_index = (active_unit_index + 1) % units_list.size()
-	mouseController.unit = units_list[active_unit_index]
+	GLOBAL.active_unit = units_list[active_unit_index]
 	
-	var unit_position = grid.local_to_map(units_list[active_unit_index].global_transform.origin)
-	grid.draw_move(unit_position, units_list[active_unit_index].stats.movement)
+	var unit_position = grid.local_to_map(GLOBAL.active_unit.global_transform.origin)
+	grid.draw_move(unit_position, GLOBAL.active_unit.stats.movement)
 	
 	#print(units_list)
 	
@@ -92,13 +95,13 @@ func _change_active_unit():
 func _input(event: InputEvent):
 	#if event.is_action_pressed("DEBUG1"):
 		#_add_unit()
-	if event.is_action_pressed("WAIT") and units_list[active_unit_index].player == true:
+	if event.is_action_pressed("WAIT") and GLOBAL.active_unit.player == true:
 		print(units_list)
 		
 		print("WAIT")
-		units_list.append(units_list[active_unit_index])
+		units_list.append(GLOBAL.active_unit)
 		units_list.remove_at(active_unit_index)
 		print(units_list)
 		
-	if event.is_action_pressed("DEFENSE") and units_list[active_unit_index].player == true:
+	if event.is_action_pressed("DEFENSE") and GLOBAL.active_unit.player == true:
 		_change_active_unit()
