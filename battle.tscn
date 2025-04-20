@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://bq2ur7tssc2y3" path="res://units/unit.tscn" id="3_7sfm4"]
 [ext_resource type="Script" uid="uid://cwjc26o4o80ou" path="res://units/units_controller.gd" id="4_6t8i5"]
 [ext_resource type="Script" uid="uid://dp6upvyfg4eqi" path="res://mouse_controller.gd" id="4_i431l"]
-[ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/Faction1/knight.tres" id="6_0npn6"]
+[ext_resource type="Script" uid="uid://fkkqunly1lwo" path="res://grid.gd" id="5_dw4jg"]
+[ext_resource type="MeshLibrary" uid="uid://24du0onhducq" path="res://grid_mesh.tres" id="6_0npn6"]
 [ext_resource type="Resource" uid="uid://bs3x3pt3d36gx" path="res://units/Faction1/peasant.tres" id="7_0npn6"]
-[ext_resource type="PackedScene" uid="uid://ci06386ybhtnl" path="res://grid.tscn" id="7_mhv3b"]
 [ext_resource type="Script" uid="uid://bcl3h47eflfwd" path="res://debug.gd" id="8_mhv3b"]
 
 [sub_resource type="GDScript" id="GDScript_dw4jg"]
@@ -27,7 +27,7 @@ albedo_color = Color(0.454902, 0.172549, 0.0862745, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_mhv3b"]
 material = SubResource("StandardMaterial3D_0npn6")
-size = Vector2(14, 12)
+size = Vector2(14, 11)
 center_offset = Vector3(7, 0, 6)
 
 [node name="Battle" type="Node3D"]
@@ -58,7 +58,7 @@ script = ExtResource("4_6t8i5")
 
 [node name="Unit1" parent="Units" instance=ExtResource("3_7sfm4")]
 unique_name_in_owner = true
-stats = ExtResource("6_0npn6")
+stats = ExtResource("7_0npn6")
 
 [node name="Unit2" parent="Units" instance=ExtResource("3_7sfm4")]
 unique_name_in_owner = true
@@ -70,17 +70,19 @@ stats = ExtResource("7_0npn6")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.45, -1)
 layers = 524288
 mesh = SubResource("PlaneMesh_mhv3b")
 
-[node name="Grid" parent="." instance=ExtResource("7_mhv3b")]
+[node name="Grid" type="GridMap" parent="."]
 unique_name_in_owner = true
-cell_size = Vector3(1, 0.05, 1)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6, 8, 5)
-visible = false
+mesh_library = ExtResource("6_0npn6")
+cell_size = Vector3(1, 1, 1)
+script = ExtResource("5_dw4jg")
 
 [node name="DEBUG" type="Node" parent="."]
 script = ExtResource("8_mhv3b")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6, 8, 5)

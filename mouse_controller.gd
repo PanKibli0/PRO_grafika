@@ -7,28 +7,34 @@ extends Node
 
 func _input(event):
 	if event is InputEventMouseMotion:  
-		var cell = _get_tile_at_mouse_position(event.position)
+		var cell = _get_tile_at_mouse_position(event.position)[0]
 		grid.select_cell(cell)
 		
+		
+		
 	if event.is_action_pressed("LMB") and !GLOBAL.active_unit.is_moving:
-		var cell = _get_tile_at_mouse_position(event.position)
-		print_rich("[color=red]Unit is in cell:[/color] ", cell)
+		var r_cell = _get_tile_at_mouse_position(event.position)
+		var cell = r_cell[0]
+		var id = r_cell[1]
 		
-		if cell != Vector3i(-1,-1,-1):
-			var world_pos = grid.map_to_local(cell)
-			world_pos.y = GLOBAL.active_unit.global_transform.origin.y
+		if id == 1: # ZMIENIC NA TYP CELL +> MOZE GLOBAL
+			op_move(cell)
 			
-			grid.free_oc_cell(grid.local_to_map(GLOBAL.active_unit.global_transform.origin))
-			grid.occupy_cell(cell, GLOBAL.active_unit)
+		if id == 3: # DAC NA TYP CELL +> MOZE GLOBAB
+			op_attack(cell)
 			
-			print_rich("[color=red]CELL:[/color] ", cell)
-			print_rich("[color=blue]map_to_local(cell):[/color] ", grid.map_to_local(cell))
-			print_rich("[color=purple]GRID pos:[/color] ", grid.global_transform.origin)
+func op_move(cell): 
+	var world_pos = grid.map_to_local(cell)
 			
-			GLOBAL.active_unit.move(world_pos) # PORUSZANIE JEDNSOTKA
+	grid.free_oc_cell(grid.local_to_map(GLOBAL.active_unit.global_transform.origin))
+	grid.occupy_cell(cell, GLOBAL.active_unit)
 			
-		
-func _get_tile_at_mouse_position(mouse_position) -> Vector3i:
+	GLOBAL.active_unit.move(world_pos) # PORUSZANIE JEDNSOTKA
+	
+func op_attack(cell):
+	pass
+
+func _get_tile_at_mouse_position(mouse_position) -> Array:
 	var space_state = camera.get_world_3d().direct_space_state
 	var from = camera.project_ray_origin(mouse_position)
 	var to = from + camera.project_ray_normal(mouse_position) * 1000
@@ -36,6 +42,7 @@ func _get_tile_at_mouse_position(mouse_position) -> Vector3i:
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	var result = space_state.intersect_ray(query)
 	
+
 	var hit_position: Vector3
 	if result.has("position"):
 		hit_position = result.position
@@ -43,14 +50,11 @@ func _get_tile_at_mouse_position(mouse_position) -> Vector3i:
 		var ray_dir = (to - from).normalized()
 		var t = -from.y / ray_dir.y 
 		hit_position = from + ray_dir * t
+		hit_position.y = 0.55
 
 	marker.position = hit_position
-
+	
 	if result.has("position"):
-		#print_rich("[color=yellow]",result.position,"[/color]")
-		#print_rich("[color=red]",grid.local_to_map(result.position),"[/color]")
-		#return grid.local_to_map(result.position)
-		return result.position
-	
-	
-	return grid.selected_cell
+		return [grid.map_to_local(result.position), grid.get_cell_item(result.position)]
+		
+	return [grid.selected_cell, grid.get_cell_item(grid.selected_cell)]

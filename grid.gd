@@ -1,6 +1,6 @@
 extends GridMap
 
-var grid_size: Vector2i = Vector2i(12, 10)
+var grid_size = [12, 10]
 var selected_cell: Vector3i = Vector3i(-1,-1,-1)
 var occupied_cells: Dictionary = {}
 
@@ -12,7 +12,6 @@ enum cell_type {
 	ENEMY = 3
 }
 
-var current_unit : Unit = null
 
 func draw_move(middle: Vector3i, movement: int):
 	#print(middle, "MIDDDLE")
@@ -20,15 +19,14 @@ func draw_move(middle: Vector3i, movement: int):
 		for y in range(-movement,movement+1):
 			if abs(x) + abs(y) <= movement:
 				var cell_pos = middle + Vector3i(x, 0, y)
-				if cell_pos.x >= 0 and cell_pos.x < grid_size.x and cell_pos.z >= 0 and cell_pos.z < grid_size.y:
-					if x == 0 and y == 0:
-						set_cell_item(cell_pos, cell_type.UNIT)
-						if occupied_cells.has(cell_pos):
-							current_unit = occupied_cells[cell_pos]
-					elif not is_cell_occupied(cell_pos):
-						set_cell_item(cell_pos, cell_type.MOVE)
-					elif unit_on_cell(cell_pos):
-						set_cell_item(cell_pos, cell_type.ENEMY)
+				if cell_pos.x < 0 or cell_pos.x >= grid_size[0]: continue
+				if cell_pos.z < 0 or cell_pos.z >= grid_size[1]: continue
+				if x == 0 and y == 0:
+					set_cell_item(cell_pos, cell_type.UNIT)
+				if not is_cell_occupied(cell_pos):
+					set_cell_item(cell_pos, cell_type.MOVE)
+				elif enemy_on_cell(cell_pos):
+					set_cell_item(cell_pos, cell_type.ENEMY)
 
 
 func clear_grid():
@@ -37,19 +35,18 @@ func clear_grid():
 	
 
 func select_cell(cell: Vector3i):
-		#selected_cell = Vector3i(-1, -1, -1)
-	if cell != selected_cell and get_cell_item(cell) == 0:
+	if cell != selected_cell and get_cell_item(cell) == cell_type.MOVE:
 		if selected_cell != Vector3i(-1, -1, -1):
 			set_cell_item(selected_cell, cell_type.MOVE)
 		selected_cell = cell
 		set_cell_item(selected_cell, cell_type.SELECT)
+		
 
-func unit_on_cell(cell):
-	if current_unit == null: return
+func enemy_on_cell(cell):
+	if GLOBAL.active_unit == null: return false
 	var el = occupied_cells[cell]
 	if el is Unit:
-		if current_unit.player != el.player:
-			#print("ENEMY GRID =>", cell, local_to_map(cell))
+		if GLOBAL.active_unit.player != el.player:
 			return true
 	return false
 
@@ -60,4 +57,14 @@ func occupy_cell(cell, unit): occupied_cells[cell] = unit
 func free_oc_cell(cell):
 	if is_cell_occupied(cell):
 		occupied_cells.erase(cell)
+		
+		
+func _input(event: InputEvent):
+	if event.is_action_pressed("camera_zoom_down"):
+		print("CELLS:")
+		for cell in get_used_cells():
+			var cell_id = get_cell_item(cell) 
+			if cell_id != 0:
+				print("Cell position:", cell, "Cell ID:", cell_id)
+			
 		

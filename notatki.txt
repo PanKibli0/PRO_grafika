@@ -1,8 +1,13 @@
 *Cell poza grid i nie ostani sleected
 
-* POZYCJA COS ROZJEBANA
 
 * DOROBIC ATAK & [ SMIERC (SIGNAL) ]
+
+GLOBAL INNE RZECZY DODAC
+
+adjust enemy()
+
+
 
 
 ==============================

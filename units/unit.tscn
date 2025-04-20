@@ -51,6 +51,7 @@ material = SubResource("StandardMaterial3D_gxe1c")
 size = Vector3(0.5, 1, 0.5)
 
 [node name="Unit" type="CharacterBody3D"]
+top_level = true
 input_ray_pickable = false
 motion_mode = 1
 script = ExtResource("1_btf8p")
@@ -100,8 +101,8 @@ skeleton = NodePath("../Model")
 
 [node name="Model" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
+auto_translate_mode = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-layers = 2
 mesh = SubResource("BoxMesh_xx66i")
 
 [node name="HP_DEBUG" type="Label" parent="."]

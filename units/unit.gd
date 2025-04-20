@@ -41,39 +41,26 @@ func _ready():
 		material.albedo_color = Color.BLUE if player else Color.RED
 		player_eye.set_surface_override_material(0, material)
 
+		
 func move(new_position: Vector3i):
 	is_moving = true
-	target_position = new_position
-	target_position.y = 0.0
+	target_position = Vector3(new_position) + Vector3(0.5, 0, 0.5)
+	target_position.y = global_transform.origin.y
 	
-	print_rich("[color=green]Unit target cell:[/color] ", new_position)
-	print_rich("[color=blue]Calculated center:[/color] ", target_position)
+	look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
 	
-	#look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
-	
-	_movement_finished()
-	
+	if tween:
+		tween.kill()
+
+	tween = create_tween()
+	tween.tween_property(self, "global_transform:origin", target_position, target_position.distance_to(global_transform.origin) / 8.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.finished.connect(_movement_finished)
+
+
 func _movement_finished():
 	global_transform.origin = target_position 
-	print_rich("[color=magenta]FINAL UNIT POS:[/color] ", global_transform.origin)
 	is_moving = false
 	emit_signal("movement_finished")
-			
-#func move(new_position: Vector3i):
-	#is_moving = true
-	#target_position = Vector3(new_position) + Vector3(0.5, 0, 0.5)
-	#target_position.y = global_transform.origin.y
-	#
-	#look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
-	#
-	#if tween:
-		#tween.kill()
-#
-	#tween = create_tween()
-	#tween.tween_property(self, "global_transform:origin", target_position, target_position.distance_to(global_transform.origin) / 8.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	#tween.finished.connect(_movement_finished)
-
-
 	
 func take_damage(enemy_amount, damage ,enemy_attack):
 	var act_damage
