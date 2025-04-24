@@ -27,8 +27,9 @@ func _ready():
 	amountLabel.text = str(actual_amount)
 	actual_health = stats.max_health
 	
-	hp_d.text = str(actual_health) +" / "+ str(stats.max_health)
+	hp_d.text = "HP: %d / %d " % [actual_health, stats.max_health]
 	
+	if !player: hp_player()
 	
 	# KOLOR DLA JEDNOSTKI
 	if model and model.get_active_material(0):
@@ -60,11 +61,12 @@ func move(new_position: Vector3i):
 func _movement_finished():
 	global_transform.origin = target_position 
 	is_moving = false
+	hp_debug(false)	
 	emit_signal("movement_finished")
 	
 func take_damage():
 	#BEGUG
-	hp_d.visible = true
+	
 	
 	var enemy = BATTLE.active_unit
 	var enemy_amount = enemy.actual_amount
@@ -97,7 +99,7 @@ func take_damage():
 
 	# DEBUG
 	await get_tree().create_timer(3.0).timeout
-	hp_d.visible = false
+	
 	
 func kill():
 	print("KILLED")
@@ -107,3 +109,16 @@ func kill():
 	
 	#get_tree().quit() # USUNAC JAK SIE PORAWI
 	pass
+
+func hp_debug(flag:bool):
+	hp_d.visible = flag
+	
+func hp_player():
+	
+	hp_d.anchor_left = 1.0
+	hp_d.anchor_right = 1.0
+	hp_d.offset_left = -200 
+	hp_d.offset_right = 0
+
+	hp_d.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	

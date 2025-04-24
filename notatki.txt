@@ -1,19 +1,17 @@
 *Cell poza grid i nie ostani sleected
 
+==============================
 
-* DOROBIC ATAK & [ SMIERC (SIGNAL) ]
-
-GLOBAL INNE RZECZY DODAC
 
 adjust  enemy() - atak obok
 
+SMIERC
 
-atak zrobiony ale nie dokonca // HP SPRAWDZAC ITD
 
 
 ==============================
-ATAK / SMIERC
-==============================
+GRID ATTACK ENEMY CELL
+
 
 polozenie // grid => GLOBAL
 tury // unit_controller => Battle/GLOBAL

@@ -5,23 +5,33 @@ extends Node
 
 @onready var MARKER = $Marker
 
+var unit: Unit = null
 func _input(event):
 	if event is InputEventMouseMotion:  
-		var cell = _get_tile_at_mouse_position(event.position)[0]
-		GRID.select_cell(cell)
+		var r_cell = _get_tile_at_mouse_position(event.position)
+		var cell = r_cell[0]
+		var id = r_cell[1]
+		
+		if id == GRID.cell_type.MOVE:
+			GRID.select_cell(cell)
 		
 		
+		if id == GRID.cell_type.ENEMY:
+			unit = GRID.get_unit(cell)
+			unit.hp_debug(true)
+		elif unit != null:
+			unit.hp_debug(false)
 		
 	if event.is_action_pressed("LMB") and !BATTLE.active_unit.is_moving:
 		var r_cell = _get_tile_at_mouse_position(event.position)
 		var cell = r_cell[0]
 		var id = r_cell[1]
 		
-		if id == 1: # ZMIENIC NA TYP CELL +> MOZE GLOBAL
+		if id == GRID.cell_type.MOVE: 
 			op_move(cell)
 			
-		if id == 3: # DAC NA TYP CELL +> MOZE GLOBAL
-			print(cell)
+		if id == GRID.cell_type.ENEMY:
+			
 			op_attack(cell)
 			
 			
