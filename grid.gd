@@ -1,5 +1,6 @@
 extends GridMap
 
+
 var grid_size = [12, 10]
 var selected_cell: Vector3i = Vector3i(-1,-1,-1)
 var occupied_cells: Dictionary = {}
@@ -43,10 +44,10 @@ func select_cell(cell: Vector3i):
 		
 
 func _enemy_on_cell(cell: Vector3i):
-	if GLOBAL.active_unit == null: return false
+	if BATTLE.active_unit == null: return false
 	var el = occupied_cells[cell]
 	if el is Unit:
-		if GLOBAL.active_unit.player != el.player:
+		if BATTLE.active_unit.player != el.player:
 			return true
 	return false
 

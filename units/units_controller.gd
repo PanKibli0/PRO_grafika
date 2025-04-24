@@ -82,24 +82,24 @@ func _change_active_unit():
 	grid.clear_grid()
 		
 	active_unit_index = (active_unit_index + 1) % units_list.size()
-	GLOBAL.active_unit = units_list[active_unit_index]
+	BATTLE.active_unit = units_list[active_unit_index]
 	
-	var unit_position = grid.local_to_map(GLOBAL.active_unit.global_transform.origin)
-	grid.draw_move(unit_position, GLOBAL.active_unit.stats.movement)
+	var unit_position = grid.local_to_map(BATTLE.active_unit.global_transform.origin)
+	grid.draw_move(unit_position, BATTLE.active_unit.stats.movement)
 	
 	
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("o"):
 		_add_unit()
-	#if event.is_action_pressed("WAIT") and GLOBAL.active_unit.player == true:
+	#if event.is_action_pressed("WAIT") and BATTLE.active_unit.player == true:
 		#print(units_list)
 		#
 		#print("WAIT")
-		#units_list.append(GLOBAL.active_unit)
+		#units_list.append(BATTLE.active_unit)
 		#units_list.remove_at(active_unit_index)
 		#print(units_list)
 		
-	#if event.is_action_pressed("DEFENSE") and GLOBAL.active_unit.player == true:
+	#if event.is_action_pressed("DEFENSE") and BATTLE.active_unit.player == true:
 	if event.is_action_pressed("DEFENSE"):
 		_change_active_unit()

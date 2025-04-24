@@ -63,26 +63,23 @@ func _movement_finished():
 	emit_signal("movement_finished")
 	
 func take_damage():
-	var enemy = GLOBAL.active_unit
+	#BEGUG
+	hp_d.visible = true
+	
+	var enemy = BATTLE.active_unit
 	var enemy_amount = enemy.actual_amount
 	var enemy_attack = enemy.stats.attack
 	var damage = randi_range(enemy.stats.damage_min, enemy.stats.damage_max)
 	
-	var act_damage: int
-	if enemy_attack > stats.attack:
-		act_damage = enemy_amount * damage * (1 + (enemy_attack - stats.defense) * 0.05)
+	var act_damage = 0
+	if enemy_attack > stats.defense:
+		act_damage = enemy_amount * damage * (1 + abs(enemy_attack - stats.defense) * 0.05)
 	else:
-		act_damage = enemy_amount * damage / (1 + (enemy_attack - stats.defense) * 0.05)
-		
-	act_damage = max(act_damage, 0)
+		act_damage = enemy_amount * damage / (1 + abs(enemy_attack - stats.defense) * 0.05)	
+	act_damage = int(max(round(act_damage), 0))
+	if act_damage == 0: return 
 	
-	if act_damage == 0: 
-		print_rich("[color=red]ACT DAMAGE IS 0: No damage taken![/color]")
-		return 
-	
-	print_rich("[color=yellow]Before damage:[/color] actual_amount = %d, actual_health = %d, damage = %d" % [actual_amount, actual_health, act_damage])
-
-	var total_hp = (actual_amount - 1) * stats.max_health + actual_health - act_damage
+	var total_hp: int = (actual_amount) * stats.max_health + actual_health - act_damage
 	total_hp = max(total_hp, 0)
 
 	actual_amount = int(total_hp / stats.max_health)
@@ -92,23 +89,21 @@ func take_damage():
 		actual_amount -= 1
 		actual_health = stats.max_health
 	
-	print_rich("[color=green]After damage:[/color] total_hp = %d, actual_amount = %d, actual_health = %d" % [total_hp, actual_amount, actual_health])
-	
+	# WYGLAD + DEBUG
 	amountLabel.text = str(actual_amount)
-	hp_d.text = "HP: %d / %d" % [actual_health, stats.max_health]
+	hp_d.text = "HP: %d / %d \n DAMEGED: %d" % [actual_health, stats.max_health, act_damage]
 		
-	if actual_amount <= 0:
-		print_rich("[color=red]All units are dead. Calling kill()![/color]")
-		kill()
+	if actual_amount <= 0: kill()
 
-	print_rich("[color=blue]TAKE DAMAGE: %d[/color]" % act_damage)
-	
-
+	# DEBUG
+	await get_tree().create_timer(3.0).timeout
+	hp_d.visible = false
 	
 func kill():
 	print("KILLED")
 	
-	queue_free()
+	position = Vector3i(-1,-1,-1)
+	#queue_free()
 	
-	get_tree().quit() # USUNAC JAK SIE PORAWI
+	#get_tree().quit() # USUNAC JAK SIE PORAWI
 	pass

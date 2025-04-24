@@ -1,6 +1,5 @@
 [gd_scene load_steps=16 format=3 uid="uid://gioqd05hgd0g"]
 
-[ext_resource type="Script" uid="uid://h4rds26ntm6g" path="res://battle.gd" id="1_ol6im"]
 [ext_resource type="PackedScene" uid="uid://bq2ur7tssc2y3" path="res://units/unit.tscn" id="3_7sfm4"]
 [ext_resource type="Script" uid="uid://cwjc26o4o80ou" path="res://units/units_controller.gd" id="4_6t8i5"]
 [ext_resource type="Script" uid="uid://dp6upvyfg4eqi" path="res://mouse_controller.gd" id="4_i431l"]
@@ -10,6 +9,13 @@
 [ext_resource type="MeshLibrary" uid="uid://24du0onhducq" path="res://grid_mesh.tres" id="6_0npn6"]
 [ext_resource type="Resource" uid="uid://bs3x3pt3d36gx" path="res://units/Faction1/peasant.tres" id="7_0npn6"]
 [ext_resource type="Script" uid="uid://bcl3h47eflfwd" path="res://debug.gd" id="8_mhv3b"]
+
+[sub_resource type="GDScript" id="GDScript_dw4jg"]
+script/source = "extends Node3D
+
+var active_unit: Unit
+var units_list
+"
 
 [sub_resource type="GDScript" id="GDScript_0npn6"]
 
@@ -30,7 +36,7 @@ size = Vector2(14, 11)
 center_offset = Vector3(7, 0, 6)
 
 [node name="Battle" type="Node3D"]
-script = ExtResource("1_ol6im")
+script = SubResource("GDScript_dw4jg")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 0)
