@@ -27,7 +27,7 @@ func _input(event):
 		var cell = r_cell[0]
 		var id = r_cell[1]
 		
-		if id == GRID.cell_type.MOVE: 
+		if id == GRID.cell_type.SELECT: 
 			op_move(cell)
 			
 		if id == GRID.cell_type.ENEMY:
