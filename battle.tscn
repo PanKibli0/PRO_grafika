@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=15 format=3 uid="uid://gioqd05hgd0g"]
 
 [ext_resource type="Script" uid="uid://h4rds26ntm6g" path="res://battle.gd" id="1_ol6im"]
 [ext_resource type="PackedScene" uid="uid://bq2ur7tssc2y3" path="res://units/unit.tscn" id="3_7sfm4"]
@@ -12,14 +12,6 @@
 [ext_resource type="Script" uid="uid://bcl3h47eflfwd" path="res://debug.gd" id="8_mhv3b"]
 
 [sub_resource type="GDScript" id="GDScript_0npn6"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhv3b"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_lcjiy"]
-material = SubResource("StandardMaterial3D_mhv3b")
-radius = 0.1
-height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0npn6"]
 albedo_color = Color(0.454902, 0.172549, 0.0862745, 1)
@@ -50,9 +42,6 @@ script = SubResource("GDScript_0npn6")
 [node name="MouseController" type="Node" parent="Camera"]
 unique_name_in_owner = true
 script = ExtResource("4_i431l")
-
-[node name="Marker" type="MeshInstance3D" parent="Camera/MouseController"]
-mesh = SubResource("SphereMesh_lcjiy")
 
 [node name="Units" type="Node" parent="."]
 unique_name_in_owner = true
@@ -103,6 +92,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6, 8, 5)
 
 [node name="Direction" type="Label" parent="."]
+unique_name_in_owner = true
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.05

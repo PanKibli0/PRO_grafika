@@ -116,6 +116,7 @@ text = "HP:"
 
 [node name="Damage" type="Label" parent="."]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

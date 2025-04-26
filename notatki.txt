@@ -2,8 +2,6 @@
 
 ==============================
 
-OBOK => wypisz kierunek i czy ruch mozliwy pod tym katem ataku
-
 SMIERC
 
 ==============================
