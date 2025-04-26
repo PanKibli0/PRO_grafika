@@ -58,11 +58,12 @@ func op_attack(cell: Vector3i):
 	var enemy_cell = cell
 	var enemy_pos = GRID.map_to_local(enemy_cell)
 	var player_cell = GRID.local_to_map(BATTLE.active_unit.global_transform.origin)
-
+	
+	var space_state = CAMERA.get_world_3d().direct_space_state
 	var from = CAMERA.project_ray_origin(get_viewport().get_mouse_position())
 	var to = from + CAMERA.project_ray_normal(get_viewport().get_mouse_position()) * 1000
 
-	var space_state = CAMERA.get_world_3d().direct_space_state
+	
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	var result = space_state.intersect_ray(query)
 

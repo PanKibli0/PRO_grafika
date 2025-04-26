@@ -102,4 +102,16 @@ script = ExtResource("8_mhv3b")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6, 8, 5)
 
+[node name="Direction" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.05
+anchor_right = 0.5
+anchor_bottom = 0.05
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "HELLO"
+
 [connection signal="end_turn" from="Camera/MouseController" to="Units" method="_change_active_unit"]

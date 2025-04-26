@@ -2,6 +2,7 @@ class_name Unit
 extends CharacterBody3D
 
 @onready var hp_d = %HP_DEBUG
+@onready var damage_d = %Damage
 @onready var model = %Model
 @onready var player_eye = %Eye
 
@@ -89,10 +90,12 @@ func take_damage():
 	
 	# WYGLAD + DEBUG
 	amountLabel.text = str(actual_amount)
-	hp_d.text = "HP: %d / %d \n DAMEGED: %d" % [actual_health, stats.max_health, act_damage]
-		
+	hp_d.text = "HP: %d / %d" % [actual_health, stats.max_health]
+	damage_d.visible = true
+	damage_d.text = "DAMEGED: " +str(act_damage)
 	if actual_amount <= 0: kill()
-	
+	await get_tree().create_timer(3.0).timeout
+	damage_d.visible = false
 	
 func kill():
 	print("KILLED")
