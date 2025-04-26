@@ -92,7 +92,7 @@ func take_damage():
 	amountLabel.text = str(actual_amount)
 	hp_d.text = "HP: %d / %d" % [actual_health, stats.max_health]
 	damage_d.visible = true
-	damage_d.text = "DAMEGED: " +str(act_damage)
+	damage_d.text = "DAMAGED: " +str(act_damage)
 	if actual_amount <= 0: kill()
 	await get_tree().create_timer(3.0).timeout
 	damage_d.visible = false
