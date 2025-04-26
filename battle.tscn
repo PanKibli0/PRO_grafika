@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=17 format=3 uid="uid://gioqd05hgd0g"]
 
 [ext_resource type="Script" uid="uid://h4rds26ntm6g" path="res://battle.gd" id="1_ol6im"]
 [ext_resource type="PackedScene" uid="uid://bq2ur7tssc2y3" path="res://units/unit.tscn" id="3_7sfm4"]
@@ -28,6 +28,9 @@ albedo_color = Color(0.454902, 0.172549, 0.0862745, 1)
 material = SubResource("StandardMaterial3D_0npn6")
 size = Vector2(14, 11)
 center_offset = Vector3(7, 0, 6)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ol6im"]
+data = PackedVector3Array(14, 0, 11.5, 0, 0, 11.5, 14, 0, 0.5, 0, 0, 11.5, 0, 0, 0.5, 14, 0, 0.5)
 
 [node name="Battle" type="Node3D"]
 script = ExtResource("1_ol6im")
@@ -81,6 +84,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.45, -1)
 layers = 524288
 mesh = SubResource("PlaneMesh_mhv3b")
 
+[node name="Floor" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/Floor"]
+shape = SubResource("ConcavePolygonShape3D_ol6im")
+
 [node name="Grid" type="GridMap" parent="."]
 unique_name_in_owner = true
 mesh_library = ExtResource("6_0npn6")
@@ -93,3 +101,5 @@ script = ExtResource("8_mhv3b")
 [node name="Camera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6, 8, 5)
+
+[connection signal="end_turn" from="Camera/MouseController" to="Units" method="_change_active_unit"]

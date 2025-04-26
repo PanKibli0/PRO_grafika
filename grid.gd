@@ -15,7 +15,6 @@ enum cell_type {
 
 
 func draw_move(middle: Vector3i, movement: int):
-	#print(middle, "MIDDDLE")
 	for x in range(-movement,movement+1):
 		for y in range(-movement,movement+1):
 			if abs(x) + abs(y) <= movement:
@@ -25,7 +24,7 @@ func draw_move(middle: Vector3i, movement: int):
 				if x == 0 and y == 0:
 					set_cell_item(cell_pos, cell_type.UNIT)
 				if not _is_cell_occupied(cell_pos):
-					set_cell_item(cell_pos, cell_type.MOVE)
+					set_cell_item(cell_pos, cell_type.MOVE)	
 				elif _enemy_on_cell(cell_pos):
 					set_cell_item(cell_pos, cell_type.ENEMY)
 
@@ -53,7 +52,7 @@ func _enemy_on_cell(cell: Vector3i):
 
 func _is_cell_occupied(cell): return occupied_cells.has(cell)
 
-func occupy_cell(cell, unit): occupied_cells[cell] = unit
+func occupy_cell(cell: Vector3i, unit): occupied_cells[cell] = unit
 	
 func free_oc_cell(cell):
 	if _is_cell_occupied(cell):

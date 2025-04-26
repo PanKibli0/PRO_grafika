@@ -1,8 +1,6 @@
 class_name Unit
 extends CharacterBody3D
 
-signal movement_finished
-
 @onready var hp_d = %HP_DEBUG
 @onready var model = %Model
 @onready var player_eye = %Eye
@@ -10,11 +8,11 @@ signal movement_finished
 @onready var amountLabel = %AmountLabel
 
 @export var stats: UnitStats
-var amount: int 
-var player: bool = randi_range(1,2) % 2 
+@export var amount: int 
+@export var player: bool = randi_range(1,2) % 2 
 
 
-var target_position: Vector3 
+@export var target_position: Vector3 = Vector3(0,-5,0)
 var actual_health: int 
 var actual_amount: int = randi_range(5,10)
 
@@ -29,6 +27,7 @@ func _ready():
 	
 	hp_d.text = "HP: %d / %d " % [actual_health, stats.max_health]
 	
+	
 	if !player: hp_player()
 	
 	# KOLOR DLA JEDNOSTKI
@@ -42,7 +41,8 @@ func _ready():
 		material.albedo_color = Color.BLUE if player else Color.RED
 		player_eye.set_surface_override_material(0, material)
 
-		
+	global_transform.origin = target_position
+	
 func move(new_position: Vector3i):
 	is_moving = true
 	target_position = Vector3(new_position) + Vector3(0.5, 0, 0.5)
@@ -61,13 +61,9 @@ func move(new_position: Vector3i):
 func _movement_finished():
 	global_transform.origin = target_position 
 	is_moving = false
-	hp_debug(false)	
-	emit_signal("movement_finished")
+	hp_debug(false)
 	
 func take_damage():
-	#BEGUG
-	
-	
 	var enemy = BATTLE.active_unit
 	var enemy_amount = enemy.actual_amount
 	var enemy_attack = enemy.stats.attack
@@ -96,9 +92,6 @@ func take_damage():
 	hp_d.text = "HP: %d / %d \n DAMEGED: %d" % [actual_health, stats.max_health, act_damage]
 		
 	if actual_amount <= 0: kill()
-
-	# DEBUG
-	await get_tree().create_timer(3.0).timeout
 	
 	
 func kill():
@@ -110,15 +103,19 @@ func kill():
 	#get_tree().quit() # USUNAC JAK SIE PORAWI
 	pass
 
+
 func hp_debug(flag:bool):
 	hp_d.visible = flag
+	hp_d.text =  "HP: %d / %d" % [actual_health, stats.max_health]
 	
 func hp_player():
-	
 	hp_d.anchor_left = 1.0
 	hp_d.anchor_right = 1.0
 	hp_d.offset_left = -200 
 	hp_d.offset_right = 0
+
+	hp_d.add_theme_color_override("font_color", Color(1, 0, 0))
+	
 
 	hp_d.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	
