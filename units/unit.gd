@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 @onready var hp_d = %HP_DEBUG
 @onready var damage_d = %Damage
+
 @onready var model = %Model
 @onready var player_eye = %Eye
 
@@ -13,7 +14,7 @@ extends CharacterBody3D
 @export var player: bool = randi_range(1,2) % 2 
 
 
-@export var target_position: Vector3 = Vector3(0,-5,0)
+@export var target_position: Vector3 = Vector3(-1,-1,-1)
 var actual_health: int 
 var actual_amount: int = randi_range(5,10)
 
@@ -92,7 +93,7 @@ func take_damage():
 	amountLabel.text = str(actual_amount)
 	hp_d.text = "HP: %d / %d" % [actual_health, stats.max_health]
 	damage_d.visible = true
-	damage_d.text = "DAMAGED: " +str(act_damage)
+	damage_d.text = "DAMAGED: %d. KILLED: %d. Left hp: %d" % [act_damage, amount-actual_amount, actual_health]
 	if actual_amount <= 0: kill()
 	await get_tree().create_timer(3.0).timeout
 	damage_d.visible = false

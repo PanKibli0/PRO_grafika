@@ -15,19 +15,24 @@ enum cell_type {
 
 
 func draw_move(middle: Vector3i, movement: int):
-	for x in range(-movement,movement+1):
-		for y in range(-movement,movement+1):
-			if abs(x) + abs(y) <= movement:
-				var cell_pos = middle + Vector3i(x, 0, y)
-				if cell_pos.x < 0 or cell_pos.x >= grid_size[0]: continue
-				if cell_pos.z < 0 or cell_pos.z >= grid_size[1]: continue
-				if x == 0 and y == 0:
-					set_cell_item(cell_pos, cell_type.UNIT)
+	for x in range(-(movement+1), movement+2):
+		for y in range(-(movement+1), movement+2):
+			var distance = abs(x) + abs(y)
+			if distance > movement + 1: continue
+
+			var cell_pos = middle + Vector3i(x, 0, y)
+			if cell_pos.x < 0 or cell_pos.x >= grid_size[0]: continue
+			if cell_pos.z < 0 or cell_pos.z >= grid_size[1]: continue
+
+			if x == 0 and y == 0:
+				set_cell_item(cell_pos, cell_type.UNIT)
+			elif distance <= movement:
 				if not _is_cell_occupied(cell_pos):
-					set_cell_item(cell_pos, cell_type.MOVE)	
+					set_cell_item(cell_pos, cell_type.MOVE)
 				elif _enemy_on_cell(cell_pos):
 					set_cell_item(cell_pos, cell_type.ENEMY)
-
+			elif distance == movement + 1 and _enemy_on_cell(cell_pos):
+				set_cell_item(cell_pos, cell_type.ENEMY)
 
 func clear_grid():
 	selected_cell = Vector3i(-1,-1,-1)
@@ -44,6 +49,7 @@ func select_cell(cell: Vector3i):
 
 func _enemy_on_cell(cell: Vector3i):
 	if BATTLE.active_unit == null: return false
+	if not occupied_cells.has(cell): return false
 	var el = occupied_cells[cell]
 	if el is Unit:
 		if BATTLE.active_unit.player != el.player:
