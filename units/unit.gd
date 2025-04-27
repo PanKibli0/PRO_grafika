@@ -1,6 +1,8 @@
 class_name Unit
 extends CharacterBody3D
 
+signal S_death
+
 @onready var hp_d = %HP_DEBUG
 @onready var damage_d = %Damage
 
@@ -16,7 +18,8 @@ extends CharacterBody3D
 
 @export var target_position: Vector3 = Vector3(-1,-1,-1)
 var actual_health: int 
-var actual_amount: int = randi_range(5,10)
+#var actual_amount: int = randi_range(5,10)
+var actual_amount: int = 1
 
 var is_moving := false
 var tween: Tween = null
@@ -93,21 +96,16 @@ func take_damage():
 	amountLabel.text = str(actual_amount)
 	hp_d.text = "HP: %d / %d" % [actual_health, stats.max_health]
 	damage_d.visible = true
-	damage_d.text = "DAMAGED: %d. KILLED: %d. Left hp: %d" % [act_damage, amount-actual_amount, actual_health]
-	if actual_amount <= 0: kill()
-	await get_tree().create_timer(3.0).timeout
+	damage_d.text = "DAMAGED: %d | KILLED: %d | Left hp: %d" % [act_damage, amount-actual_amount, actual_health]
+	if actual_amount <= 0: death()
+	await get_tree().create_timer(2.0).timeout
 	damage_d.visible = false
 	
-func kill():
-	print("KILLED")
+func death():
+	emit_signal("S_death")
+	queue_free()
 	
-	position = Vector3i(-1,-1,-1)
-	#queue_free()
 	
-	#get_tree().quit() # USUNAC JAK SIE PORAWI
-	pass
-
-
 func hp_debug(flag:bool):
 	hp_d.visible = flag
 	hp_d.text =  "HP: %d / %d" % [actual_health, stats.max_health]

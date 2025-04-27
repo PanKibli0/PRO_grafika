@@ -69,12 +69,11 @@ func get_unit(cell: Vector3i):
 	if not _is_cell_occupied(cell): return
 	return occupied_cells[cell]
 		
-func _input(event: InputEvent):
-	if event.is_action_pressed("camera_zoom_down"):
-		print("CELLS:")
-		for cell in get_used_cells():
-			var cell_id = get_cell_item(cell) 
-			if cell_id != 0:
-				print("Cell position:", cell, "Cell ID:", cell_id)
+
+func _unit_death(unit):
+	for pos in occupied_cells.keys():
+		if occupied_cells[pos] == unit:
+			occupied_cells.erase(pos)
+			break
 			
 		

@@ -1,8 +1,8 @@
 extends Node
 
-signal end_turn
+signal S_end_turn
 
-@onready var DIRECTION = %Direction
+@onready var direction = %Direction
 
 @onready var GRID = %Grid
 @onready var CAMERA =  %Camera
@@ -14,7 +14,7 @@ func _input(event):
 	if event is InputEventMouseMotion:  
 		var r_cell = _get_cell_at_mouse_position(event.position)
 		if r_cell.is_empty(): 
-			DIRECTION.text = ""
+			direction.text = ""
 			return
 		var cell = r_cell[0]
 		var id = r_cell[1]
@@ -30,7 +30,7 @@ func _input(event):
 			update_attack_direction(cell, event.position)
 		elif unit != null:
 			unit.hp_debug(false)
-			DIRECTION.text = ""
+			direction.text = ""
 		
 		
 	if event.is_action_pressed("LMB") and !BATTLE.active_unit.is_moving:
@@ -41,10 +41,10 @@ func _input(event):
 		
 		if id == GRID.cell_type.SELECT: 
 			op_move(cell)
-			emit_signal("end_turn")
+			emit_signal("S_end_turn")
 		elif id == GRID.cell_type.ENEMY:
 			if op_attack(cell, event.position): 
-				emit_signal("end_turn")
+				emit_signal("S_end_turn")
 	
 func _raycast(mouse_position: Vector2) -> Dictionary:
 	var space_state = CAMERA.get_world_3d().direct_space_state
@@ -128,20 +128,20 @@ func update_attack_direction(cell: Vector3i, mouse_position: Vector2):
 
 	match delta:
 		Vector3i(-1, 0, 0):
-			DIRECTION.text = "Lewo"
+			direction.text = "Lewo"
 		Vector3i(1, 0, 0):
-			DIRECTION.text = "Prawo"
+			direction.text = "Prawo"
 		Vector3i(0, 0, -1):
-			DIRECTION.text = "Góra"
+			direction.text = "Góra"
 		Vector3i(0, 0, 1):
-			DIRECTION.text = "Dół"
+			direction.text = "Dół"
 		Vector3i(-1, 0, -1):
-			DIRECTION.text = "Lewo-Góra"
+			direction.text = "Lewo-Góra"
 		Vector3i(1, 0, -1):
-			DIRECTION.text = "Prawo-Góra"
+			direction.text = "Prawo-Góra"
 		Vector3i(-1, 0, 1):
-			DIRECTION.text = "Lewo-Dół"
+			direction.text = "Lewo-Dół"
 		Vector3i(1, 0, 1):
-			DIRECTION.text = "Prawo-Dół"
+			direction.text = "Prawo-Dół"
 		_:
-			DIRECTION.text = ""
+			direction.text = ""
