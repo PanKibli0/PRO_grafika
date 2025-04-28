@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=12 format=3 uid="uid://gioqd05hgd0g"]
 
 [ext_resource type="Script" uid="uid://h4rds26ntm6g" path="res://battle.gd" id="1_ol6im"]
 [ext_resource type="Script" uid="uid://cwjc26o4o80ou" path="res://units/units_controller.gd" id="4_6t8i5"]
+[ext_resource type="PackedScene" uid="uid://bq2ur7tssc2y3" path="res://units/unit.tscn" id="4_dw4jg"]
 [ext_resource type="Script" uid="uid://dp6upvyfg4eqi" path="res://mouse_controller.gd" id="4_i431l"]
+[ext_resource type="Resource" uid="uid://dqpijfwnnmhmb" path="res://units/Faction1/ARMORED.tres" id="5_0npn6"]
 [ext_resource type="Script" uid="uid://fkkqunly1lwo" path="res://grid.gd" id="5_dw4jg"]
 [ext_resource type="MeshLibrary" uid="uid://24du0onhducq" path="res://grid_mesh.tres" id="6_0npn6"]
 
@@ -41,6 +43,11 @@ script = ExtResource("4_i431l")
 [node name="Units" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("4_6t8i5")
+
+[node name="Unit" parent="Units" instance=ExtResource("4_dw4jg")]
+stats = ExtResource("5_0npn6")
+amount = 1
+target_position = Vector3(5, 0, 5)
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
