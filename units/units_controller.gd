@@ -25,7 +25,12 @@ func _get_position(for_player: bool) -> Vector3:
 
 func _ready():
 	units_list = get_children()
-	units_list.sort_custom(_compare_initiative)
+	
+	for i in range(20):
+		_add_unit(i, i % 2 == 0)
+	
+	if units_list.size() > 1:	
+		units_list.sort_custom(_compare_initiative)
 	
 	for unit in units_list:
 		unit.connect("S_death", Callable(self, "_unit_death").bind(unit))
@@ -91,3 +96,32 @@ func _input(event: InputEvent):
 	#if event.is_action_pressed("DEFENSE") and BATTLE.active_unit.player == true:
 	if event.is_action_pressed("DEFENSE"):
 		_change_active_unit()
+	
+	if event.is_action_pressed("WAIT"):
+		var random = randi_range(0, units_list.size())
+		while random == active_unit_index:
+			random = randi_range(0, units_list.size())
+		units_list[random].death()
+
+func _add_unit(DV: int = 0, player = true):
+	var new_unit_scene = preload("res://units/Unit.tscn")  
+	var unit = new_unit_scene.instantiate()
+	
+	var stats = UnitStats.new(
+		"Debug Unit" + str(DV),
+		randi_range(5, 100),
+		randi_range(1, 10),
+		randi_range(1, 10),
+		randi_range(1, 20),
+		randi_range(1, 30),
+		randi_range(1, 20),
+		randi_range(1, 12),
+		Color(randf(), randf(), randf())
+	)
+
+	unit.stats = stats
+	unit.player = player
+	
+	add_child(unit)
+	
+	units_list.append(unit)
