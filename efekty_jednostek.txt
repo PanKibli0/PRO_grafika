@@ -1,0 +1,59 @@
+OGŁUSZENIE - brak kontry, -inicjatywa
+SZTURM - % na drugi atak
+OBSZAROWY
+LINIA
+PRECYZYJNY - krótki zasięg strzelca ++obrażenia
+SZAŁ - sojusznik ginie, ++atak
+TARCZA - ++obrona sojuszników
+SPUSTOSZENIE - przeciwnik ginie(-amount), drugi atak
+NIEOGRANICZONY KONTRATAK - zawsze jest kontratak
+ODPORNOŚĆ NA "X"
+INNY OPÓŹNIONY ATAK
+USUWANIE BUFF
+USUWANIE DEBUFF
+SZARŻA - ATAK++, za każde pole do przejścia
+LECZENIE
+INNY ATAK Z TYŁU, ZASIĘG JEDNEGO POLA
+WSKRZESZANIE
+
+--- Umiejętności specjalne ---
+
+EKSPLOZJA - atak wokół po śmierci/umiej
+SKOK - lepszy ruch
+KONTRATAK Z DYSTANSU
+STRZAŁ ŁAŃCUCHOWY
+STRZAŁ PRZECHODZI NA POBLISKIE CELE
+HIPNOZA??
+DAMAGE PRZY JEDNOSTCE
+OSTRZE MASAKRY
+WIĘCEJ DAMAGE ZA DUŻY STACK
+PRZYWOŁANIE
+
+--- Typy jednostek i cechy ---
+
+NIEUMARŁY - brak leczenia, + odporności
+TARCZA - mniejszy damage od dystansu
+NIEMATERIALNY (DUCH) - % na dostanie jakichkolwiek obrażeń
+KRADNIĘCIE AMUNICJI/MANY
+WAMPIRYZM - wysysanie życia
+JEDNOSTKA MECHANICZNA
+BRAK KONTRY
+STRZELEC - mniejsze obrażenia jak blisko
+SKUTECZNOŚĆ NA BLISKO - Strzelec => 100% na blisko obrażenia
+TCHÓRZ - ucieka po dostaniu obrażeń
+MANEWR - ucieka i zadaje obrażenia z daleka
+WZMOCNIONY KONTRATAK
+PROWOKACJA
+RZUT JEDNOSTKĄ
+JEDZENIE J. - leczenie poprzez zabijanie swoich
+PRZESUNIĘCIE
+BRAK PRZESUNIĘCIA
+PRZYCIĄGANIE
+KOLCE - damage przy każdym ataku
+UDERZ I WRÓĆ - atakuje i wraca w stare miejsce
+SĄSIEDNI ATAK - atak jak atakują jednostkę sojuszniczą obok
+PRZYWOŁYWANIE
+RZECZY NA START
+SKAMIENIENIE - brak akcji + brak interakcji
+NIEWIDZIALNOŚĆ - ???
+ODRODZENIE - wskrzeszenie po śmierci
