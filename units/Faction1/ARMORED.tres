@@ -5,12 +5,12 @@
 [resource]
 script = ExtResource("1_068xi")
 name = "Peasant"
-max_health = 500
+max_health = 1
 attack = 0
 defense = 0
 damage_min = 20
 damage_max = 40
-initiative = 1
-movement = 5
-color = Color(0.766814, 0.101419, 0.512306, 1)
+initiative = 1000
+movement = 20
+color = Color(0.929412, 0, 0.45098, 0.368627)
 metadata/_custom_type_script = "uid://cukyhyanl175x"

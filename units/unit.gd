@@ -30,12 +30,19 @@ func _ready():
 	actual_health = stats.max_health
 	actual_stats = stats
 	
-	amountLabel.text = str(actual_amount)
+	amountLabel.text = str(actual_amount) + "/" + str(size)
 	hp_d.text = "HP: %d / %d " % [actual_health, stats.max_health]
 	
 	
 	if !player: hp_player()
 	
+	if size == 2:
+		model.scale = 2*model.scale
+		player_eye.scale = 2*player_eye.scale
+		model.position.y += 1
+		player_eye.position.y += 1
+		
+		
 	# KOLOR DLA JEDNOSTKI
 	if model and model.get_active_material(0):
 		var material = model.get_active_material(0).duplicate()
@@ -48,13 +55,17 @@ func _ready():
 		player_eye.set_surface_override_material(0, material)
 
 	global_transform.origin = target_position
+	global_transform.origin += Vector3(1,0,1)
 	
 func move(new_position: Vector3i):
 	is_moving = true
-	target_position = Vector3(new_position) + Vector3(0.5, 0, 0.5)
+	var add_pos = Vector3(0.5, 0, 0.5) if size == 1 else Vector3(1, 0, 1)
+	#var add_pos = Vector3(0.5, 0, 0.5)
+	
+	target_position = Vector3(new_position) + add_pos
 	target_position.y = global_transform.origin.y
 	
-	look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
+	#look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
 	
 	if tween:
 		tween.kill()
@@ -68,6 +79,7 @@ func _movement_finished():
 	global_transform.origin = target_position 
 	is_moving = false
 	hp_debug(false)
+	print(target_position)
 	
 func take_damage():
 	var enemy = BATTLE.active_unit

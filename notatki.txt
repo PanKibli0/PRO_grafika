@@ -2,36 +2,10 @@
 
 ==============================
 
-SMIERC
+MOVE 2x2 BLEDNIE OBLICZANY
+POLOZENIE 2x2 BLEDNIE POKAZAYWANE/OBLICZANE
 
 ==============================
 
 polozenie // grid => GLOBAL
 tury // unit_controller => Battle/GLOBAL
-
-==============================
-
-kodzik na kiedys:
-	
-	func _add_unit(DV: int = 0, u_player = false):
-	#var new_unit_scene = preload("res://units/Unit.tscn")  
-	#var unit = new_unit_scene.instantiate()
-	#
-	#var stats = UnitStats.new()
-	#stats.name = "Debug Unit"+str(DV)
-	#stats.max_health = randi_range(10,1000)
-	#stats.attack = randi_range(10,1000)
-	#stats.defense = randi_range(10,1000)
-	#stats.damage_min = randi_range(10,1000)
-	#stats.damage_max = randi_range(10,1000)
-	#stats.initiative = randi_range(1, 20)
-	#stats.movement =  randi_range(1,12)
-	#stats.color = Color(randf(), randf(), randf())  # losowy kolor
-#
-	#unit.stats = stats
-	#
-	#if u_player: print("UPLAYER")
-	#
-	#add_child(unit)
-	#
-	#units_list.append(unit)

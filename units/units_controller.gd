@@ -47,6 +47,7 @@ func _ready():
 		unit.global_transform.origin = Vector3(cell_pos)  
 		unit.target_position = cell_pos 
 		
+		
 		if unit.player: unit.look_at(Vector3(cell_pos.x + 1, cell_pos.y, cell_pos.z) )
 		else: unit.look_at(Vector3(cell_pos.x - 1, cell_pos.y, cell_pos.z))
 		
@@ -68,7 +69,7 @@ func _change_active_unit():
 	BATTLE.active_unit.hp_debug(true)
 	
 	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin)
-	GRID.draw_move(unit_position, BATTLE.active_unit.stats.movement)	
+	GRID.draw_move(unit_position, BATTLE.active_unit.stats.movement, BATTLE.active_unit.size)	
 
 func _unit_death(unit):
 	units_list.erase(unit)

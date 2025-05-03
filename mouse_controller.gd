@@ -67,9 +67,10 @@ func get_mouse_world_position(mouse_position: Vector2) -> Vector3:
 			
 func op_move(cell): 
 	var world_pos = GRID.map_to_local(cell)
-			
-	GRID.free_oc_cell(GRID.local_to_map(BATTLE.active_unit.global_transform.origin))
-	GRID.occupy_cell(cell, BATTLE.active_unit)
+	
+	var old_pos = GRID.local_to_map(BATTLE.active_unit.global_transform.origin)
+	GRID.free_oc_area(BATTLE.active_unit)
+	GRID.occupy_area(cell, BATTLE.active_unit)
 			
 	BATTLE.active_unit.move(world_pos) # PORUSZANIE JEDNSOTKA
 	

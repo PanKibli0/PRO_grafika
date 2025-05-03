@@ -5,12 +5,12 @@
 [resource]
 script = ExtResource("1_g6a86")
 name = "Knight"
-max_health = 20
+max_health = 10000
 attack = 4
 defense = 6
 damage_min = 20
 damage_max = 40
-initiative = 10
-movement = 4
+initiative = 1
+movement = 5
 color = Color(0, 0, 0, 1)
 metadata/_custom_type_script = "uid://cukyhyanl175x"
