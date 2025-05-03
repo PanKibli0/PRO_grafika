@@ -26,8 +26,8 @@ func _get_position(for_player: bool) -> Vector3:
 func _ready():
 	units_list = get_children()
 	
-	for i in range(20):
-		_add_unit(i, i % 2 == 0)
+	#for i in range(20):
+		#_add_unit(i, i % 2 == 0)
 	
 	if units_list.size() > 1:	
 		units_list.sort_custom(_compare_initiative)
@@ -50,7 +50,7 @@ func _ready():
 		if unit.player: unit.look_at(Vector3(cell_pos.x + 1, cell_pos.y, cell_pos.z) )
 		else: unit.look_at(Vector3(cell_pos.x - 1, cell_pos.y, cell_pos.z))
 		
-		GRID.occupy_cell(r_pos, unit)
+		GRID.occupy_area(r_pos, unit)
 		
 	_change_active_unit()
 
@@ -98,10 +98,7 @@ func _input(event: InputEvent):
 		_change_active_unit()
 	
 	if event.is_action_pressed("WAIT"):
-		var random = randi_range(0, units_list.size())
-		while random == active_unit_index:
-			random = randi_range(0, units_list.size())
-		units_list[random].death()
+		pass
 
 func _add_unit(DV: int = 0, player = true):
 	var new_unit_scene = preload("res://units/Unit.tscn")  

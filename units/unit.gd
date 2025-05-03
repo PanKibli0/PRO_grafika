@@ -11,23 +11,26 @@ signal S_death
 
 @onready var amountLabel = %AmountLabel
 
+@export var player: bool = true
 @export var stats: UnitStats
 @export var amount: int = randi_range(5,10)
-@export var player: bool = true
+@export var size = 1
 
-@export var target_position: Vector3 = Vector3(-1,-1,-1)
+var actual_stats: UnitStats
 var actual_health: int 
 var actual_amount: int
 
+@export var target_position: Vector3 = Vector3(-1,-1,-1)
 var is_moving := false
 var tween: Tween = null
 
 
 func _ready():
 	actual_amount = amount
-	amountLabel.text = str(actual_amount)
 	actual_health = stats.max_health
+	actual_stats = stats
 	
+	amountLabel.text = str(actual_amount)
 	hp_d.text = "HP: %d / %d " % [actual_health, stats.max_health]
 	
 	
