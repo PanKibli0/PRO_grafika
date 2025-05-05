@@ -51,6 +51,8 @@ size = Vector3(0.5, 1, 0.5)
 
 [node name="Unit" type="CharacterBody3D"]
 top_level = true
+collision_layer = 4
+collision_mask = 4
 input_ray_pickable = false
 motion_mode = 1
 script = ExtResource("1_btf8p")

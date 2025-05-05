@@ -1,0 +1,94 @@
+[gd_scene load_steps=14 format=3 uid="uid://gioqd05hgd0g"]
+
+[ext_resource type="Script" uid="uid://h4rds26ntm6g" path="res://battle.gd" id="1_ol6im"]
+[ext_resource type="Script" uid="uid://sqvwfmlbwexy" path="res://camera.gd" id="2_lcjiy"]
+[ext_resource type="Script" uid="uid://cwjc26o4o80ou" path="res://units/units_controller.gd" id="4_6t8i5"]
+[ext_resource type="PackedScene" uid="uid://bq2ur7tssc2y3" path="res://units/unit.tscn" id="4_dw4jg"]
+[ext_resource type="Script" uid="uid://dp6upvyfg4eqi" path="res://mouse_controller.gd" id="4_i431l"]
+[ext_resource type="Resource" uid="uid://dqpijfwnnmhmb" path="res://units/Faction1/ARMORED.tres" id="5_0npn6"]
+[ext_resource type="Script" uid="uid://fkkqunly1lwo" path="res://grid.gd" id="5_dw4jg"]
+[ext_resource type="MeshLibrary" uid="uid://24du0onhducq" path="res://grid_mesh.tres" id="6_0npn6"]
+[ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/Faction1/knight.tres" id="6_mhv3b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0npn6"]
+albedo_color = Color(0.454902, 0.172549, 0.0862745, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mhv3b"]
+material = SubResource("StandardMaterial3D_0npn6")
+size = Vector2(14, 11)
+center_offset = Vector3(7, 0, 6)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ol6im"]
+data = PackedVector3Array(14, 0, 11.5, 0, 0, 11.5, 14, 0, 0.5, 0, 0, 11.5, 0, 0, 0.5, 14, 0, 0.5)
+
+[sub_resource type="GDScript" id="GDScript_ol6im"]
+script/source = "extends Node
+"
+
+[node name="Battle" type="Node3D"]
+script = ExtResource("1_ol6im")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 0)
+
+[node name="Camera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 6, 7, 10)
+keep_aspect = 0
+current = true
+fov = 105.0
+script = ExtResource("2_lcjiy")
+
+[node name="MouseController" type="Node" parent="Camera"]
+unique_name_in_owner = true
+script = ExtResource("4_i431l")
+
+[node name="Units" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_6t8i5")
+
+[node name="Unit" parent="Units" instance=ExtResource("4_dw4jg")]
+stats = ExtResource("5_0npn6")
+amount = 1
+size = 2
+target_position = Vector3(5, 0, 5)
+
+[node name="Unit2" parent="Units" instance=ExtResource("4_dw4jg")]
+player = false
+stats = ExtResource("6_mhv3b")
+amount = 1
+target_position = Vector3(4, 0, 4)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.45, -1)
+layers = 524288
+mesh = SubResource("PlaneMesh_mhv3b")
+
+[node name="Floor" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/Floor"]
+shape = SubResource("ConcavePolygonShape3D_ol6im")
+
+[node name="Grid" type="GridMap" parent="."]
+unique_name_in_owner = true
+mesh_library = ExtResource("6_0npn6")
+cell_size = Vector3(1, 1, 1)
+script = ExtResource("5_dw4jg")
+
+[node name="Direction" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.05
+anchor_right = 0.5
+anchor_bottom = 0.05
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="Node" type="Node" parent="."]
+script = SubResource("GDScript_ol6im")
+
+[connection signal="S_end_turn" from="Camera/MouseController" to="Units" method="_change_active_unit"]

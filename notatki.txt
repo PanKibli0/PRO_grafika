@@ -1,9 +1,14 @@
 *Cell poza grid i nie ostani sleected
 
 ==============================
-
-MOVE 2x2 BLEDNIE OBLICZANY
 POLOZENIE 2x2 BLEDNIE POKAZAYWANE/OBLICZANE
+
+SELECT Z LEWEJ STORNY NA JEDNSOTKE TRZA SPRAWDIZC CO JEST NIE TAK => 
+	MOZE ZMIAST if get_unit(cell) == BATTLE.active_unit: 
+	DAC SPRAWDZANIE CZY ALL ID + UNIT
+
+RUCH NA PRZEDOSTANIE I BLOKUJE SIE CELL POD sprawdic
+
 
 ==============================
 

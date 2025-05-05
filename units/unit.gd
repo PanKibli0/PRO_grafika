@@ -36,11 +36,11 @@ func _ready():
 	
 	if !player: hp_player()
 	
-	if size == 2:
-		model.scale = 2*model.scale
-		player_eye.scale = 2*player_eye.scale
-		model.position.y += 1
-		player_eye.position.y += 1
+	#if size == 2:
+		##model.scale = 2*model.scale
+		##player_eye.scale = 2*player_eye.scale
+		##model.position.y += 1
+		##player_eye.position.y += 1
 		
 		
 	# KOLOR DLA JEDNOSTKI
@@ -59,8 +59,8 @@ func _ready():
 	
 func move(new_position: Vector3i):
 	is_moving = true
-	var add_pos = Vector3(0.5, 0, 0.5) if size == 1 else Vector3(1, 0, 1)
-	#var add_pos = Vector3(0.5, 0, 0.5)
+	#var add_pos = Vector3(0.5, 0, 0.5) if size == 1 else Vector3(1, 0, 1)
+	var add_pos = Vector3(0.5, 0, 0.5)
 	
 	target_position = Vector3(new_position) + add_pos
 	target_position.y = global_transform.origin.y

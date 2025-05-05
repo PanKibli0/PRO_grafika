@@ -19,12 +19,13 @@ func _input(event):
 		var cell = r_cell[0]
 		var id = r_cell[1]
 		
-		if id == GRID.cell_type.MOVE:
+		if id in [GRID.cell_type.MOVE,GRID.cell_type.SELECT, GRID.cell_type.UNIT]:
 			GRID.select_cell(cell)
 		
 		if id == GRID.cell_type.ENEMY:
-			GRID.set_cell_item(GRID.selected_cell, 0)
-			GRID.selected_cell = Vector3i(-1,-1,-1)
+			for c in GRID.selected_area:
+				GRID.set_cell_item(c, 0)
+			GRID.selected_area.clear()
 			unit = GRID.get_unit(cell)
 			unit.hp_debug(true)
 			update_attack_direction(cell, event.position)
@@ -68,6 +69,7 @@ func get_mouse_world_position(mouse_position: Vector2) -> Vector3:
 func op_move(cell): 
 	var world_pos = GRID.map_to_local(cell)
 	
+#	?? COS POPRAWIC
 	var old_pos = GRID.local_to_map(BATTLE.active_unit.global_transform.origin)
 	GRID.free_oc_area(BATTLE.active_unit)
 	GRID.occupy_area(cell, BATTLE.active_unit)

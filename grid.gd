@@ -4,7 +4,7 @@ extends GridMap
 var grid_size = [12, 10]
 var selected_cell: Vector3i = Vector3i(-1,-1,-1)
 var occupied_cells: Dictionary = {}
-
+var selected_area: Array = []
 
 enum cell_type {
 	MOVE = 0,
@@ -14,41 +14,42 @@ enum cell_type {
 }
 
 
-func draw_move(middle: Vector3i, movement: int, size: int):
-	for x in range(-(movement+1), movement+2):
-		for y in range(-(movement+1), movement+2):
-			var cell_pos = middle + Vector3i(x, 0, y)
-			if cell_pos.x < 0 or cell_pos.x + size -1 >= grid_size[0]: continue
-			if cell_pos.z < 0 or cell_pos.z + size -1 >= grid_size[1]: continue
-			
+func draw_move(origin_cell: Vector3i, movement: int, size: int):
+	for x in range(-(movement + 1), movement + 2):
+		for y in range(-(movement + 1), movement + 2):
+			var offset = Vector3i(x, 0, y)
+			var target_origin = origin_cell + offset
+
+			if target_origin.x < 0 or target_origin.x + size > grid_size[0] or target_origin.z < 0 or target_origin.z + size > grid_size[1]: continue
+
 			var distance = abs(x) + abs(y)
 			if distance > movement + size: continue
 
 			if x == 0 and y == 0:
-				for center_x in range(size):
-					for center_z in range(size):
-						var center_cell = cell_pos + Vector3i(center_x, 0, center_z)
-						set_cell_item(center_cell, cell_type.UNIT)
+				for dx in range(size):
+					for dz in range(size):
+						set_cell_item(origin_cell + Vector3i(dx, 0, dz), cell_type.UNIT)
 			elif distance <= movement:
-				if not _is_cell_occupied(cell_pos):
-					set_cell_item(cell_pos, cell_type.MOVE)
-				elif _enemy_on_cell(cell_pos):
-					set_cell_item(cell_pos, cell_type.ENEMY)
-			elif distance == movement + 1 and _enemy_on_cell(cell_pos):
-				set_cell_item(cell_pos, cell_type.ENEMY)
+				if _area_free(target_origin, size):
+					for dx in range(size):
+						for dz in range(size):
+							set_cell_item(target_origin + Vector3i(dx, 0, dz), cell_type.MOVE)
+				elif _enemy_on_cell(target_origin):
+					set_cell_item(target_origin, cell_type.ENEMY)
+			elif distance == movement + 1 and _enemy_on_cell(target_origin):
+				set_cell_item(target_origin, cell_type.ENEMY)
+
+func _area_free(origin_cell: Vector3i, size: int) -> bool:
+	for x in range(size):
+		for z in range(size):
+			if _is_cell_occupied(origin_cell + Vector3i(x, 0, z)): return false
+	return true
+
 
 func clear_grid():
-	selected_cell = Vector3i(-1,-1,-1)
+	selected_area.clear()
 	clear()
 	
-
-func select_cell(cell: Vector3i):
-	if cell != selected_cell and get_cell_item(cell) == cell_type.MOVE:
-		if selected_cell != Vector3i(-1, -1, -1):
-			set_cell_item(selected_cell, cell_type.MOVE)
-		selected_cell = cell
-		set_cell_item(selected_cell, cell_type.SELECT)
-		
 
 func _enemy_on_cell(cell: Vector3i):
 	if BATTLE.active_unit == null: return false
@@ -80,15 +81,7 @@ func free_oc_area(unit):
 	for cell in keys_to_remove:
 		occupied_cells.erase(cell)
 	
-func _is_cell_area_free(cell_origin, size) -> bool:
-	for x in range(size):
-		for z in range(size):
-			var cell = cell_origin + Vector3i(x, 0, z)
-			if occupied_cells.has(cell):
-				return false
-	return true
 	
-		
 func get_unit(cell: Vector3i):
 	if not _is_cell_occupied(cell): return
 	return occupied_cells[cell]
@@ -101,6 +94,51 @@ func _unit_death(unit):
 			
 		
 var grid_filled := false
+
+
+var selected_area_original_ids = {}
+
+func select_cell(cell: Vector3i):
+	var size = BATTLE.active_unit.size
+	if get_unit(cell) == BATTLE.active_unit: 
+		print_rich("[color=red]===============================[/color]")
+		print(cell)
+		print(selected_area_original_ids)
+		print_rich("[color=yellow]===============================[/color]")
+		return
+
+	for x in range(size):
+		for z in range(size):
+			var check_cell = cell - Vector3i(x, 0, 0) + Vector3i(0, 0, z)
+			var item = get_cell_item(check_cell)
+			if item not in [cell_type.MOVE, cell_type.SELECT, cell_type.UNIT]:
+				return
+			if item == cell_type.UNIT and get_unit(check_cell) != BATTLE.active_unit:
+				return
+
+	for c in selected_area:
+		if selected_area_original_ids.has(c):
+			set_cell_item(c, selected_area_original_ids[c])
+	selected_area.clear()
+	selected_area_original_ids.clear()
+
+	for x in range(size):
+		for z in range(size):
+			var c = cell - Vector3i(x, 0, 0) + Vector3i(0, 0, z)
+			selected_area_original_ids[c] = get_cell_item(c)
+			set_cell_item(c, cell_type.SELECT)
+			selected_area.append(c)
+
+	selected_cell = cell
+
+func _is_area_move(origin_cell: Vector3i, size: int) -> bool:
+	for x in range(size):
+		for z in range(size):
+			if get_cell_item(origin_cell + Vector3i(x, 0, z)) != cell_type.MOVE:
+				return false
+	return true
+
+
 
 func _input(event):
 	if event.is_action_pressed("debug1"):

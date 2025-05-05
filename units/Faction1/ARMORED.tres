@@ -11,6 +11,6 @@ defense = 0
 damage_min = 20
 damage_max = 40
 initiative = 1000
-movement = 20
+movement = 4
 color = Color(0.929412, 0, 0.45098, 0.368627)
 metadata/_custom_type_script = "uid://cukyhyanl175x"

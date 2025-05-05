@@ -8,10 +8,6 @@ func _ready():
 	default_position = global_position
 	default_rotation = rotation_degrees
 
-func _process(delta):
-	if Input.is_action_just_pressed("debug12"):
-		toggle_debug_camera()
-
 func toggle_debug_camera():
 	if is_debug_view:
 		global_position = default_position
@@ -20,3 +16,7 @@ func toggle_debug_camera():
 		global_position = Vector3(6, 10, 5)
 		rotation_degrees = Vector3(-90, 0, 0)
 	is_debug_view = !is_debug_view
+
+func _input(event):
+	if event.is_action_pressed("debug12"):
+		toggle_debug_camera()
