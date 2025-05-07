@@ -10,48 +10,56 @@ signal S_end_turn
 
 var unit: Unit = null
 
+func _hover_input(event):
+	var r_cell = _get_cell_at_mouse_position(event.position)
+	if r_cell.is_empty(): 
+		direction.text = ""
+		return
+	var cell = r_cell[0]
+	var id = r_cell[1]
+	
+	if id in [GRID.cell_type.MOVE,GRID.cell_type.SELECT, GRID.cell_type.UNIT]:
+		GRID.select_cell(cell)
+	
+	if id == GRID.cell_type.ENEMY:
+		for c in GRID.selected_area.keys():
+			GRID.set_cell_item(c, GRID.selected_area[c])
+		GRID.selected_area.clear()
+		unit = GRID.get_unit(cell)
+		unit.hp_debug(true)
+		update_attack_direction(cell, event.position)
+	elif unit != null:
+		unit.hp_debug(false)
+		direction.text = ""
+
+func _click_input(event):
+	var r_cell = _get_cell_at_mouse_position(event.position)
+	if r_cell.is_empty(): return
+	var cell = r_cell[0]
+	var id = r_cell[1]
+
+	if id == GRID.cell_type.SELECT: 
+		op_move(cell)
+		emit_signal("S_end_turn")
+	elif id == GRID.cell_type.ENEMY:
+		if op_attack(cell, event.position): 
+			emit_signal("S_end_turn")
+
+
 func _input(event):
 	if event is InputEventMouseMotion:  
-		var r_cell = _get_cell_at_mouse_position(event.position)
-		if r_cell.is_empty(): 
-			direction.text = ""
-			return
-		var cell = r_cell[0]
-		var id = r_cell[1]
-		
-		if id in [GRID.cell_type.MOVE,GRID.cell_type.SELECT, GRID.cell_type.UNIT]:
-			GRID.select_cell(cell)
-		
-		if id == GRID.cell_type.ENEMY:
-			for c in GRID.selected_area:
-				GRID.set_cell_item(c, 0)
-			GRID.selected_area.clear()
-			unit = GRID.get_unit(cell)
-			unit.hp_debug(true)
-			update_attack_direction(cell, event.position)
-		elif unit != null:
-			unit.hp_debug(false)
-			direction.text = ""
-		
+		_hover_input(event)		
 		
 	if event.is_action_pressed("LMB") and !BATTLE.active_unit.is_moving:
-		var r_cell = _get_cell_at_mouse_position(event.position)
-		if r_cell.is_empty(): return
-		var cell = r_cell[0]
-		var id = r_cell[1]
+		_click_input(event)
 		
-		if id == GRID.cell_type.SELECT: 
-			op_move(cell)
-			emit_signal("S_end_turn")
-		elif id == GRID.cell_type.ENEMY:
-			if op_attack(cell, event.position): 
-				emit_signal("S_end_turn")
 	
 func _raycast(mouse_position: Vector2) -> Dictionary:
 	var space_state = CAMERA.get_world_3d().direct_space_state
 	var from = CAMERA.project_ray_origin(mouse_position)
 	var to = from + CAMERA.project_ray_normal(mouse_position) * 1000
 	return space_state.intersect_ray(PhysicsRayQueryParameters3D.create(from, to))
+		
 		
 func _get_cell_at_mouse_position(mouse_position: Vector2) -> Array:
 	var result = _raycast(mouse_position)

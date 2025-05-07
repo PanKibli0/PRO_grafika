@@ -59,8 +59,8 @@ func _ready():
 	
 func move(new_position: Vector3i):
 	is_moving = true
-	#var add_pos = Vector3(0.5, 0, 0.5) if size == 1 else Vector3(1, 0, 1)
-	var add_pos = Vector3(0.5, 0, 0.5)
+	var add_pos = Vector3(0.5, 0, 0.5) if size == 1 else Vector3(0.5, 0, 0.5)
+	#var add_pos = Vector3(0.5, 0, 0.5)
 	
 	target_position = Vector3(new_position) + add_pos
 	target_position.y = global_transform.origin.y

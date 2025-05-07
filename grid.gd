@@ -4,7 +4,7 @@ extends GridMap
 var grid_size = [12, 10]
 var selected_cell: Vector3i = Vector3i(-1,-1,-1)
 var occupied_cells: Dictionary = {}
-var selected_area: Array = []
+var selected_area: Dictionary = {}
 
 enum cell_type {
 	MOVE = 0,
@@ -47,6 +47,7 @@ func _area_free(origin_cell: Vector3i, size: int) -> bool:
 
 
 func clear_grid():
+	selected_cell = Vector3(-1,-1,-1)
 	selected_area.clear()
 	clear()
 	
@@ -96,16 +97,8 @@ func _unit_death(unit):
 var grid_filled := false
 
 
-var selected_area_original_ids = {}
-
 func select_cell(cell: Vector3i):
 	var size = BATTLE.active_unit.size
-	if get_unit(cell) == BATTLE.active_unit: 
-		print_rich("[color=red]===============================[/color]")
-		print(cell)
-		print(selected_area_original_ids)
-		print_rich("[color=yellow]===============================[/color]")
-		return
 
 	for x in range(size):
 		for z in range(size):
@@ -113,21 +106,16 @@ func select_cell(cell: Vector3i):
 			var item = get_cell_item(check_cell)
 			if item not in [cell_type.MOVE, cell_type.SELECT, cell_type.UNIT]:
 				return
-			if item == cell_type.UNIT and get_unit(check_cell) != BATTLE.active_unit:
-				return
 
-	for c in selected_area:
-		if selected_area_original_ids.has(c):
-			set_cell_item(c, selected_area_original_ids[c])
+	for c in selected_area.keys():
+		set_cell_item(c, selected_area[c])
 	selected_area.clear()
-	selected_area_original_ids.clear()
 
 	for x in range(size):
 		for z in range(size):
 			var c = cell - Vector3i(x, 0, 0) + Vector3i(0, 0, z)
-			selected_area_original_ids[c] = get_cell_item(c)
+			selected_area[c] = get_cell_item(c)
 			set_cell_item(c, cell_type.SELECT)
-			selected_area.append(c)
 
 	selected_cell = cell
 
