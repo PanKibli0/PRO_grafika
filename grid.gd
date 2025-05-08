@@ -20,16 +20,17 @@ func draw_move(origin_cell: Vector3i, movement: int, size: int):
 			var offset = Vector3i(x, 0, y)
 			var target_origin = origin_cell + offset
 
-			if target_origin.x < 0 or target_origin.x + size > grid_size[0] or target_origin.z < 0 or target_origin.z + size > grid_size[1]: continue
+			if target_origin.x < 0 or target_origin.x > grid_size[0] - size or target_origin.z < 0 or target_origin.z > grid_size[1] - size:
+				continue
+
+			if target_origin == origin_cell:
+				continue
 
 			var distance = abs(x) + abs(y)
-			if distance > movement + size: continue
+			if distance > movement + size:
+				continue
 
-			if x == 0 and y == 0:
-				for dx in range(size):
-					for dz in range(size):
-						set_cell_item(origin_cell + Vector3i(dx, 0, dz), cell_type.UNIT)
-			elif distance <= movement:
+			if distance <= movement:
 				if _area_free(target_origin, size):
 					for dx in range(size):
 						for dz in range(size):
@@ -39,10 +40,19 @@ func draw_move(origin_cell: Vector3i, movement: int, size: int):
 			elif distance == movement + 1 and _enemy_on_cell(target_origin):
 				set_cell_item(target_origin, cell_type.ENEMY)
 
+	for dx in range(size):
+		for dz in range(size):
+			set_cell_item(origin_cell + Vector3i(dx, 0, dz), cell_type.UNIT)
+
+
+
 func _area_free(origin_cell: Vector3i, size: int) -> bool:
+	var unit = BATTLE.active_unit
 	for x in range(size):
 		for z in range(size):
-			if _is_cell_occupied(origin_cell + Vector3i(x, 0, z)): return false
+			var pos = origin_cell + Vector3i(x, 0, z)
+			if occupied_cells.has(pos) and occupied_cells[pos] != unit:
+				return false
 	return true
 
 
