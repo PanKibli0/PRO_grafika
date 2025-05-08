@@ -112,11 +112,18 @@ var grid_filled := false
 func select_cell(cell: Vector3i):
 	var size = BATTLE.active_unit.size
 
+	if cell == selected_cell: 
+		return
+	
 	for x in range(size):
 		for z in range(size):
 			var check_cell = cell + Vector3i(x, 0, z)
 			var item = get_cell_item(check_cell)
-			if item not in [cell_type.MOVE, cell_type.SELECT, cell_type.UNIT]:
+			
+			if item == cell_type.UNIT and size == 2:
+				if selected_area_unit(check_cell):
+					return
+			elif item not in [cell_type.MOVE, cell_type.SELECT]:
 				return
 
 	for c in selected_area.keys():
@@ -130,6 +137,20 @@ func select_cell(cell: Vector3i):
 			set_cell_item(c, cell_type.SELECT)
 
 	selected_cell = cell
+
+
+func selected_area_unit(cell: Vector3i) -> bool:
+	var unit = BATTLE.active_unit
+	if not occupied_cells.has(cell) or occupied_cells[cell] != unit:
+		return false
+	if not occupied_cells.has(cell + Vector3i(1, 0, 0)) or occupied_cells[cell + Vector3i(1, 0, 0)] != unit:
+		return false
+	if not occupied_cells.has(cell + Vector3i(0, 0, 1)) or occupied_cells[cell + Vector3i(0, 0, 1)] != unit:
+		return false
+	if not occupied_cells.has(cell + Vector3i(1, 0, 1)) or occupied_cells[cell + Vector3i(1, 0, 1)] != unit:
+		return false
+	return true
+
 
 
 func _is_area_move(origin_cell: Vector3i, size: int) -> bool:

@@ -18,8 +18,7 @@ func _hover_input(event):
 	var cell = r_cell[0]
 	var id = r_cell[1]
 	
-	if id in [GRID.cell_type.MOVE,GRID.cell_type.SELECT, GRID.cell_type.UNIT]:
-		GRID.select_cell(cell)
+	GRID.select_cell(cell)
 	
 	if id == GRID.cell_type.ENEMY:
 		for c in GRID.selected_area.keys():
