@@ -34,7 +34,9 @@ func draw_move(origin_cell: Vector3i, movement: int, size: int):
 				if _area_free(target_origin, size):
 					for dx in range(size):
 						for dz in range(size):
-							set_cell_item(target_origin + Vector3i(dx, 0, dz), cell_type.MOVE)
+							var pos = target_origin + Vector3i(dx, 0, dz)
+							if not (occupied_cells.has(pos) and occupied_cells[pos] == BATTLE.active_unit):
+								set_cell_item(pos, cell_type.MOVE)
 				elif _enemy_on_cell(target_origin):
 					set_cell_item(target_origin, cell_type.ENEMY)
 			elif distance == movement + 1 and _enemy_on_cell(target_origin):
