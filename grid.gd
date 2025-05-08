@@ -102,7 +102,7 @@ func select_cell(cell: Vector3i):
 
 	for x in range(size):
 		for z in range(size):
-			var check_cell = cell - Vector3i(x, 0, 0) + Vector3i(0, 0, z)
+			var check_cell = cell + Vector3i(x, 0, z)
 			var item = get_cell_item(check_cell)
 			if item not in [cell_type.MOVE, cell_type.SELECT, cell_type.UNIT]:
 				return
@@ -113,11 +113,12 @@ func select_cell(cell: Vector3i):
 
 	for x in range(size):
 		for z in range(size):
-			var c = cell - Vector3i(x, 0, 0) + Vector3i(0, 0, z)
+			var c = cell + Vector3i(x, 0, z)
 			selected_area[c] = get_cell_item(c)
 			set_cell_item(c, cell_type.SELECT)
 
 	selected_cell = cell
+
 
 func _is_area_move(origin_cell: Vector3i, size: int) -> bool:
 	for x in range(size):
