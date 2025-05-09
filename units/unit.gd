@@ -10,6 +10,7 @@ signal S_death
 @onready var player_eye = %Eye
 
 @onready var amountLabel = %AmountLabel
+@onready var effects = %Effects
 
 @export var player: bool = true
 @export_range(1,2,1) var size = 1
@@ -38,11 +39,12 @@ func _ready():
 	
 	if !player: hp_player()
 	
-	#if size == 2:
-		##model.scale = 2*model.scale
-		##player_eye.scale = 2*player_eye.scale
-		##model.position.y += 1
-		##player_eye.position.y += 1
+	if size == 2:
+		model.scale *= 2
+		player_eye.scale *= 2
+		model.position.y *= 2
+		player_eye.position.y *= 2
+		$Amount.position.y *=2
 		
 		
 	# KOLOR DLA JEDNOSTKI
@@ -61,13 +63,12 @@ func _ready():
 	
 func move(new_position: Vector3i):
 	is_moving = true
-	var add_pos = Vector3(0.5, 0, 0.5) if size == 1 else Vector3(0.5, 0, 0.5)
-	#var add_pos = Vector3(0.5, 0, 0.5)
+	var add_pos = Vector3(0.5, 0, 0.5) if size == 1 else Vector3(1, 0, 1)
 	
 	target_position = Vector3(new_position) + add_pos
 	target_position.y = global_transform.origin.y
 	
-	#look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
+	look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
 	
 	if tween:
 		tween.kill()

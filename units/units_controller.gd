@@ -64,12 +64,18 @@ func _compare_initiative(unit1: Node, unit2: Node):
 func _change_active_unit():
 	GRID.clear_grid()
 	
+	if BATTLE.active_unit: 
+		BATTLE.active_unit.effects.on_turn_end()
+		BATTLE.active_unit.hp_debug(false)
+	
 	active_unit_index = (active_unit_index + 1) % units_list.size()
-	if BATTLE.active_unit: BATTLE.active_unit.hp_debug(false)
+	
 	BATTLE.active_unit = units_list[active_unit_index]
 	BATTLE.active_unit.hp_debug(true)
 	
-	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin)
+	BATTLE.active_unit.effects.on_turn_start()
+	
+	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin - Vector3(0.5,0,0.5))
 	GRID.draw_move(unit_position, BATTLE.active_unit.stats.movement, BATTLE.active_unit.size)	
 
 func _unit_death(unit):

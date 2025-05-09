@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bq2ur7tssc2y3"]
+[gd_scene load_steps=12 format=3 uid="uid://bq2ur7tssc2y3"]
 
 [ext_resource type="Script" uid="uid://c4we5ic1upvog" path="res://units/unit.gd" id="1_btf8p"]
 [ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="2_gxe1c"]
+[ext_resource type="Script" uid="uid://c502txk62n1fe" path="res://units/effects.gd" id="3_xx66i"]
 
 [sub_resource type="Resource" id="Resource_xx66i"]
 script = ExtResource("2_gxe1c")
@@ -133,3 +134,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 24
 text = "DAMAGED:"
+
+[node name="Effects" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_xx66i")

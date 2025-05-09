@@ -16,17 +16,13 @@ func on_turn_start(unit):
 func on_turn_end(unit):
 	print_rich("[color=yellow]on_turn_end:[/color] %s" % name)
 
-func on_before_attack(unit, target):
-	print_rich("[color=yellow]on_before_attack:[/color] %s" % name)
+'''JHEZELI CIE ZAATAKUJE'''
+func on_attack(unit, target):
+	print_rich("[color=yellow]on_attack:[/color] %s" % name)
 
-func on_after_attack(unit, target):
-	print_rich("[color=yellow]on_after_attack:[/color] %s" % name)
-
-func on_before_heal(unit, amount):
-	print_rich("[color=yellow]on_before_heal:[/color] %s" % name)
-
-func on_after_heal(unit, amount):
-	print_rich("[color=yellow]on_after_heal:[/color] %s" % name)
+'''JESLI JESTES LECZONY'''
+func on_heal(unit):
+	print_rich("[color=yellow]on_heal:[/color] %s" % name)
 
 func on_apply(unit):
 	print_rich("[color=yellow]on_apply:[/color] %s" % name)

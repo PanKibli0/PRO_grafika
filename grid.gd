@@ -121,7 +121,7 @@ func select_cell(cell: Vector3i):
 			var item = get_cell_item(check_cell)
 			
 			if item == cell_type.UNIT and size == 2:
-				if selected_area_unit(check_cell):
+				if is_valid_unit_selection(cell):
 					return
 			elif item not in [cell_type.MOVE, cell_type.SELECT]:
 				return
@@ -139,16 +139,12 @@ func select_cell(cell: Vector3i):
 	selected_cell = cell
 
 
-func selected_area_unit(cell: Vector3i) -> bool:
-	var unit = BATTLE.active_unit
-	if not occupied_cells.has(cell) or occupied_cells[cell] != unit:
-		return false
-	if not occupied_cells.has(cell + Vector3i(1, 0, 0)) or occupied_cells[cell + Vector3i(1, 0, 0)] != unit:
-		return false
-	if not occupied_cells.has(cell + Vector3i(0, 0, 1)) or occupied_cells[cell + Vector3i(0, 0, 1)] != unit:
-		return false
-	if not occupied_cells.has(cell + Vector3i(1, 0, 1)) or occupied_cells[cell + Vector3i(1, 0, 1)] != unit:
-		return false
+func is_valid_unit_selection(origin: Vector3i) -> bool:
+	for x in range(2):
+		for z in range(2):
+			var check_cell = origin + Vector3i(x, 0, z)
+			if not occupied_cells.has(check_cell):
+				return false
 	return true
 
 

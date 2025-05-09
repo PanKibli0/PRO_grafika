@@ -48,7 +48,6 @@ unique_name_in_owner = true
 script = ExtResource("4_6t8i5")
 
 [node name="Unit" parent="Units" instance=ExtResource("4_dw4jg")]
-size = 1
 amount = 20
 stats = ExtResource("5_0npn6")
 target_position = Vector3(5, 0, 5)

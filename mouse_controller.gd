@@ -19,6 +19,8 @@ func _hover_input(event):
 	var cell = r_cell[0]
 	var id = r_cell[1]
 	
+	GRID.select_cell(cell)
+	
 	if id == GRID.cell_type.ENEMY:
 		unit = GRID.get_unit(cell)
 		unit.hp_debug(true)
@@ -30,7 +32,14 @@ func _hover_input(event):
 				GRID.select_cell(cell)
 				GRID.select_cell(attack_move_cell)
 				
-
+			else: 
+				pass
+				#for c in GRID.selected_area.keys():
+					#GRID.set_cell_item(c, GRID.selected_area[c])
+				#GRID.selected_area.clear()
+				#GRID.selected_cell = Vector3(-1,-1,-1)
+			
+			
 	elif unit != null:
 		unit.hp_debug(false)
 		direction.text = ""
@@ -54,6 +63,10 @@ func _click_input(event):
 	var id = r_cell[1]
 
 	if id == GRID.cell_type.SELECT: 
+		if int(cell.x) == GRID.grid_size[0] -1:
+			cell -= Vector3(1,0,0)
+		if int(cell.z) == GRID.grid_size[1] -1:
+			cell -= Vector3(0,0,1)
 		op_move(cell)
 		emit_signal("S_end_turn")
 	elif id == GRID.cell_type.ENEMY:
@@ -89,11 +102,9 @@ func get_mouse_world_position(mouse_position: Vector2) -> Vector3:
 	
 	return Vector3(-1,-1,-1)
 			
-func op_move(cell): 
+func op_move(cell):
 	var world_pos = GRID.map_to_local(cell)
 	
-#	?? COS POPRAWIC
-
 	GRID.free_oc_area(BATTLE.active_unit)
 	GRID.occupy_area(cell, BATTLE.active_unit)
 			
@@ -135,9 +146,9 @@ func op_attack(cell: Vector3i, mouse_position: Vector2) -> bool:
 	else:
 		return false
 
+	attacked_unit.effects.on_attack(BATTLE.active_unit)
+
 	return true
-
-
 
 
 func update_attack_direction(cell: Vector3i, mouse_position: Vector2) -> Vector3:

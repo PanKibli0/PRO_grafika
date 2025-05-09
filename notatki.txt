@@ -5,9 +5,23 @@
 POLOZENIE 2x2 BLEDNIE POKAZAYWANE
 ATTAK => RUCH 2x2 zle zrobiony (DZIALA CIAGLE NA 1x1)
 
-
+# CZYSCZENIE CELL POPRAWIC NA OK
 
 ==============================
 
 polozenie // grid => GLOBAL
 tury // unit_controller => Battle/GLOBAL
+
+==============================
+
+DO ZROBIENIA:
+	*FUNKCJA WAIT(wrzucenie jednostki na koniec kolejki) => co koniec tury ponowne sortowanie listy
+	*POPRAWA ATTAK => RUCH 2x2 zle zrobiony (DZIALA CIAGLE NA 1x1)
+	*EFEKTY DO ZROBIENIA I SPR CZY DZIALAJA (BAZOWY SYSTEM NIBY JEST)
+	*ROZNE SELECT_CELL ataków => JESZCZE NW JAK ZROBIC MOZE w "GRID" dodanie TYPOW DO SELECT JESLI MA BYC SPECJAL
+	
+	* MODELE, ANIMACJE, DZWIEKI => DOROBIC ALL
+ 
+DODATKI DO ZROBIENIA:
+	* GUI z lista jednsotek ktora po ktorej jest ()
+	* STEROWANIE KAMERA
