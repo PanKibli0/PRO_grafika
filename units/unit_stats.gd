@@ -16,18 +16,18 @@ func _to_string() -> String:
 		name, max_health, attack, defense, damage_min, damage_max, initiative, movement
 	]
 
-func _init(name: String = "Unit Name", max_health: int = 1, attack: int = 1, defense: int = 1, damage_min: int = 1, damage_max: int = 1, initiative: int = 1, movement: int = 1, color: Color = Color(1, 1, 1)):
-	if damage_min > damage_max:
-		var temp = damage_min
-		damage_min = damage_max
-		damage_max = temp
+func _init(v_name: String = "Unit Name", v_max_health: int = 1, v_attack: int = 1, v_defense: int = 1, v_damage_min: int = 1, v_damage_max: int = 1, v_initiative: int = 1, v_movement: int = 1, v_color: Color = Color(1, 1, 1)):
+	if v_damage_min > v_damage_max:
+		var temp = v_damage_min
+		v_damage_min = v_damage_max
+		v_damage_max = temp
 	
-	self.name = name
-	self.max_health = max_health
-	self.attack = attack
-	self.defense = defense	
-	self.damage_min = damage_min
-	self.damage_max = damage_max
-	self.initiative = initiative
-	self.movement = movement
-	self.color = color
+	self.name = v_name
+	self.max_health = v_max_health
+	self.attack = v_attack
+	self.defense = v_defense	
+	self.damage_min = v_damage_min
+	self.damage_max = v_damage_max
+	self.initiative = v_initiative
+	self.movement = v_movement
+	self.color = v_color

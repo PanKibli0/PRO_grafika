@@ -24,6 +24,7 @@ func _get_position(for_player: bool) -> Vector3:
 
 
 func _ready():
+	
 	units_list = get_children()
 	
 	#for i in range(20):
@@ -76,6 +77,7 @@ func _unit_death(unit):
 	_end_game()
 
 func _end_game():
+	return
 	var player_count = 0
 	var enemy_count = 0
 

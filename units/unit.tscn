@@ -56,6 +56,7 @@ collision_mask = 4
 input_ray_pickable = false
 motion_mode = 1
 script = ExtResource("1_btf8p")
+size = 2
 stats = SubResource("Resource_xx66i")
 
 [node name="Amount" type="Sprite3D" parent="."]

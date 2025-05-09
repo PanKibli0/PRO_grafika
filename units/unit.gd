@@ -12,9 +12,11 @@ signal S_death
 @onready var amountLabel = %AmountLabel
 
 @export var player: bool = true
-@export var stats: UnitStats
+@export_range(1,2,1) var size = 1
+
 @export var amount: int = randi_range(5,10)
-@export var size = 1
+@export var stats: UnitStats
+
 
 var actual_stats: UnitStats
 var actual_health: int 
@@ -84,30 +86,30 @@ func _movement_finished():
 func take_damage():
 	var enemy = BATTLE.active_unit
 	var enemy_amount = enemy.actual_amount
-	var enemy_attack = enemy.stats.attack
-	var damage = randi_range(enemy.stats.damage_min, enemy.stats.damage_max)
+	var enemy_attack = enemy.actual_stats.attack
+	var damage = randi_range(enemy.actual_stats.damage_min, enemy.actual_stats.damage_max)
 	
 	var act_damage = 0
-	if enemy_attack > stats.defense:
-		act_damage = enemy_amount * damage * (1 + abs(enemy_attack - stats.defense) * 0.05)
+	if enemy_attack > actual_stats.defense:
+		act_damage = enemy_amount * damage * (1 + abs(enemy_attack - actual_stats.defense) * 0.05)
 	else:
-		act_damage = enemy_amount * damage / (1 + abs(enemy_attack - stats.defense) * 0.05)	
+		act_damage = enemy_amount * damage / (1 + abs(enemy_attack - actual_stats.defense) * 0.05)	
 	act_damage = int(max(round(act_damage), 0))
 	if act_damage == 0: return 
 	
-	var total_hp: int = (actual_amount) * stats.max_health + actual_health - act_damage
+	var total_hp: int = (actual_amount) * actual_stats.max_health + actual_health - act_damage
 	total_hp = max(total_hp, 0)
 
-	actual_amount = int(total_hp / stats.max_health)
-	actual_health = int(total_hp % stats.max_health)
+	actual_amount = int(total_hp / actual_stats.max_health)
+	actual_health = int(total_hp % actual_stats.max_health)
 	
 	if actual_health == 0 and actual_amount > 0:
 		actual_amount -= 1
-		actual_health = stats.max_health
+		actual_health = actual_stats.max_health
 	
 	# WYGLAD + DEBUG
 	amountLabel.text = str(actual_amount)
-	hp_d.text = "HP: %d / %d" % [actual_health, stats.max_health]
+	hp_d.text = "HP: %d / %d" % [actual_health, actual_stats.max_health]
 	damage_d.visible = true
 	damage_d.text = "DAMAGED: %d | KILLED: %d | Left hp: %d" % [act_damage, amount-actual_amount, actual_health]
 	if actual_amount <= 0: death()
@@ -121,7 +123,7 @@ func death():
 	
 func hp_debug(flag:bool):
 	hp_d.visible = flag
-	hp_d.text =  "HP: %d / %d" % [actual_health, stats.max_health]
+	hp_d.text =  "HP: %d / %d" % [actual_health, actual_stats.max_health]
 	
 func hp_player():
 	hp_d.anchor_left = 1.0

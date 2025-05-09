@@ -15,21 +15,37 @@ func _hover_input(event):
 	if r_cell.is_empty(): 
 		direction.text = ""
 		return
+	
 	var cell = r_cell[0]
 	var id = r_cell[1]
 	
-	GRID.select_cell(cell)
-	
 	if id == GRID.cell_type.ENEMY:
-		for c in GRID.selected_area.keys():
-			GRID.set_cell_item(c, GRID.selected_area[c])
-		GRID.selected_area.clear()
 		unit = GRID.get_unit(cell)
 		unit.hp_debug(true)
-		update_attack_direction(cell, event.position)
+		
+		var attack_direction = update_attack_direction(cell, event.position)
+		if attack_direction != Vector3.ZERO:
+			var attack_move_cell = cell + attack_direction
+			if _can_attack_from_position(cell, attack_move_cell):
+				GRID.select_cell(cell)
+				GRID.select_cell(attack_move_cell)
+				
+
 	elif unit != null:
 		unit.hp_debug(false)
 		direction.text = ""
+
+func _can_attack_from_position(target_cell: Vector3i, move_cell: Vector3i) -> bool:
+	return (
+		GRID.get_cell_item(move_cell) in [GRID.cell_type.MOVE, GRID.cell_type.UNIT] and
+		(not GRID._is_cell_occupied(move_cell) or GRID.get_unit(move_cell) == BATTLE.active_unit) and
+		(
+			move_cell == GRID.local_to_map(BATTLE.active_unit.global_transform.origin) or
+			not GRID._is_cell_occupied(move_cell) or
+			GRID.get_unit(move_cell) == BATTLE.active_unit
+		)
+	)
+
 
 func _click_input(event):
 	var r_cell = _get_cell_at_mouse_position(event.position)
@@ -77,7 +93,7 @@ func op_move(cell):
 	var world_pos = GRID.map_to_local(cell)
 	
 #	?? COS POPRAWIC
-	var old_pos = GRID.local_to_map(BATTLE.active_unit.global_transform.origin)
+
 	GRID.free_oc_area(BATTLE.active_unit)
 	GRID.occupy_area(cell, BATTLE.active_unit)
 			
@@ -112,10 +128,10 @@ func op_attack(cell: Vector3i, mouse_position: Vector2) -> bool:
 	if standing_direction == -delta:
 		attacked_unit.take_damage()
 
-	elif GRID.get_cell_item(desired_cell) in [GRID.cell_type.MOVE, GRID.cell_type.UNIT]:
-		if not GRID._is_cell_occupied(desired_cell) or GRID.get_unit(desired_cell) == BATTLE.active_unit:
-			op_move(desired_cell)
-			attacked_unit.take_damage()
+	elif GRID.get_cell_item(desired_cell) == GRID.cell_type.SELECT:
+		print_rich("[color=red]MOVE[/color]")
+		op_move(desired_cell)
+		attacked_unit.take_damage()
 	else:
 		return false
 
@@ -124,18 +140,22 @@ func op_attack(cell: Vector3i, mouse_position: Vector2) -> bool:
 
 
 
-func update_attack_direction(cell: Vector3i, mouse_position: Vector2):
+func update_attack_direction(cell: Vector3i, mouse_position: Vector2) -> Vector3:
 	var enemy_pos = GRID.map_to_local(cell)
 	var mouse_world_pos = get_mouse_world_position(mouse_position)
-	if mouse_world_pos == Vector3(-1,-1,-1): return 
+	if mouse_world_pos == Vector3(-1,-1,-1): 
+		direction.text = ""
+		return Vector3i.ZERO
+	
 	var click_dir = (mouse_world_pos - enemy_pos).normalized()
-
+	
 	var delta = Vector3i(
 		1 if click_dir.x > 0.3 else (-1 if click_dir.x < -0.3 else 0),
 		0,
 		1 if click_dir.z > 0.3 else (-1 if click_dir.z < -0.3 else 0)
 	)
-
+	
+	# Aktualizacja tekstu kierunku
 	match delta:
 		Vector3i(-1, 0, 0):
 			direction.text = "Lewo"
@@ -155,3 +175,5 @@ func update_attack_direction(cell: Vector3i, mouse_position: Vector2):
 			direction.text = "Prawo-Dół"
 		_:
 			direction.text = ""
+	
+	return delta

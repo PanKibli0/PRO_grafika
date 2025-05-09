@@ -48,15 +48,16 @@ unique_name_in_owner = true
 script = ExtResource("4_6t8i5")
 
 [node name="Unit" parent="Units" instance=ExtResource("4_dw4jg")]
+size = 1
+amount = 20
 stats = ExtResource("5_0npn6")
-amount = 1
-size = 2
 target_position = Vector3(5, 0, 5)
 
 [node name="Unit2" parent="Units" instance=ExtResource("4_dw4jg")]
 player = false
-stats = ExtResource("6_mhv3b")
+size = 1
 amount = 1
+stats = ExtResource("6_mhv3b")
 target_position = Vector3(4, 0, 4)
 
 [node name="Floor" type="MeshInstance3D" parent="."]
