@@ -32,3 +32,5 @@ DO ZROBIENIA:
 DODATKI DO ZROBIENIA:
 	* GUI z lista jednsotek ktora po ktorej jest ()
 	* STEROWANIE KAMERA
+* Blokady (BRAK MOVE) 
+* Efekty pół (np ściana ognia) 
