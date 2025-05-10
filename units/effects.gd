@@ -3,6 +3,9 @@ extends Node
 @onready var unit = $".."
 var active_effects: Array[Effect] = []
 
+var flag_start = false
+var flag_end = false
+
 func _ready() -> void:
 	#add_effect(Effect.new("HEIL", "HEILDESC", 10))
 	pass

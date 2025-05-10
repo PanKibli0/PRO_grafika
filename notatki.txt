@@ -11,15 +11,13 @@ tury // unit_controller => Battle/GLOBA
 
 ==============================
 
-POLOZENIE 2x2 BLEDNIE POKAZAYWANE
+POLOZENIE JEDNSOTKI 2x2 BLEDNIE POKAZAYWANE => OD NIBY OK, ALE WYSWIETLANIE NIET
 ATTAK => RUCH 2x2 zle zrobiony (DZIALA CIAGLE NA 1x1)
-
-wAIT ciagle czekanie mozliwe, cos z sorotwnaiem pod koniec zjebane itd
 
 ==============================
 
 DO ZROBIENIA:
-	*FUNKCJA WAIT(wrzucenie jednostki na koniec kolejki) => co koniec tury ponowne sortowanie listy
+	*ATAK DYSTANOSWY (DODAC ZMIENNA OD STARZAL JESLI > 0 ATAK Z DALEKA BEZ RUCHU, RYSOWANIE ALL RPZECIWNIKOW)
 	$*POPRAWA ATTAK => RUCH 2x2 zle zrobiony (DZIALA CIAGLE NA 1x1)
 	$*POPRAWA POLOZENIA SIZE 2x2 => KOD NIBY OK, ALE WYSWIETLANIE NIET
 	*EFEKTY DO ZROBIENIA I SPR CZY DZIALAJA (BAZOWY SYSTEM NIBY JEST)

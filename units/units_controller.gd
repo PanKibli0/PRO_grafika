@@ -75,13 +75,13 @@ func _change_active_unit():
 		BATTLE.active_unit.effects.on_turn_end()
 		BATTLE.active_unit.hp_debug(false)
 	
-	if active_unit_index == units_list.size():
+	if active_unit_index == units_list.size()-1:
 		units_list.sort_custom(_compare_initiative)
+		for unit in units_list:
+			unit.waited = false
+		print_rich("[color=lightgreen]NEW TURN![/color]")
 	
 	active_unit_index = (active_unit_index + 1) % units_list.size()
-	if BATTLE.active_unit: 
-		if BATTLE.active_unit.waited:
-			BATTLE.active_unit.waited = false
 	BATTLE.active_unit = units_list[active_unit_index]
 	BATTLE.active_unit.hp_debug(true)
 	
@@ -89,6 +89,27 @@ func _change_active_unit():
 	
 	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin - Vector3(0.5,0,0.5))
 	GRID.draw_move(unit_position, BATTLE.active_unit.stats.movement, BATTLE.active_unit.stats.size)	
+
+
+func _input(event: InputEvent):	
+	#if event.is_action_pressed("DEFENSE") and BATTLE.active_unit.player == true:
+	if event.is_action_pressed("DEFENSE"):
+		_change_active_unit()
+	
+	if event.is_action_pressed("WAIT"):
+		_unit_wait()
+	
+
+func _unit_wait():
+	if BATTLE.active_unit.waited: return
+	BATTLE.active_unit.waited = true
+	units_list.remove_at(active_unit_index)
+	units_list.append(BATTLE.active_unit)
+	
+	active_unit_index = active_unit_index-1
+
+	_change_active_unit()
+
 
 func _unit_death(unit):
 	units_list.erase(unit)
@@ -112,30 +133,6 @@ func _end_game():
 
 	get_tree().quit()
 
-
-func _input(event: InputEvent):	
-	#if event.is_action_pressed("DEFENSE") and BATTLE.active_unit.player == true:
-	if event.is_action_pressed("DEFENSE"):
-		_change_active_unit()
-	
-	if event.is_action_pressed("WAIT"):
-		_unit_wait()
-
-func _unit_wait():
-	if BATTLE.active_unit.waited: return
-	BATTLE.active_unit.waited = true
-	units_list.remove_at(active_unit_index)
-	units_list.append(BATTLE.active_unit)
-	print_rich("[color=red]", units_list, "[/color]")
-	print_rich("[color=gray]", BATTLE.active_unit, " waits and moves to the end of the turn order.[/color]")
-	
-	print(active_unit_index)
-
-	active_unit_index = active_unit_index-1 if active_unit_index != 0 else -1
-	print(active_unit_index)
-	_change_active_unit()
-	print_rich("[color=pink]", units_list, "[/color]")
-	print_rich("[color=magenta]" , BATTLE.active_unit , "[/color]")
 
 func _add_unit(DV: int = 0, player = true):
 	var new_unit_scene = preload("res://units/Unit.tscn")  

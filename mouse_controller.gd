@@ -63,10 +63,13 @@ func _click_input(event):
 	var id = r_cell[1]
 
 	if id == GRID.cell_type.SELECT: 
-		if int(cell.x) == GRID.grid_size[0] -1:
-			cell -= Vector3(1,0,0)
-		if int(cell.z) == GRID.grid_size[1] -1:
-			cell -= Vector3(0,0,1)
+		if BATTLE.active_unit.stats.size == 2:
+			if int(cell.x) == GRID.grid_size[0] -1:
+				cell -= Vector3(1,0,0)
+			if int(cell.z) == GRID.grid_size[1] -1:
+				cell -= Vector3(0,0,1)
+			if GRID.is_valid_unit_selection(cell):
+				cell -= Vector3(1,0,0)
 		op_move(cell)
 		emit_signal("S_end_turn")
 	elif id == GRID.cell_type.ENEMY:

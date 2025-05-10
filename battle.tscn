@@ -54,19 +54,6 @@ amount = 1
 stats = ExtResource("6_mhv3b")
 target_position = Vector3(4, 0, 4)
 
-[node name="Unit3" parent="Units" instance=ExtResource("4_dw4jg")]
-player = false
-amount = 1
-stats = ExtResource("6_mhv3b")
-
-[node name="Unit4" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 1
-stats = ExtResource("6_mhv3b")
-
-[node name="Unit5" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 1
-stats = ExtResource("6_mhv3b")
-
 [node name="Floor" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.45, -1)
