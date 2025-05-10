@@ -13,7 +13,7 @@ signal S_death
 @onready var effects = %Effects
 
 @export var player: bool = true
-@export_range(1,2,1) var size = 1
+
 
 @export var amount: int = randi_range(5,10)
 @export var stats: UnitStats
@@ -25,6 +25,7 @@ var actual_amount: int
 
 @export var target_position: Vector3 = Vector3(-1,-1,-1)
 var is_moving := false
+var waited = false
 var tween: Tween = null
 
 
@@ -33,13 +34,13 @@ func _ready():
 	actual_health = stats.max_health
 	actual_stats = stats
 	
-	amountLabel.text = str(actual_amount) + "/" + str(size)
+	amountLabel.text = str(actual_amount) + "/" + str(stats.size)
 	hp_d.text = "HP: %d / %d " % [actual_health, stats.max_health]
 	
 	
 	if !player: hp_player()
 	
-	if size == 2:
+	if stats.size == 2:
 		model.scale *= 2
 		player_eye.scale *= 2
 		model.position.y *= 2
@@ -63,7 +64,7 @@ func _ready():
 	
 func move(new_position: Vector3i):
 	is_moving = true
-	var add_pos = Vector3(0.5, 0, 0.5) if size == 1 else Vector3(1, 0, 1)
+	var add_pos = Vector3(0.5, 0, 0.5) if stats.size == 1 else Vector3(1, 0, 1)
 	
 	target_position = Vector3(new_position) + add_pos
 	target_position.y = global_transform.origin.y
@@ -82,7 +83,7 @@ func _movement_finished():
 	global_transform.origin = target_position 
 	is_moving = false
 	hp_debug(false)
-	print(target_position)
+
 	
 func take_damage():
 	var enemy = BATTLE.active_unit

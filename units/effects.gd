@@ -3,9 +3,9 @@ extends Node
 @onready var unit = $".."
 var active_effects: Array[Effect] = []
 
-func _ready():
-	add_effect(Effect.new("1", "d1", 3))
-	add_effect(Effect.new("2", "d2", 3))
+func _ready() -> void:
+	#add_effect(Effect.new("HEIL", "HEILDESC", 10))
+	pass
 
 func add_effect(effect: Effect):
 	active_effects.append(effect)
@@ -38,7 +38,7 @@ func on_turn_end():
 	_cleanup_expired()
 
 '''JHEZELI CIE ZAATAKUJE'''
-func on_attack(target): 
+func on_attack(target = null): 
 	for effect in active_effects:
 		effect.on_attack(unit, target)
 

@@ -14,6 +14,7 @@ damage_min = 0
 damage_max = 0
 initiative = 0
 movement = 0
+size = 1
 color = Color(0, 0, 0, 0.0117647)
 metadata/_custom_type_script = "uid://cukyhyanl175x"
 
@@ -57,7 +58,6 @@ collision_mask = 4
 input_ray_pickable = false
 motion_mode = 1
 script = ExtResource("1_btf8p")
-size = 2
 stats = SubResource("Resource_xx66i")
 
 [node name="Amount" type="Sprite3D" parent="."]

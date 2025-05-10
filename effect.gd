@@ -16,8 +16,8 @@ func on_turn_start(unit):
 func on_turn_end(unit):
 	print_rich("[color=yellow]on_turn_end:[/color] %s" % name)
 
-'''JHEZELI CIE ZAATAKUJE'''
-func on_attack(unit, target):
+'''JEZELI CIE ZAATAKUJE'''
+func on_attack(unit, target = null):
 	print_rich("[color=yellow]on_attack:[/color] %s" % name)
 
 '''JESLI JESTES LECZONY'''

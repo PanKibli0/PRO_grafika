@@ -77,13 +77,11 @@ func _is_cell_occupied(cell):
 	return occupied_cells.has(cell)
 
 func occupy_area(cell_origin: Vector3i, unit): 
-	for x in range(unit.size):
-		for z in range(unit.size):
+	for x in range(unit.stats.size):
+		for z in range(unit.stats.size):
 			var cell = cell_origin + Vector3i(x,0,z)
 			occupied_cells[cell] = unit
-	print(occupied_cells.keys())
-	print(occupied_cells.size())
-	print()
+
 	
 func free_oc_area(unit):
 	var keys_to_remove: Array = []
@@ -110,7 +108,7 @@ var grid_filled := false
 
 
 func select_cell(cell: Vector3i):
-	var size = BATTLE.active_unit.size
+	var size = BATTLE.active_unit.stats.size
 
 	if cell == selected_cell: 
 		return

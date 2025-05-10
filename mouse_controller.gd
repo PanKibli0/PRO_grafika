@@ -28,7 +28,7 @@ func _hover_input(event):
 		var attack_direction = update_attack_direction(cell, event.position)
 		if attack_direction != Vector3.ZERO:
 			var attack_move_cell = cell + attack_direction
-			if _can_attack_from_position(cell, attack_move_cell):
+			if _can_attack_from_position(attack_move_cell):
 				GRID.select_cell(cell)
 				GRID.select_cell(attack_move_cell)
 				
@@ -44,7 +44,7 @@ func _hover_input(event):
 		unit.hp_debug(false)
 		direction.text = ""
 
-func _can_attack_from_position(target_cell: Vector3i, move_cell: Vector3i) -> bool:
+func _can_attack_from_position(move_cell: Vector3i) -> bool:
 	return (
 		GRID.get_cell_item(move_cell) in [GRID.cell_type.MOVE, GRID.cell_type.UNIT] and
 		(not GRID._is_cell_occupied(move_cell) or GRID.get_unit(move_cell) == BATTLE.active_unit) and
@@ -140,13 +140,12 @@ func op_attack(cell: Vector3i, mouse_position: Vector2) -> bool:
 		attacked_unit.take_damage()
 
 	elif GRID.get_cell_item(desired_cell) == GRID.cell_type.SELECT:
-		print_rich("[color=red]MOVE[/color]")
 		op_move(desired_cell)
 		attacked_unit.take_damage()
 	else:
 		return false
 
-	attacked_unit.effects.on_attack(BATTLE.active_unit)
+	attacked_unit.effects.on_attack(attacked_unit)
 
 	return true
 

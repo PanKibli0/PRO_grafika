@@ -2,25 +2,34 @@
 
 ==============================
 
-POLOZENIE 2x2 BLEDNIE POKAZAYWANE
-ATTAK => RUCH 2x2 zle zrobiony (DZIALA CIAGLE NA 1x1)
+polozenie // grid => GLOBAL
+tury // unit_controller => Battle/GLOBA
 
-# CZYSCZENIE CELL POPRAWIC NA OK
+
+
+
 
 ==============================
 
-polozenie // grid => GLOBAL
-tury // unit_controller => Battle/GLOBAL
+POLOZENIE 2x2 BLEDNIE POKAZAYWANE
+ATTAK => RUCH 2x2 zle zrobiony (DZIALA CIAGLE NA 1x1)
+
+wAIT ciagle czekanie mozliwe, cos z sorotwnaiem pod koniec zjebane itd
 
 ==============================
 
 DO ZROBIENIA:
 	*FUNKCJA WAIT(wrzucenie jednostki na koniec kolejki) => co koniec tury ponowne sortowanie listy
-	*POPRAWA ATTAK => RUCH 2x2 zle zrobiony (DZIALA CIAGLE NA 1x1)
+	$*POPRAWA ATTAK => RUCH 2x2 zle zrobiony (DZIALA CIAGLE NA 1x1)
+	$*POPRAWA POLOZENIA SIZE 2x2 => KOD NIBY OK, ALE WYSWIETLANIE NIET
 	*EFEKTY DO ZROBIENIA I SPR CZY DZIALAJA (BAZOWY SYSTEM NIBY JEST)
 	*ROZNE SELECT_CELL ataków => JESZCZE NW JAK ZROBIC MOZE w "GRID" dodanie TYPOW DO SELECT JESLI MA BYC SPECJAL
 	
 	* MODELE, ANIMACJE, DZWIEKI => DOROBIC ALL
+	
+	++ POCZATEK GRY, WYBIERANIE POZYCJI DLA JEDNSOTEK (PRZED WALKA)
+	++ SCENA - MENU (WYBIERANIE JENDSOKTE KTORYMI BEDZIE SIE WALCZYLO)
+	++ AI (no chyba ze brak czasu bedzie to bedzie local multi)
  
 DODATKI DO ZROBIENIA:
 	* GUI z lista jednsotek ktora po ktorej jest ()
