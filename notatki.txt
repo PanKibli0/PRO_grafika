@@ -6,7 +6,7 @@ polozenie // grid => GLOBAL
 tury // unit_controller => Battle/GLOBA
 
 
-
+WAIT z turn EFFECT sprawdzić jak działa bo na 99% podwójnie 
 
 
 ==============================
