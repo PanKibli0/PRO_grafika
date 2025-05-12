@@ -47,6 +47,12 @@ func draw_move(origin_cell: Vector3i, movement: int, size: int):
 			set_cell_item(origin_cell + Vector3i(dx, 0, dz), cell_type.UNIT)
 
 
+func _all_enemy():
+	var player = BATTLE.active_unit.player
+	for cell in occupied_cells.keys():
+		if occupied_cells[cell].player == player:
+			set_cell_item(cell,cell_type.ENEMY)
+			
 
 func _area_free(origin_cell: Vector3i, size: int) -> bool:
 	var unit = BATTLE.active_unit

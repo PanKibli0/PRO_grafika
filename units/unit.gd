@@ -11,6 +11,7 @@ signal S_death
 
 @onready var amountLabel = %AmountLabel
 @onready var effects = %Effects
+@onready var attack := %Attack
 
 @export var player: bool = true
 
@@ -85,7 +86,7 @@ func _movement_finished():
 	hp_debug(false)
 
 	
-func take_damage():
+func calculate_attack(modificator = 1) -> int:
 	var enemy = BATTLE.active_unit
 	var enemy_amount = enemy.actual_amount
 	var enemy_attack = enemy.actual_stats.attack
@@ -93,30 +94,34 @@ func take_damage():
 	
 	var act_damage = 0
 	if enemy_attack > actual_stats.defense:
-		act_damage = enemy_amount * damage * (1 + abs(enemy_attack - actual_stats.defense) * 0.05)
+		act_damage = enemy_amount * damage * (1 + abs(enemy_attack - actual_stats.defense) * 0.05) * modificator
 	else:
-		act_damage = enemy_amount * damage / (1 + abs(enemy_attack - actual_stats.defense) * 0.05)	
-	act_damage = int(max(round(act_damage), 0))
-	if act_damage == 0: return 
+		act_damage = enemy_amount * damage / (1 + abs(enemy_attack - actual_stats.defense) * 0.05) * modificator
+	return int(max(round(act_damage), 0))
+
+
+func take_damage(damage: int):
+	if damage == 0: return
 	
-	var total_hp: int = (actual_amount) * actual_stats.max_health + actual_health - act_damage
+	var total_hp: int = (actual_amount) * actual_stats.max_health + actual_health - damage
 	total_hp = max(total_hp, 0)
 
 	actual_amount = int(total_hp / actual_stats.max_health)
 	actual_health = int(total_hp % actual_stats.max_health)
-	
+
 	if actual_health == 0 and actual_amount > 0:
 		actual_amount -= 1
 		actual_health = actual_stats.max_health
-	
-	# WYGLAD + DEBUG
+
 	amountLabel.text = str(actual_amount)
 	hp_d.text = "HP: %d / %d" % [actual_health, actual_stats.max_health]
 	damage_d.visible = true
-	damage_d.text = "DAMAGED: %d | KILLED: %d | Left hp: %d" % [act_damage, amount-actual_amount, actual_health]
-	if actual_amount <= 0: death()
+	damage_d.text = "DAMAGED: %d | KILLED: %d | Left hp: %d" % [damage, amount - actual_amount, actual_health]
+	if actual_amount <= 0:
+		death()
 	await get_tree().create_timer(2.0).timeout
 	damage_d.visible = false
+
 	
 func death():
 	emit_signal("S_death")

@@ -144,7 +144,7 @@ func op_attack(cell: Vector3i, mouse_position: Vector2) -> bool:
 
 	elif GRID.get_cell_item(desired_cell) == GRID.cell_type.SELECT:
 		op_move(desired_cell)
-		attacked_unit.take_damage()
+		attacked_unit.take_damage(attacked_unit.calculate_attack())
 	else:
 		return false
 
