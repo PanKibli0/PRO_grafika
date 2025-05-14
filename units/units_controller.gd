@@ -81,15 +81,25 @@ func _change_active_unit():
 			unit.waited = false
 		print_rich("[color=lightgreen]NEW TURN![/color]")
 	
+	'''ZMIANA GRACZA'''
 	active_unit_index = (active_unit_index + 1) % units_list.size()
 	BATTLE.active_unit = units_list[active_unit_index]
 	BATTLE.active_unit.hp_debug(true)
+
 	
 	BATTLE.active_unit.effects.on_turn_start()
 	
 	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin - Vector3(0.5,0,0.5))
 	GRID.draw_move(unit_position, BATTLE.active_unit.stats.movement, BATTLE.active_unit.stats.size)	
+	if BATTLE.active_unit.stats.ammo > 0: 
+		BATTLE.active_unit.d_attack = true
+		%Distance.text = "DALEKO"
+	
+	_distance_unit(unit_position)
 
+func _distance_unit(unit_position):
+	if BATTLE.active_unit.d_attack and not GRID.enemy_next_to(unit_position): 	
+		GRID.draw_all_enemies()
 
 func _input(event: InputEvent):	
 	#if event.is_action_pressed("DEFENSE") and BATTLE.active_unit.player == true:
@@ -98,7 +108,22 @@ func _input(event: InputEvent):
 	
 	if event.is_action_pressed("WAIT"):
 		_unit_wait()
+		
+	if event.is_action_pressed("DISTANCE_CLOSE"):
+		_distance_close()
 	
+
+func _distance_close():
+	if BATTLE.active_unit.stats.ammo <=0: return
+	BATTLE.active_unit.d_attack = !BATTLE.active_unit.d_attack
+	print(BATTLE.active_unit.d_attack)
+	%Distance.text = "DALEKO" if BATTLE.active_unit.d_attack else "BLISKO" 
+	
+	GRID.clear_grid()
+	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin - Vector3(0.5,0,0.5))
+	GRID.draw_move(unit_position, BATTLE.active_unit.stats.movement, BATTLE.active_unit.stats.size)	
+	_distance_unit(unit_position)
+
 
 func _unit_wait():
 	if BATTLE.active_unit.waited: return

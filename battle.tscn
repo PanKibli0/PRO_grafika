@@ -46,13 +46,13 @@ script = ExtResource("4_6t8i5")
 [node name="Unit" parent="Units" instance=ExtResource("4_dw4jg")]
 amount = 20
 stats = ExtResource("5_0npn6")
-target_position = Vector3(5, 0, 5)
+target_position = Vector3(10, 0, 5)
 
 [node name="Unit2" parent="Units" instance=ExtResource("4_dw4jg")]
 player = false
 amount = 1
 stats = ExtResource("6_mhv3b")
-target_position = Vector3(4, 0, 4)
+target_position = Vector3(1, 0, 4)
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
@@ -82,5 +82,14 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
+
+[node name="Distance" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
 
 [connection signal="S_end_turn" from="Camera/MouseController" to="Units" method="_change_active_unit"]

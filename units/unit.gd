@@ -25,6 +25,7 @@ var actual_health: int
 var actual_amount: int
 
 @export var target_position: Vector3 = Vector3(-1,-1,-1)
+var d_attack: bool
 var is_moving := false
 var waited = false
 var tween: Tween = null
@@ -34,6 +35,7 @@ func _ready():
 	actual_amount = amount
 	actual_health = stats.max_health
 	actual_stats = stats
+	d_attack = true if actual_stats.ammo > 0 else false
 	
 	amountLabel.text = str(actual_amount) + "/" + str(stats.size)
 	hp_d.text = "HP: %d / %d " % [actual_health, stats.max_health]

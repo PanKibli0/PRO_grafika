@@ -120,6 +120,7 @@ func op_attack(cell: Vector3i, mouse_position: Vector2) -> bool:
 	if attacked_unit == null: 
 		return false
 
+
 	var enemy_pos = GRID.map_to_local(cell)
 	var mouse_world_pos = get_mouse_world_position(mouse_position)
 	if mouse_world_pos == Vector3(-1,-1,-1): return false
@@ -140,8 +141,10 @@ func op_attack(cell: Vector3i, mouse_position: Vector2) -> bool:
 
 
 	if standing_direction == -delta:
-		attacked_unit.take_damage()
-
+		attacked_unit.take_damage(attacked_unit.calculate_attack())
+	elif BATTLE.active_unit.stats.ammo > 0 and BATTLE.active_unit.d_attack:
+		BATTLE.active_unit.stats.ammo -= 1
+		attacked_unit.take_damage(attacked_unit.calculate_attack())
 	elif GRID.get_cell_item(desired_cell) == GRID.cell_type.SELECT:
 		op_move(desired_cell)
 		attacked_unit.take_damage(attacked_unit.calculate_attack())
@@ -168,7 +171,6 @@ func update_attack_direction(cell: Vector3i, mouse_position: Vector2) -> Vector3
 		1 if click_dir.z > 0.3 else (-1 if click_dir.z < -0.3 else 0)
 	)
 	
-	# Aktualizacja tekstu kierunku
 	match delta:
 		Vector3i(-1, 0, 0):
 			direction.text = "Lewo"

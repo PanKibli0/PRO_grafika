@@ -47,12 +47,23 @@ func draw_move(origin_cell: Vector3i, movement: int, size: int):
 			set_cell_item(origin_cell + Vector3i(dx, 0, dz), cell_type.UNIT)
 
 
-func _all_enemy():
+func draw_all_enemies():
 	var player = BATTLE.active_unit.player
 	for cell in occupied_cells.keys():
-		if occupied_cells[cell].player == player:
+		print_rich("[color=lightblue]%s === %s[/color]" % [str(occupied_cells[cell].player), player])
+		if occupied_cells[cell].player != player:
 			set_cell_item(cell,cell_type.ENEMY)
 			
+
+func enemy_next_to(unit_position):
+	var player = BATTLE.active_unit.player
+	for i in [-1,1]:
+		for j in [-1,1]:
+			var check_cell = unit_position + Vector3i(i,0,j)
+			if occupied_cells.has(check_cell):
+				if occupied_cells[check_cell].player != player: 
+					return true
+	return false
 
 func _area_free(origin_cell: Vector3i, size: int) -> bool:
 	var unit = BATTLE.active_unit

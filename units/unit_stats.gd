@@ -7,6 +7,7 @@ extends Resource
 @export var defense: int = 1
 @export var damage_min: int = 1
 @export var damage_max: int = 1
+@export var ammo: int = 0
 @export var initiative: int = 1
 @export var movement: int = 1
 @export_range(1,2,1) var size: int = 1
