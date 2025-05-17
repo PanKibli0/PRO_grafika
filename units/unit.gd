@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 signal S_death
 
-@onready var hp_d = %HP_DEBUG
+@onready var panelStats = %UnitStats
 @onready var damage_d = %Damage
 
 @onready var model = %Model
@@ -38,10 +38,8 @@ func _ready():
 	d_attack = true if actual_stats.ammo > 0 else false
 	
 	amountLabel.text = str(actual_amount) + "/" + str(stats.size)
-	hp_d.text = "HP: %d / %d " % [actual_health, stats.max_health]
+	panelStats.set_info(self)
 	
-	
-	if !player: hp_player()
 	
 	if stats.size == 2:
 		model.scale *= 2
@@ -85,7 +83,6 @@ func move(new_position: Vector3i):
 func _movement_finished():
 	global_transform.origin = target_position 
 	is_moving = false
-	hp_debug(false)
 
 	
 func calculate_attack(modificator = 1) -> int:
@@ -116,7 +113,7 @@ func take_damage(damage: int):
 		actual_health = actual_stats.max_health
 
 	amountLabel.text = str(actual_amount)
-	hp_d.text = "HP: %d / %d" % [actual_health, actual_stats.max_health]
+	panelStats.set_info(self)
 	damage_d.visible = true
 	damage_d.text = "DAMAGED: %d | KILLED: %d | Left hp: %d" % [damage, amount - actual_amount, actual_health]
 	if actual_amount <= 0:
@@ -130,18 +127,15 @@ func death():
 	queue_free()
 	
 	
-func hp_debug(flag:bool):
-	hp_d.visible = flag
-	hp_d.text =  "HP: %d / %d" % [actual_health, actual_stats.max_health]
+func panel_view(flag:bool):
+	panelStats.visible = flag
+	panelStats.set_info(self)
+	if !player: panel_pos()
 	
-func hp_player():
-	hp_d.anchor_left = 1.0
-	hp_d.anchor_right = 1.0
-	hp_d.offset_left = -200 
-	hp_d.offset_right = 0
+func panel_pos():
+	panelStats.anchor_left = 1.0
+	panelStats.anchor_right = 1.0
+	panelStats.offset_left = -150
+	panelStats.offset_right = 0
 
-	hp_d.add_theme_color_override("font_color", Color(1, 0, 0))
-	
-
-	hp_d.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	

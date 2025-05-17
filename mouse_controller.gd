@@ -23,7 +23,7 @@ func _hover_input(event):
 	
 	if id == GRID.cell_type.ENEMY:
 		unit = GRID.get_unit(cell)
-		unit.hp_debug(true)
+		unit.panel_view(true)
 		
 		var attack_direction = update_attack_direction(cell, event.position)
 		if attack_direction != Vector3.ZERO:
@@ -41,7 +41,7 @@ func _hover_input(event):
 			
 			
 	elif unit != null:
-		unit.hp_debug(false)
+		unit.panel_view(false)
 		direction.text = ""
 
 func _can_attack_from_position(move_cell: Vector3i) -> bool:

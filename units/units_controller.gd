@@ -73,7 +73,7 @@ func _change_active_unit():
 	
 	if BATTLE.active_unit: 
 		BATTLE.active_unit.effects.on_turn_end()
-		BATTLE.active_unit.hp_debug(false)
+		BATTLE.active_unit.panel_view(false)
 	
 	if active_unit_index == units_list.size()-1:
 		units_list.sort_custom(_compare_initiative)
@@ -84,7 +84,7 @@ func _change_active_unit():
 	'''ZMIANA GRACZA'''
 	active_unit_index = (active_unit_index + 1) % units_list.size()
 	BATTLE.active_unit = units_list[active_unit_index]
-	BATTLE.active_unit.hp_debug(true)
+	BATTLE.active_unit.panel_view(true)
 
 	
 	BATTLE.active_unit.effects.on_turn_start()

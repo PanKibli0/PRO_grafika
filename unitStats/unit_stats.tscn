@@ -1,0 +1,266 @@
+[gd_scene load_steps=14 format=3 uid="uid://7k0iu38lngxu"]
+
+[ext_resource type="Texture2D" uid="uid://onqusivukdwl" path="res://unitStats/hp.png" id="1_8sf3d"]
+[ext_resource type="Script" uid="uid://puaguxhrf1qo" path="res://unitStats/unit_stats.gd" id="1_nc61m"]
+[ext_resource type="Texture2D" uid="uid://cwtyfbq4u0jqr" path="res://unitStats/amount.png" id="2_ii6w7"]
+[ext_resource type="Texture2D" uid="uid://d0yiq8al3v7og" path="res://unitStats/attack.png" id="2_kwiap"]
+[ext_resource type="Texture2D" uid="uid://dlbp5sumpwfxx" path="res://unitStats/defense.png" id="3_nc61m"]
+[ext_resource type="Texture2D" uid="uid://bpjm7v2dwsdxy" path="res://unitStats/damage.png" id="4_ii6w7"]
+[ext_resource type="Texture2D" uid="uid://25tl511ewl2q" path="res://unitStats/initiative.png" id="5_bb7bv"]
+[ext_resource type="Texture2D" uid="uid://dh62lkfjpm078" path="res://unitStats/movement.png" id="6_0jcpq"]
+[ext_resource type="Texture2D" uid="uid://blih3sjerjofs" path="res://unitStats/ammo.png" id="7_ypn1u"]
+[ext_resource type="Script" uid="uid://cpoj2l0m150op" path="res://unitStats/button.gd" id="8_kwiap"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_880au"]
+bg_color = Color(0.984314, 0.117647, 0.0980392, 0.411765)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8sf3d"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kwiap"]
+bg_color = Color(0.533333, 0.490196, 0.760784, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.356863, 0, 0.8, 1)
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[node name="UnitStats" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 5.0
+offset_bottom = 5.0
+mouse_filter = 2
+script = ExtResource("1_nc61m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.187176, 0.187176, 0.187176, 0.498039)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "UNIT NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Amount" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AmountIcon" type="TextureRect" parent="VBoxContainer/Amount"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("2_ii6w7")
+expand_mode = 2
+
+[node name="AmountLabel" type="Label" parent="VBoxContainer/Amount"]
+layout_mode = 2
+text = "1000/1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HP" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HPIcon" type="TextureRect" parent="VBoxContainer/HP"]
+modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("1_8sf3d")
+expand_mode = 2
+
+[node name="HPbar" type="ProgressBar" parent="VBoxContainer/HP"]
+custom_minimum_size = Vector2(100, 15)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_880au")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8sf3d")
+value = 50.0
+show_percentage = false
+
+[node name="HPlabel" type="Label" parent="VBoxContainer/HP/HPbar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_right = 40.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 15
+text = "1000/1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="attack&defense" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="AttackIcon" type="TextureRect" parent="VBoxContainer/attack&defense"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_kwiap")
+expand_mode = 2
+
+[node name="Attack" type="Label" parent="VBoxContainer/attack&defense"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DefenseIcon" type="TextureRect" parent="VBoxContainer/attack&defense"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_nc61m")
+expand_mode = 2
+
+[node name="Defense" type="Label" parent="VBoxContainer/attack&defense"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="damage" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MinDamageIcon" type="TextureRect" parent="VBoxContainer/damage"]
+modulate = Color(0.502714, 0.674461, 0.833215, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ii6w7")
+expand_mode = 2
+
+[node name="MinDamage" type="Label" parent="VBoxContainer/damage"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaxDamageIcon" type="TextureRect" parent="VBoxContainer/damage"]
+modulate = Color(1, 0.666667, 0, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ii6w7")
+expand_mode = 2
+
+[node name="MaxDamage" type="Label" parent="VBoxContainer/damage"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="inititative&movement" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="InititativeIcon" type="TextureRect" parent="VBoxContainer/inititative&movement"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_bb7bv")
+expand_mode = 2
+
+[node name="Inititative" type="Label" parent="VBoxContainer/inititative&movement"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MovementIcon" type="TextureRect" parent="VBoxContainer/inititative&movement"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_0jcpq")
+expand_mode = 2
+
+[node name="Movement" type="Label" parent="VBoxContainer/inititative&movement"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ammo&ButtonEffects" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="AmmoIcon" type="TextureRect" parent="VBoxContainer/Ammo&ButtonEffects"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("7_ypn1u")
+expand_mode = 2
+
+[node name="Ammo" type="Label" parent="VBoxContainer/Ammo&ButtonEffects"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Ammo&ButtonEffects"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/focus = SubResource("StyleBoxFlat_kwiap")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_kwiap")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_kwiap")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_kwiap")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_kwiap")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_kwiap")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kwiap")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_kwiap")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kwiap")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_kwiap")
+theme_override_styles/normal = SubResource("StyleBoxFlat_kwiap")
+toggle_mode = true
+action_mode = 0
+text = "EFFECTS"
+text_direction = 3
+script = ExtResource("8_kwiap")
+
+[connection signal="pressed" from="VBoxContainer/Ammo&ButtonEffects/Button" to="VBoxContainer/Ammo&ButtonEffects/Button" method="effects_list"]

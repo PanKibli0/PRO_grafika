@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://bq2ur7tssc2y3"]
+[gd_scene load_steps=14 format=3 uid="uid://bq2ur7tssc2y3"]
 
 [ext_resource type="Script" uid="uid://c4we5ic1upvog" path="res://units/unit.gd" id="1_btf8p"]
 [ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="2_gxe1c"]
+[ext_resource type="PackedScene" uid="uid://7k0iu38lngxu" path="res://unitStats/unit_stats.tscn" id="3_33c7x"]
 [ext_resource type="Script" uid="uid://c502txk62n1fe" path="res://units/effects.gd" id="3_xx66i"]
 [ext_resource type="Script" uid="uid://deyf5kvu51wdq" path="res://units/attack.gd" id="4_hkgx6"]
 
@@ -109,17 +110,9 @@ auto_translate_mode = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("BoxMesh_xx66i")
 
-[node name="HP_DEBUG" type="Label" parent="."]
+[node name="UnitStats" parent="." instance=ExtResource("3_33c7x")]
 unique_name_in_owner = true
 visible = false
-offset_right = 40.0
-offset_bottom = 23.0
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.0984358, 0.517507, 0.752164, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 25
-text = "HP:"
 
 [node name="Damage" type="Label" parent="."]
 unique_name_in_owner = true
