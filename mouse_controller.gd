@@ -23,28 +23,51 @@ func _hover_input(event):
 	
 	if id == GRID.cell_type.ENEMY:
 		unit = GRID.get_unit(cell)
-		unit.panel_view(true)
+		unit.panel_view(true, true)
+
 		
 		var attack_direction = update_attack_direction(cell, event.position)
+		print_direction(attack_direction)
 		if attack_direction != Vector3.ZERO:
 			var attack_move_cell = cell + attack_direction
 			if _can_attack_from_position(attack_move_cell):
 				GRID.select_cell(cell)
 				GRID.select_cell(attack_move_cell)
 				
-			else: 
-				pass
-				#for c in GRID.selected_area.keys():
-					#GRID.set_cell_item(c, GRID.selected_area[c])
-				#GRID.selected_area.clear()
-				#GRID.selected_cell = Vector3(-1,-1,-1)
-			
-			
+					
 	elif unit != null:
 		unit.panel_view(false)
 		direction.text = ""
+		
+	if id in [GRID.cell_type.INFO_ENEMY, GRID.cell_type.INFO_SELF]:
+		unit = GRID.get_unit(cell)
+		if unit:
+			unit.panel_view(true, true)
+
+func print_direction(attack_direction: Vector3i):
+	match attack_direction:
+		Vector3i(-1, 0, 0):
+			direction.text = "Lewo"
+		Vector3i(1, 0, 0):
+			direction.text = "Prawo"
+		Vector3i(0, 0, -1):
+			direction.text = "Góra"
+		Vector3i(0, 0, 1):
+			direction.text = "Dół"
+		Vector3i(-1, 0, -1):
+			direction.text = "Lewo-Góra"
+		Vector3i(1, 0, -1):
+			direction.text = "Prawo-Góra"
+		Vector3i(-1, 0, 1):
+			direction.text = "Lewo-Dół"
+		Vector3i(1, 0, 1):
+			direction.text = "Prawo-Dół"
+		_:
+			direction.text = ""
+	
 
 func _can_attack_from_position(move_cell: Vector3i) -> bool:
+	
 	return (
 		GRID.get_cell_item(move_cell) in [GRID.cell_type.MOVE, GRID.cell_type.UNIT] and
 		(not GRID._is_cell_occupied(move_cell) or GRID.get_unit(move_cell) == BATTLE.active_unit) and
@@ -170,25 +193,5 @@ func update_attack_direction(cell: Vector3i, mouse_position: Vector2) -> Vector3
 		0,
 		1 if click_dir.z > 0.3 else (-1 if click_dir.z < -0.3 else 0)
 	)
-	
-	match delta:
-		Vector3i(-1, 0, 0):
-			direction.text = "Lewo"
-		Vector3i(1, 0, 0):
-			direction.text = "Prawo"
-		Vector3i(0, 0, -1):
-			direction.text = "Góra"
-		Vector3i(0, 0, 1):
-			direction.text = "Dół"
-		Vector3i(-1, 0, -1):
-			direction.text = "Lewo-Góra"
-		Vector3i(1, 0, -1):
-			direction.text = "Prawo-Góra"
-		Vector3i(-1, 0, 1):
-			direction.text = "Lewo-Dół"
-		Vector3i(1, 0, 1):
-			direction.text = "Prawo-Dół"
-		_:
-			direction.text = ""
 	
 	return delta

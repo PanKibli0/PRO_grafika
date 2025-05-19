@@ -11,7 +11,7 @@ signal S_death
 
 @onready var amountLabel = %AmountLabel
 @onready var effects = %Effects
-@onready var attack := %Attack
+#@onready var attack := %Attack
 
 @export var player: bool = true
 
@@ -33,11 +33,11 @@ var tween: Tween = null
 
 func _ready():
 	actual_amount = amount
-	actual_health = stats.max_health
 	actual_stats = stats
+	actual_health = stats.max_health
 	d_attack = true if actual_stats.ammo > 0 else false
 	
-	amountLabel.text = str(actual_amount) + "/" + str(stats.size)
+	amountLabel.text = str(actual_amount)
 	panelStats.set_info(self)
 	
 	
@@ -105,6 +105,7 @@ func take_damage(damage: int):
 	var total_hp: int = (actual_amount) * actual_stats.max_health + actual_health - damage
 	total_hp = max(total_hp, 0)
 
+	@warning_ignore("integer_division")
 	actual_amount = int(total_hp / actual_stats.max_health)
 	actual_health = int(total_hp % actual_stats.max_health)
 
@@ -127,15 +128,23 @@ func death():
 	queue_free()
 	
 	
-func panel_view(flag:bool):
+func panel_view(flag:bool, right_corner:= false):
 	panelStats.visible = flag
 	panelStats.set_info(self)
-	if !player: panel_pos()
+
+	if right_corner:
+		panelStats.anchor_left = 1.0
+		panelStats.anchor_right = 1.0
+		panelStats.offset_left = -150
+		panelStats.offset_right = 0
+	else:
+		panelStats.anchor_left = 0.0
+		panelStats.anchor_right = 0.0
+		panelStats.offset_left = 0
+		panelStats.offset_right = 150
+		
 	
-func panel_pos():
-	panelStats.anchor_left = 1.0
-	panelStats.anchor_right = 1.0
-	panelStats.offset_left = -150
-	panelStats.offset_right = 0
+
+	
 
 	

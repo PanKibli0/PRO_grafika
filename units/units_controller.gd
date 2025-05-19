@@ -86,16 +86,18 @@ func _change_active_unit():
 	BATTLE.active_unit = units_list[active_unit_index]
 	BATTLE.active_unit.panel_view(true)
 
-	
 	BATTLE.active_unit.effects.on_turn_start()
+	
+	
 	
 	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin - Vector3(0.5,0,0.5))
 	GRID.draw_move(unit_position, BATTLE.active_unit.stats.movement, BATTLE.active_unit.stats.size)	
 	if BATTLE.active_unit.stats.ammo > 0: 
 		BATTLE.active_unit.d_attack = true
 		%Distance.text = "DALEKO"
-	
+
 	_distance_unit(unit_position)
+	GRID.draw_all_units()
 
 func _distance_unit(unit_position):
 	if BATTLE.active_unit.d_attack and not GRID.enemy_next_to(unit_position): 	
@@ -122,6 +124,7 @@ func _distance_close():
 	GRID.clear_grid()
 	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin - Vector3(0.5,0,0.5))
 	GRID.draw_move(unit_position, BATTLE.active_unit.stats.movement, BATTLE.active_unit.stats.size)	
+	GRID.draw_all_units()
 	_distance_unit(unit_position)
 
 
@@ -142,6 +145,7 @@ func _unit_death(unit):
 
 func _end_game():
 	return
+	@warning_ignore("unreachable_code")
 	var player_count = 0
 	var enemy_count = 0
 

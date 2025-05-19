@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cxpfc44838ipi"]
+[gd_scene load_steps=15 format=3 uid="uid://cxpfc44838ipi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4b74"]
 albedo_color = Color(0.332715, 0.721366, 0.371059, 1)
@@ -34,17 +34,23 @@ albedo_color = Color(1, 0.423529, 0, 1)
 material = SubResource("StandardMaterial3D_2ah3f")
 size = Vector2(0.8, 0.8)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_86x0r"]
-albedo_color = Color(0.333333, 0, 0.372549, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b8egm"]
+albedo_color = Color(1, 0.658824, 0, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2lwrf"]
-material = SubResource("StandardMaterial3D_86x0r")
+material = SubResource("StandardMaterial3D_b8egm")
+size = Vector2(0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6vnaw"]
+albedo_color = Color(0.171555, 0.527408, 0.553961, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nb82m"]
+material = SubResource("StandardMaterial3D_6vnaw")
 size = Vector2(0.8, 0.8)
 
 [node name="grid_mesh" type="Node3D"]
 
 [node name="MOVE_CELL" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("PlaneMesh_86x0r")
 skeleton = NodePath("")
 
@@ -57,17 +63,14 @@ shape = SubResource("ConvexPolygonShape3D_2lwrf")
 mesh = SubResource("BoxMesh_2lwrf")
 
 [node name="SELECT_CELL" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("PlaneMesh_6vnaw")
 skeleton = NodePath("")
 
 [node name="UNIT_CELL" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("PlaneMesh_fulmq")
 skeleton = NodePath("")
 
 [node name="ENEMY_CELL" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("PlaneMesh_fbhnk")
 skeleton = NodePath("")
 
@@ -78,11 +81,24 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ENEMY_CELL/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_2lwrf")
 
-[node name="DEBUG" type="MeshInstance3D" parent="."]
+[node name="INFO_ENEMY" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_2lwrf")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="DEBUG"]
+[node name="StaticBody3D" type="StaticBody3D" parent="INFO_ENEMY"]
+collision_layer = 2
+collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DEBUG/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="INFO_ENEMY/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_2lwrf")
+
+[node name="INFO_SELF" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_nb82m")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="INFO_SELF"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="INFO_SELF/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_2lwrf")

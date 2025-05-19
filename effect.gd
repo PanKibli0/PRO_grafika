@@ -10,23 +10,29 @@ func _init(v_name, v_description, v_duration):
 	self.description = v_description
 	self.duration = v_duration
 
+@warning_ignore("unused_parameter")
 func on_turn_start(unit):
 	print_rich("[color=yellow]on_turn_start:[/color] %s" % name)
 
+@warning_ignore("unused_parameter")
 func on_turn_end(unit):
 	print_rich("[color=yellow]on_turn_end:[/color] %s" % name)
 
 '''JEZELI CIE ZAATAKUJE'''
+@warning_ignore("unused_parameter")
 func on_attack(unit, target = null):
 	print_rich("[color=yellow]on_attack:[/color] %s" % name)
 
 '''JESLI JESTES LECZONY'''
+@warning_ignore("unused_parameter")
 func on_heal(unit):
 	print_rich("[color=yellow]on_heal:[/color] %s" % name)
 
+@warning_ignore("unused_parameter")
 func on_apply(unit):
 	print_rich("[color=yellow]on_apply:[/color] %s" % name)
 
+@warning_ignore("unused_parameter")
 func on_remove(unit):
 	print_rich("[color=yellow]on_remove:[/color] %s" % name)
 		

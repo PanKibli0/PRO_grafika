@@ -11,6 +11,8 @@ enum cell_type {
 	SELECT = 1,
 	UNIT = 2,
 	ENEMY = 3,
+	INFO_ENEMY = 4,
+	INFO_SELF = 5
 }
 
 
@@ -19,7 +21,7 @@ func draw_move(origin_cell: Vector3i, movement: int, size: int):
 		for y in range(-(movement + 1), movement + 2):
 			var offset = Vector3i(x, 0, y)
 			var target_origin = origin_cell + offset
-
+			
 			if target_origin.x < 0 or target_origin.x > grid_size[0] - size or target_origin.z < 0 or target_origin.z > grid_size[1] - size:
 				continue
 
@@ -39,8 +41,14 @@ func draw_move(origin_cell: Vector3i, movement: int, size: int):
 								set_cell_item(pos, cell_type.MOVE)
 				elif _enemy_on_cell(target_origin):
 					set_cell_item(target_origin, cell_type.ENEMY)
-			elif distance == movement + 1 and _enemy_on_cell(target_origin):
-				set_cell_item(target_origin, cell_type.ENEMY)
+			elif distance == movement + 1:
+				if _enemy_on_cell(target_origin):
+					set_cell_item(target_origin, cell_type.ENEMY)
+				for ci in [-1,1]:
+					var corner_enemy = target_origin + Vector3i(0, 0 ,ci)
+					if not x == corner_enemy.y and  _enemy_on_cell(corner_enemy): 
+						set_cell_item(corner_enemy, cell_type.ENEMY)
+	
 
 	for dx in range(size):
 		for dz in range(size):
@@ -53,6 +61,17 @@ func draw_all_enemies():
 		print_rich("[color=lightblue]%s === %s[/color]" % [str(occupied_cells[cell].player), player])
 		if occupied_cells[cell].player != player:
 			set_cell_item(cell,cell_type.ENEMY)
+		
+
+func draw_all_units():
+	var player = BATTLE.active_unit.player
+	for cell in occupied_cells.keys():
+		print_rich("[color=lightblue]%s === %s[/color]" % [str(occupied_cells[cell].player), player])
+		if get_cell_item(cell) != -1: continue
+		if occupied_cells[cell].player != player:
+			set_cell_item(cell,cell_type.INFO_ENEMY)
+		else:
+			set_cell_item(cell, cell_type.INFO_SELF)
 			
 
 func enemy_next_to(unit_position):

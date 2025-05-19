@@ -5,10 +5,10 @@
 [ext_resource type="Script" uid="uid://cwjc26o4o80ou" path="res://units/units_controller.gd" id="4_6t8i5"]
 [ext_resource type="PackedScene" uid="uid://bq2ur7tssc2y3" path="res://units/unit.tscn" id="4_dw4jg"]
 [ext_resource type="Script" uid="uid://dp6upvyfg4eqi" path="res://mouse_controller.gd" id="4_i431l"]
-[ext_resource type="Resource" uid="uid://dqpijfwnnmhmb" path="res://units/Faction1/ARMORED.tres" id="5_0npn6"]
 [ext_resource type="Script" uid="uid://fkkqunly1lwo" path="res://grid.gd" id="5_dw4jg"]
-[ext_resource type="MeshLibrary" uid="uid://24du0onhducq" path="res://grid_mesh.tres" id="6_0npn6"]
-[ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/Faction1/knight.tres" id="6_mhv3b"]
+[ext_resource type="MeshLibrary" uid="uid://cocf8rjdcohc8" path="res://grid_mesh.tres" id="6_0npn6"]
+[ext_resource type="Resource" uid="uid://dqpijfwnnmhmb" path="res://units/variants/ARMORED.tres" id="6_ol6im"]
+[ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/variants/knight.tres" id="7_b1i6x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0npn6"]
 albedo_color = Color(0.454902, 0.172549, 0.0862745, 1)
@@ -45,23 +45,19 @@ script = ExtResource("4_6t8i5")
 
 [node name="Unit" parent="Units" instance=ExtResource("4_dw4jg")]
 amount = 20
-stats = ExtResource("5_0npn6")
-target_position = Vector3(10, 0, 5)
+stats = ExtResource("6_ol6im")
+target_position = Vector3(10, 0, 4)
 
 [node name="Unit2" parent="Units" instance=ExtResource("4_dw4jg")]
 player = false
 amount = 1
-stats = ExtResource("6_mhv3b")
-target_position = Vector3(1, 0, 4)
-
-[node name="Unit3" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 1
-stats = ExtResource("6_mhv3b")
+stats = ExtResource("7_b1i6x")
+target_position = Vector3(4, 0, 4)
 
 [node name="Unit4" parent="Units" instance=ExtResource("4_dw4jg")]
 player = false
 amount = 1
-stats = ExtResource("6_mhv3b")
+stats = ExtResource("7_b1i6x")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
@@ -100,5 +96,6 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
+text = "BLISKO"
 
 [connection signal="S_end_turn" from="Camera/MouseController" to="Units" method="_change_active_unit"]
