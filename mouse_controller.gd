@@ -86,7 +86,7 @@ func _click_input(event):
 	var id = r_cell[1]
 
 	if id == GRID.cell_type.SELECT: 
-		if BATTLE.active_unit.stats.size == 2:
+		if BATTLE.active_unit.actual_stats.size == 2:
 			if int(cell.x) == GRID.grid_size[0] -1:
 				cell -= Vector3(1,0,0)
 			if int(cell.z) == GRID.grid_size[1] -1:
@@ -165,8 +165,8 @@ func op_attack(cell: Vector3i, mouse_position: Vector2) -> bool:
 
 	if standing_direction == -delta:
 		attacked_unit.take_damage(attacked_unit.calculate_attack())
-	elif BATTLE.active_unit.stats.ammo > 0 and BATTLE.active_unit.d_attack:
-		BATTLE.active_unit.stats.ammo -= 1
+	elif BATTLE.active_unit.actual_stats.ammo > 0 and BATTLE.active_unit.d_attack:
+		BATTLE.active_unit.actual_stats.ammo -= 1
 		attacked_unit.take_damage(attacked_unit.calculate_attack())
 	elif GRID.get_cell_item(desired_cell) == GRID.cell_type.SELECT:
 		op_move(desired_cell)

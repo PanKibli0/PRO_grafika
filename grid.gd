@@ -58,7 +58,6 @@ func draw_move(origin_cell: Vector3i, movement: int, size: int):
 func draw_all_enemies():
 	var player = BATTLE.active_unit.player
 	for cell in occupied_cells.keys():
-		print_rich("[color=lightblue]%s === %s[/color]" % [str(occupied_cells[cell].player), player])
 		if occupied_cells[cell].player != player:
 			set_cell_item(cell,cell_type.ENEMY)
 		
@@ -66,7 +65,6 @@ func draw_all_enemies():
 func draw_all_units():
 	var player = BATTLE.active_unit.player
 	for cell in occupied_cells.keys():
-		print_rich("[color=lightblue]%s === %s[/color]" % [str(occupied_cells[cell].player), player])
 		if get_cell_item(cell) != -1: continue
 		if occupied_cells[cell].player != player:
 			set_cell_item(cell,cell_type.INFO_ENEMY)
@@ -113,8 +111,8 @@ func _is_cell_occupied(cell):
 	return occupied_cells.has(cell)
 
 func occupy_area(cell_origin: Vector3i, unit): 
-	for x in range(unit.stats.size):
-		for z in range(unit.stats.size):
+	for x in range(unit.actual_stats.size):
+		for z in range(unit.actual_stats.size):
 			var cell = cell_origin + Vector3i(x,0,z)
 			occupied_cells[cell] = unit
 
@@ -144,7 +142,7 @@ var grid_filled := false
 
 
 func select_cell(cell: Vector3i):
-	var size = BATTLE.active_unit.stats.size
+	var size = BATTLE.active_unit.actual_stats.size
 
 	if cell == selected_cell: 
 		return

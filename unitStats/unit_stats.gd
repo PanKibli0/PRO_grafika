@@ -20,7 +20,7 @@ func set_info(unit: Unit):
 	name_label.text = unit.actual_stats.name
 
 	amount_label.text = str(unit.actual_amount) + " / " + str(unit.amount)
-	hp_label.text = str(unit.actual_health) + " / " + str(unit.stats.max_health)
+	hp_label.text = str(unit.actual_health) + " / " + str(unit.actual_stats.max_health)
 	if unit.player:	
 		name_label.modulate = Color("00b3ff")
 		amount_icon.modulate = Color("00b3ff")

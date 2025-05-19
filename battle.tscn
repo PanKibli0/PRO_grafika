@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://dp6upvyfg4eqi" path="res://mouse_controller.gd" id="4_i431l"]
 [ext_resource type="Script" uid="uid://fkkqunly1lwo" path="res://grid.gd" id="5_dw4jg"]
 [ext_resource type="MeshLibrary" uid="uid://cocf8rjdcohc8" path="res://grid_mesh.tres" id="6_0npn6"]
-[ext_resource type="Resource" uid="uid://dqpijfwnnmhmb" path="res://units/variants/ARMORED.tres" id="6_ol6im"]
 [ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/variants/knight.tres" id="7_b1i6x"]
+[ext_resource type="Resource" uid="uid://bs3x3pt3d36gx" path="res://units/variants/peasant.tres" id="7_lcjiy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0npn6"]
 albedo_color = Color(0.454902, 0.172549, 0.0862745, 1)
@@ -43,18 +43,32 @@ script = ExtResource("4_i431l")
 unique_name_in_owner = true
 script = ExtResource("4_6t8i5")
 
-[node name="Unit" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 20
-stats = ExtResource("6_ol6im")
-target_position = Vector3(10, 0, 4)
-
-[node name="Unit2" parent="Units" instance=ExtResource("4_dw4jg")]
+[node name="Unit7" parent="Units" instance=ExtResource("4_dw4jg")]
 player = false
 amount = 1
 stats = ExtResource("7_b1i6x")
-target_position = Vector3(4, 0, 4)
 
-[node name="Unit4" parent="Units" instance=ExtResource("4_dw4jg")]
+[node name="Unit8" parent="Units" instance=ExtResource("4_dw4jg")]
+player = false
+amount = 1
+stats = ExtResource("7_b1i6x")
+
+[node name="Unit9" parent="Units" instance=ExtResource("4_dw4jg")]
+player = false
+amount = 1
+stats = ExtResource("7_b1i6x")
+
+[node name="Unit10" parent="Units" instance=ExtResource("4_dw4jg")]
+player = false
+amount = 1
+stats = ExtResource("7_b1i6x")
+
+[node name="Unit12" parent="Units" instance=ExtResource("4_dw4jg")]
+player = false
+amount = 1
+stats = ExtResource("7_lcjiy")
+
+[node name="Unit11" parent="Units" instance=ExtResource("4_dw4jg")]
 player = false
 amount = 1
 stats = ExtResource("7_b1i6x")
