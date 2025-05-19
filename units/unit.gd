@@ -60,14 +60,20 @@ func _ready():
 		material.albedo_color = Color.BLUE if player else Color.RED
 		player_eye.set_surface_override_material(0, material)
 
-	global_transform.origin = target_position
-	global_transform.origin += Vector3(1,0,1)
+	if stats.size == 2:
+		global_transform.origin = target_position + Vector3(1, 0, 1)
+	else:
+		global_transform.origin = target_position + Vector3(0.5, 0, 0.5)
 	
 func move(new_position: Vector3i):
 	is_moving = true
 	var add_pos = Vector3(0.5, 0, 0.5) if stats.size == 1 else Vector3(1, 0, 1)
 	
-	target_position = Vector3(new_position) + add_pos
+	if stats.size == 2:
+		target_position = Vector3(new_position) + Vector3(1, 0, 1)
+	else:
+		target_position = Vector3(new_position) + Vector3(0.5, 0, 0.5)
+	
 	target_position.y = global_transform.origin.y
 	
 	look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
