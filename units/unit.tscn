@@ -51,7 +51,7 @@ transparency = 1
 
 [sub_resource type="BoxMesh" id="BoxMesh_xx66i"]
 material = SubResource("StandardMaterial3D_gxe1c")
-size = Vector3(0.5, 1, 0.5)
+size = Vector3(0.5, 2.5, 0.5)
 
 [node name="Unit" type="CharacterBody3D"]
 top_level = true
@@ -106,7 +106,6 @@ skeleton = NodePath("../Model")
 [node name="Model" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
 auto_translate_mode = 2
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("BoxMesh_xx66i")
 
 [node name="UnitStats" parent="." instance=ExtResource("3_33c7x")]
