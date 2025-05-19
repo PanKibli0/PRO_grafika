@@ -10,15 +10,10 @@ extends Resource
 @export var ammo: int = 0
 @export var initiative: int = 1
 @export var movement: int = 1
-@export_range(1,2,1) var size: int = 1
 @export var color: Color
 
-func _to_string() -> String:
-	return "[%s] HP: %d | ATK: %d | DEF: %d | DMG: %d-%d | INIT: %d | MOV: %d" % [
-		name, max_health, attack, defense, damage_min, damage_max, initiative, movement
-	]
 
-func _init(v_name: String = "Unit Name", v_max_health: int = 1, v_attack: int = 1, v_defense: int = 1, v_damage_min: int = 1, v_damage_max: int = 1, v_initiative: int = 1, v_movement: int = 1,v_size = 1, v_color: Color = Color(1, 1, 1)):
+func _init(v_name: String = "Unit Name", v_max_health: int = 1, v_attack: int = 1, v_defense: int = 1, v_damage_min: int = 1, v_damage_max: int = 1, v_initiative: int = 1, v_movement: int = 1, v_color: Color = Color(1, 1, 1)):
 	if v_damage_min > v_damage_max:
 		var temp = v_damage_min
 		v_damage_min = v_damage_max
@@ -32,5 +27,4 @@ func _init(v_name: String = "Unit Name", v_max_health: int = 1, v_attack: int = 
 	self.damage_max = v_damage_max
 	self.initiative = v_initiative
 	self.movement = v_movement
-	self.size = v_size
 	self.color = v_color

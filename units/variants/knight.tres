@@ -13,6 +13,5 @@ damage_max = 1
 ammo = 1
 initiative = 1
 movement = 2
-size = 2
 color = Color(0, 0, 0, 1)
 metadata/_custom_type_script = "uid://cukyhyanl175x"

@@ -33,7 +33,7 @@ var tween: Tween = null
 
 func _ready():
 	actual_amount = amount
-	actual_stats = stats
+	actual_stats = stats.duplicate(true)
 	actual_health = stats.max_health
 	d_attack = true if actual_stats.ammo > 0 else false
 	
@@ -41,15 +41,6 @@ func _ready():
 	panelStats.set_info(self)
 	
 	
-	if stats.size == 2:
-		model.scale *= 2
-		player_eye.scale *= 2
-		model.position.y *= 2
-		player_eye.position.y *= 2
-		$Amount.position.y *=2
-		
-		
-	# KOLOR DLA JEDNOSTKI
 	if model and model.get_active_material(0):
 		var material = model.get_active_material(0).duplicate()
 		material.albedo_color = stats.color
@@ -60,20 +51,13 @@ func _ready():
 		material.albedo_color = Color.BLUE if player else Color.RED
 		player_eye.set_surface_override_material(0, material)
 
-	if stats.size == 2:
-		global_transform.origin = target_position + Vector3(1, 0, 1)
-	else:
-		global_transform.origin = target_position + Vector3(0.5, 0, 0.5)
+	
+	global_transform.origin = target_position + Vector3(0.5, 0, 0.5)
 	
 func move(new_position: Vector3i):
 	is_moving = true
-	var add_pos = Vector3(0.5, 0, 0.5) if stats.size == 1 else Vector3(1, 0, 1)
 	
-	if stats.size == 2:
-		target_position = Vector3(new_position) + Vector3(1, 0, 1)
-	else:
-		target_position = Vector3(new_position) + Vector3(0.5, 0, 0.5)
-	
+	target_position = Vector3(new_position) + Vector3(0.5, 0, 0.5)
 	target_position.y = global_transform.origin.y
 	
 	look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)

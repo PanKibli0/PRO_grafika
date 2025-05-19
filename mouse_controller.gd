@@ -86,13 +86,6 @@ func _click_input(event):
 	var id = r_cell[1]
 
 	if id == GRID.cell_type.SELECT: 
-		if BATTLE.active_unit.actual_stats.size == 2:
-			if int(cell.x) == GRID.grid_size[0] -1:
-				cell -= Vector3(1,0,0)
-			if int(cell.z) == GRID.grid_size[1] -1:
-				cell -= Vector3(0,0,1)
-			if GRID.is_valid_unit_selection(cell):
-				cell -= Vector3(1,0,0)
 		op_move(cell)
 		emit_signal("S_end_turn")
 	elif id == GRID.cell_type.ENEMY:
@@ -130,14 +123,13 @@ func get_mouse_world_position(mouse_position: Vector2) -> Vector3:
 			
 func op_move(cell):
 	var world_pos = GRID.map_to_local(cell)
-	
-	GRID.free_oc_area(BATTLE.active_unit)
-	GRID.occupy_area(cell, BATTLE.active_unit)
 			
-	BATTLE.active_unit.move(world_pos) # PORUSZANIE JEDNSOTKA
+	GRID.free_oc_cell(GRID.local_to_map(BATTLE.active_unit.global_transform.origin))
+	GRID.occupy_cell(cell, BATTLE.active_unit)
+			
+	BATTLE.active_unit.move(world_pos)
 	
-	
-	
+
 func op_attack(cell: Vector3i, mouse_position: Vector2) -> bool:
 	var attacked_unit = GRID.get_unit(cell)
 	if attacked_unit == null: 

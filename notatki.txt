@@ -1,25 +1,12 @@
-*Cell poza grid i nie ostani sleected
-
 ==============================
 
-polozenie // grid => GLOBAL
-tury // unit_controller => Battle/GLOBA
-
-
-WAIT z turn EFFECT sprawdzić jak działa bo na 99% podwójnie 
 
 
 ==============================
 
-POLOZENIE JEDNSOTKI 2x2 BLEDNIE POKAZAYWANE => KOD NIBY OK, ALE WYSWIETLANIE NIET
-ATTAK => RUCH 2x2 zle zrobiony (DZIALA CIAGLE NA 1x1)
-
-==============================
 
 DO ZROBIENIA:
-	$*POPRAWA ATTAK => RUCH 2x2 zle zrobiony (DZIALA CIAGLE NA 1x1)
-	$*POPRAWA POLOZENIA SIZE 2x2 => KOD NIBY OK, ALE WYSWIETLANIE NIET
-
+	
 	*EFEKTY DO ZROBIENIA I SPR CZY DZIALAJA (BAZOWY SYSTEM NIBY JEST)
 	*ROZNE SELECT_CELL ataków => JESZCZE NW JAK ZROBIC MOZE w "GRID" dodanie TYPOW DO SELECT JESLI MA BYC SPECJAL
 	
@@ -28,11 +15,7 @@ DO ZROBIENIA:
 	++ SCENA - MENU (WYBIERANIE JENDSOKTE KTORYMI BEDZIE SIE WALCZYLO)
 	++ AI (no chyba ze brak czasu bedzie to bedzie local multi)
 
-	++ POCZATEK GRY, WYBIERANIE POZYCJI DLA JEDNSOTEK (PRZED WALKA)
 	
- 
 DODATKI DO ZROBIENIA:
-	* GUI z lista jednsotek ktora po ktorej jest ()
-	* STEROWANIE KAMERA
-* Blokady (BRAK MOVE) <KAMIENIE, WODA NW CO>
-* Efekty pół (np ściana ognia) 
+
+	* Efekty pół (np ściana ognia) 

@@ -52,11 +52,11 @@ func _ready():
 		var r_pos: Vector3i
 		if unit.target_position != Vector3(-1, -1, -1):
 			r_pos = GRID.map_to_local(unit.target_position)
-		else: r_pos = _get_position(unit.player, unit.actual_stats.size)
+		else: r_pos = _get_position(unit.player)
 		print(unit, r_pos)
 		
-		var offset = Vector3(0.5, 0, 0.5) if unit.actual_stats.size == 1 else Vector3(1, 0, 1)
-		var cell_pos = Vector3(GRID.local_to_map(r_pos)) + offset
+		
+		var cell_pos = Vector3(GRID.local_to_map(r_pos)) + Vector3(0.5, 0, 0.5)
 		
 		unit.global_transform.origin = Vector3(cell_pos)  
 		unit.target_position = cell_pos 
@@ -65,7 +65,7 @@ func _ready():
 		if unit.player: unit.look_at(Vector3(cell_pos.x + 1, cell_pos.y, cell_pos.z) )
 		else: unit.look_at(Vector3(cell_pos.x - 1, cell_pos.y, cell_pos.z))
 		
-		GRID.occupy_area(r_pos, unit)
+		GRID.occupy_cell(r_pos, unit)
 	
 	units_list.sort_custom(_compare_initiative)
 	print_rich("[color=red]", units_list, "[/color]")	
@@ -100,12 +100,12 @@ func _change_active_unit():
 	
 	
 	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin - Vector3(0.5,0,0.5))
-	GRID.draw_move(unit_position, BATTLE.active_unit.actual_stats.movement, BATTLE.active_unit.actual_stats.size)	
+	GRID.draw_move(unit_position, BATTLE.active_unit.actual_stats.movement)	
 	if BATTLE.active_unit.actual_stats.ammo > 0: 
 		BATTLE.active_unit.d_attack = true
 		%Distance.text = "DALEKO"
-
-	_distance_unit(unit_position)
+		_distance_unit(unit_position)
+		
 	GRID.draw_all_units()
 
 func _distance_unit(unit_position):
@@ -113,7 +113,6 @@ func _distance_unit(unit_position):
 		GRID.draw_all_enemies()
 
 func _input(event: InputEvent):	
-	#if event.is_action_pressed("DEFENSE") and BATTLE.active_unit.player == true:
 	if event.is_action_pressed("DEFENSE"):
 		_change_active_unit()
 	
@@ -132,7 +131,7 @@ func _distance_close():
 	
 	GRID.clear_grid()
 	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin - Vector3(0.5,0,0.5))
-	GRID.draw_move(unit_position, BATTLE.active_unit.actual_stats.movement, BATTLE.active_unit.actual_stats.size)	
+	GRID.draw_move(unit_position, BATTLE.active_unit.actual_stats.movement)	
 	GRID.draw_all_units()
 	_distance_unit(unit_position)
 
@@ -190,7 +189,7 @@ func _add_unit(DV: int = 0, player = true):
 
 	unit.stats = stats
 	unit.player = player
-	unit.size = 2
+
 	
 	add_child(unit)
 	

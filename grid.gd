@@ -16,43 +16,35 @@ enum cell_type {
 }
 
 
-func draw_move(origin_cell: Vector3i, movement: int, size: int):
+func draw_move(origin_cell: Vector3i, movement: int):
 	for x in range(-(movement + 1), movement + 2):
-		for y in range(-(movement + 1), movement + 2):
-			var offset = Vector3i(x, 0, y)
-			var target_origin = origin_cell + offset
-			
-			if target_origin.x < 0 or target_origin.x > grid_size[0] - size or target_origin.z < 0 or target_origin.z > grid_size[1] - size:
-				continue
-
-			if target_origin == origin_cell:
-				continue
-
+		for y in range(-(movement+1), movement+2):
 			var distance = abs(x) + abs(y)
-			if distance > movement + size:
-				continue
+			if distance > movement + 1: continue
 
-			if distance <= movement:
-				if _area_free(target_origin, size):
-					for dx in range(size):
-						for dz in range(size):
-							var pos = target_origin + Vector3i(dx, 0, dz)
-							if not (occupied_cells.has(pos) and occupied_cells[pos] == BATTLE.active_unit):
-								set_cell_item(pos, cell_type.MOVE)
-				elif _enemy_on_cell(target_origin):
-					set_cell_item(target_origin, cell_type.ENEMY)
+			var cell_pos = origin_cell + Vector3i(x, 0, y)
+			if cell_pos.x < 0 or cell_pos.x >= grid_size[0]: continue
+			if cell_pos.z < 0 or cell_pos.z >= grid_size[1]: continue
+
+			if x == 0 and y == 0:
+				set_cell_item(cell_pos, cell_type.UNIT)
+			elif distance <= movement:
+				if not _is_cell_occupied(cell_pos):
+					set_cell_item(cell_pos, cell_type.MOVE)
+				elif _enemy_on_cell(cell_pos):
+					set_cell_item(cell_pos, cell_type.ENEMY)
+			elif distance == movement + 1 and _enemy_on_cell(cell_pos):
+				set_cell_item(cell_pos, cell_type.ENEMY)
 			elif distance == movement + 1:
-				if _enemy_on_cell(target_origin):
-					set_cell_item(target_origin, cell_type.ENEMY)
+				if _enemy_on_cell(cell_pos):
+					set_cell_item(cell_pos, cell_type.ENEMY)
 				for ci in [-1,1]:
-					var corner_enemy = target_origin + Vector3i(0, 0 ,ci)
+					var corner_enemy = cell_pos + Vector3i(0, 0 ,ci)
 					if not x == corner_enemy.y and  _enemy_on_cell(corner_enemy): 
 						set_cell_item(corner_enemy, cell_type.ENEMY)
 	
 
-	for dx in range(size):
-		for dz in range(size):
-			set_cell_item(origin_cell + Vector3i(dx, 0, dz), cell_type.UNIT)
+	set_cell_item(origin_cell , cell_type.UNIT)
 
 
 func draw_all_enemies():
@@ -82,15 +74,6 @@ func enemy_next_to(unit_position):
 					return true
 	return false
 
-func _area_free(origin_cell: Vector3i, size: int) -> bool:
-	var unit = BATTLE.active_unit
-	for x in range(size):
-		for z in range(size):
-			var pos = origin_cell + Vector3i(x, 0, z)
-			if occupied_cells.has(pos) and occupied_cells[pos] != unit:
-				return false
-	return true
-
 
 func clear_grid():
 	selected_cell = Vector3(-1,-1,-1)
@@ -107,23 +90,12 @@ func _enemy_on_cell(cell: Vector3i):
 			return true
 	return false
 
-func _is_cell_occupied(cell): 
-	return occupied_cells.has(cell)
+func _is_cell_occupied(cell): return occupied_cells.has(cell)
 
-func occupy_area(cell_origin: Vector3i, unit): 
-	for x in range(unit.actual_stats.size):
-		for z in range(unit.actual_stats.size):
-			var cell = cell_origin + Vector3i(x,0,z)
-			occupied_cells[cell] = unit
-
+func occupy_cell(cell: Vector3i, unit): occupied_cells[cell] = unit
 	
-func free_oc_area(unit):
-	var keys_to_remove: Array = []
-	for cell in occupied_cells.keys():
-		if occupied_cells[cell] == unit:
-			keys_to_remove.append(cell)
-
-	for cell in keys_to_remove:
+func free_oc_cell(cell: Vector3i):
+	if _is_cell_occupied(cell):
 		occupied_cells.erase(cell)
 	
 	
@@ -142,51 +114,17 @@ var grid_filled := false
 
 
 func select_cell(cell: Vector3i):
-	var size = BATTLE.active_unit.actual_stats.size
-
-	if cell == selected_cell: 
-		return
-	
-	for x in range(size):
-		for z in range(size):
-			var check_cell = cell + Vector3i(x, 0, z)
-			var item = get_cell_item(check_cell)
-			
-			if item == cell_type.UNIT and size == 2:
-				if is_valid_unit_selection(cell):
-					return
-			elif item not in [cell_type.MOVE, cell_type.SELECT]:
-				return
-
-	for c in selected_area.keys():
-		set_cell_item(c, selected_area[c])
-	selected_area.clear()
-
-	for x in range(size):
-		for z in range(size):
-			var c = cell + Vector3i(x, 0, z)
-			selected_area[c] = get_cell_item(c)
-			set_cell_item(c, cell_type.SELECT)
-
-	selected_cell = cell
-
-
-func is_valid_unit_selection(origin: Vector3i) -> bool:
-	for x in range(2):
-		for z in range(2):
-			var check_cell = origin + Vector3i(x, 0, z)
-			if not occupied_cells.has(check_cell):
-				return false
-	return true
+	if cell != selected_cell and get_cell_item(cell) == cell_type.MOVE:
+		if selected_cell != Vector3i(-1, -1, -1):
+			set_cell_item(selected_cell, cell_type.MOVE)
+		selected_cell = cell
+		set_cell_item(selected_cell, cell_type.SELECT)
 
 
 
-func _is_area_move(origin_cell: Vector3i, size: int) -> bool:
-	for x in range(size):
-		for z in range(size):
-			if get_cell_item(origin_cell + Vector3i(x, 0, z)) != cell_type.MOVE:
-				return false
-	return true
+
+
+
 
 
 
