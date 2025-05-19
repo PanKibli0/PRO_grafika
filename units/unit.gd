@@ -133,8 +133,3 @@ func panel_view(flag:bool, right_corner:= false):
 		panelStats.offset_left = 0
 		panelStats.offset_right = 150
 		
-	
-
-	
-
-	
