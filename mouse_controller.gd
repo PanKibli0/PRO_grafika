@@ -156,13 +156,13 @@ func op_attack(cell: Vector3i, mouse_position: Vector2) -> bool:
 
 
 	if standing_direction == -delta:
-		attacked_unit.take_damage(attacked_unit.calculate_attack())
+		attacked_unit.calculate_attack()
 	elif BATTLE.active_unit.actual_stats.ammo > 0 and BATTLE.active_unit.d_attack:
 		BATTLE.active_unit.actual_stats.ammo -= 1
-		attacked_unit.take_damage(attacked_unit.calculate_attack())
+		attacked_unit.calculate_attack()
 	elif GRID.get_cell_item(desired_cell) == GRID.cell_type.SELECT:
 		op_move(desired_cell)
-		attacked_unit.take_damage(attacked_unit.calculate_attack())
+		attacked_unit.calculate_attack()
 	else:
 		return false
 

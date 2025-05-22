@@ -5,10 +5,6 @@ var name: String = "Unnamed Effect"
 var description: String = "DESC"
 var duration: int = 1 
 
-func _init(v_name, v_description, v_duration):
-	self.name = v_name
-	self.description = v_description
-	self.duration = v_duration
 
 @warning_ignore("unused_parameter")
 func on_turn_start(unit):

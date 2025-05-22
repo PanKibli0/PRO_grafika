@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=13 format=3 uid="uid://gioqd05hgd0g"]
 
 [ext_resource type="Script" uid="uid://h4rds26ntm6g" path="res://battle.gd" id="1_ol6im"]
 [ext_resource type="Script" uid="uid://sqvwfmlbwexy" path="res://camera.gd" id="2_lcjiy"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://fkkqunly1lwo" path="res://grid.gd" id="5_dw4jg"]
 [ext_resource type="MeshLibrary" uid="uid://cocf8rjdcohc8" path="res://grid_mesh.tres" id="6_0npn6"]
 [ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/variants/knight.tres" id="7_b1i6x"]
+[ext_resource type="Script" uid="uid://dxlkuybralhn1" path="res://debug.gd" id="9_lcjiy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0npn6"]
 albedo_color = Color(0.454902, 0.172549, 0.0862745, 1)
@@ -98,5 +99,8 @@ offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
 text = "BLISKO"
+
+[node name="debug" type="Node" parent="."]
+script = ExtResource("9_lcjiy")
 
 [connection signal="S_end_turn" from="Camera/MouseController" to="Units" method="_change_active_unit"]

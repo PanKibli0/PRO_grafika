@@ -11,10 +11,8 @@ signal S_death
 
 @onready var amountLabel = %AmountLabel
 @onready var effects = %Effects
-#@onready var attack := %Attack
 
 @export var player: bool = true
-
 
 @export var amount: int = randi_range(5,10)
 @export var stats: UnitStats
@@ -75,7 +73,7 @@ func _movement_finished():
 	is_moving = false
 
 	
-func calculate_attack(modificator = 1) -> int:
+func calculate_attack(modificator = 1):
 	var enemy = BATTLE.active_unit
 	var enemy_amount = enemy.actual_amount
 	var enemy_attack = enemy.actual_stats.attack
@@ -86,7 +84,11 @@ func calculate_attack(modificator = 1) -> int:
 		act_damage = enemy_amount * damage * (1 + abs(enemy_attack - actual_stats.defense) * 0.05) * modificator
 	else:
 		act_damage = enemy_amount * damage / (1 + abs(enemy_attack - actual_stats.defense) * 0.05) * modificator
-	return int(max(round(act_damage), 0))
+
+	act_damage = round(act_damage)
+
+	print(act_damage)
+	take_damage(act_damage)
 
 
 func take_damage(damage: int):
@@ -106,7 +108,10 @@ func take_damage(damage: int):
 	amountLabel.text = str(actual_amount)
 	panelStats.set_info(self)
 	damage_d.visible = true
+	if self == BATTLE.active_unit: damage_d.set("theme_override_colors/font_color", Color("905ABF"))
+	else: damage_d.set("theme_override_colors/font_color", Color("a68d00"))
 	damage_d.text = "DAMAGED: %d | KILLED: %d | Left hp: %d" % [damage, amount - actual_amount, actual_health]
+	
 	if actual_amount <= 0:
 		death()
 	await get_tree().create_timer(2.0).timeout
@@ -132,4 +137,5 @@ func panel_view(flag:bool, right_corner:= false):
 		panelStats.anchor_right = 0.0
 		panelStats.offset_left = 0
 		panelStats.offset_right = 150
+		
 		
