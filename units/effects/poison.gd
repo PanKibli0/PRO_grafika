@@ -1,4 +1,4 @@
-class_name PoisonEffect
+class_name EffectPoison
 extends Effect
 
 var value : int
@@ -12,7 +12,7 @@ func _init(v_value, dur=3):
 
 func on_turn_end(unit):
 	print(unit.actual_health)
-	unit.take_damage(value)
+	unit.take_damage(value, true)
 	print(unit.actual_health)
 	print("DAMAGE")
 	

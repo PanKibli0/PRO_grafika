@@ -8,27 +8,26 @@ var units_list = []
 var position_left = Vector3i(0, 0, 0)
 var position_right = Vector3i(11, 0, 0)
 
-func _get_position(for_player: bool, size: int = 1) -> Vector3:
+func _get_position(for_player: bool) -> Vector3:
 	while true:  
 		var pos
 		
 		if for_player:
-			if position_left.z + size > 10:
+			if position_left.z  > 10:
 				position_left.z = 0
-				position_left.x += size
+				position_left.x += 2
 			pos = position_left
 			
-			position_left.z += size
+			position_left.z += 2
 		else:
-			if position_right.z + size > 10:
+			if position_right.z > 10:
 				position_right.z = 0
-				position_right.x -= size
+				position_right.x -= 2
 			 
 			pos = position_right
-			print(size)
-			if size == 2: pos.x -= 1
+
 			print_rich()
-			position_right.z += size
+			position_right.z += 2
 
 		if not GRID._is_cell_occupied(pos):
 			return GRID.local_to_map(pos)
@@ -79,10 +78,16 @@ func _compare_initiative(unit1: Node, unit2: Node):
 func _change_active_unit():
 	GRID.clear_grid()
 
+	if BATTLE.active_unit:
+		if BATTLE.active_unit.waited and BATTLE.active_unit.end_self_turn:
+			BATTLE.active_unit.end_self_turn = false
+		else:
+			BATTLE.active_unit.end_self_turn = true
 	
-	if BATTLE.active_unit: 
+	if BATTLE.active_unit and BATTLE.active_unit.end_self_turn: 
 		BATTLE.active_unit.effects.on_turn_end()
 		BATTLE.active_unit.panel_view(false)
+	
 	
 	if active_unit_index == units_list.size()-1:
 		units_list.sort_custom(_compare_initiative)
@@ -95,8 +100,8 @@ func _change_active_unit():
 	BATTLE.active_unit = units_list[active_unit_index]
 	BATTLE.active_unit.panel_view(true)
 
-	BATTLE.active_unit.effects.on_turn_start()
-	
+	if not BATTLE.active_unit.waited:
+		BATTLE.active_unit.effects.on_turn_start()
 	
 	
 	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin - Vector3(0.5,0,0.5))

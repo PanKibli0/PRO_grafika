@@ -13,7 +13,7 @@ config_version=5
 config/name="game"
 run/main_scene="uid://gioqd05hgd0g"
 config/features=PackedStringArray("4.4", "Mobile")
-run/max_fps=45
+run/max_fps=40
 config/icon="res://icon.svg"
 
 [autoload]
@@ -22,8 +22,8 @@ BATTLE="*res://battle.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1600
+window/size/viewport_height=900
 window/stretch/mode="canvas_items"
 
 [filesystem]

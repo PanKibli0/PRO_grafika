@@ -26,7 +26,7 @@ expand_margin_bottom = 2.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8sf3d"]
 bg_color = Color(1, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kwiap"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j3gde"]
 bg_color = Color(0.533333, 0.490196, 0.760784, 1)
 border_width_left = 3
 border_width_top = 3
@@ -48,7 +48,7 @@ offset_left = 5.0
 offset_top = 5.0
 offset_right = 5.0
 offset_bottom = 5.0
-mouse_filter = 2
+mouse_filter = 1
 script = ExtResource("1_nc61m")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -246,21 +246,19 @@ vertical_alignment = 1
 [node name="Button" type="Button" parent="VBoxContainer/Ammo&ButtonEffects"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-theme_override_styles/focus = SubResource("StyleBoxFlat_kwiap")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_kwiap")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_kwiap")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_kwiap")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_kwiap")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_kwiap")
-theme_override_styles/hover = SubResource("StyleBoxFlat_kwiap")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_kwiap")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_kwiap")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_kwiap")
-theme_override_styles/normal = SubResource("StyleBoxFlat_kwiap")
+theme_override_styles/focus = SubResource("StyleBoxFlat_j3gde")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_j3gde")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_j3gde")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_j3gde")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_j3gde")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_j3gde")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j3gde")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_j3gde")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j3gde")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_j3gde")
+theme_override_styles/normal = SubResource("StyleBoxFlat_j3gde")
 toggle_mode = true
 action_mode = 0
 text = "EFFECTS"
 text_direction = 3
 script = ExtResource("8_kwiap")
-
-[connection signal="pressed" from="VBoxContainer/Ammo&ButtonEffects/Button" to="VBoxContainer/Ammo&ButtonEffects/Button" method="effects_list"]

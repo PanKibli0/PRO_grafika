@@ -3,12 +3,6 @@ extends Node
 @onready var unit = $".."
 var active_effects: Array[Effect] = []
 
-var flag_start = false
-var flag_end = false
-
-func _ready() -> void:
-	#add_effect(Effect.new("HEIL", "HEILDESC", 10))
-	pass
 
 func add_effect(effect: Effect):
 	active_effects.append(effect)
@@ -31,13 +25,14 @@ func _cleanup_expired():
 func on_turn_start():
 	for effect in active_effects:
 		effect.on_turn_start(unit)
-		effect.duration -= 1
 	_cleanup_expired()
 
 
 func on_turn_end():
 	for effect in active_effects:
 		effect.on_turn_end(unit)
+		print(effect.duration)
+		effect.duration -= 1
 	_cleanup_expired()
 
 '''JHEZELI CIE ZAATAKUJE'''

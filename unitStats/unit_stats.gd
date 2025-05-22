@@ -1,5 +1,7 @@
 extends Control
 
+signal S_effect_list
+
 @onready var name_label = $VBoxContainer/Name
 @onready var amount_icon = $VBoxContainer/Amount/AmountIcon
 @onready var amount_label = $VBoxContainer/Amount/AmountLabel
@@ -12,7 +14,9 @@ extends Control
 @onready var movement_label = $"VBoxContainer/inititative&movement/Movement"
 @onready var ammo_label = $"VBoxContainer/Ammo&ButtonEffects/Ammo"
 
-
+func _ready() -> void:
+	$"VBoxContainer/Ammo&ButtonEffects/Button".connect("pressed", func(): emit_signal("S_effect_list"))
+	
 func set_info(unit: Unit):
 	if not unit.actual_stats or not unit.stats:
 		return
@@ -54,4 +58,7 @@ func _set_label_value(label: Label, value, standard_value):
 	else:
 		label.modulate = Color(1, 1, 1) 
 	
+	
+
+
 	

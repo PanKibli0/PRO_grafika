@@ -1,5 +1,7 @@
 extends Node
 
-func _input(event):
-	if event.is_action_pressed("1"):
-		BATTLE.active_unit.effects.add_effect(PoisonEffect.new(10, 5))
+func _ready() -> void:
+	for d in %Units.get_children():
+		#for i in range(10):
+		d.effects.add_effect(EffectPoison.new(10,3))
+		

@@ -48,15 +48,16 @@ amount = 1
 stats = ExtResource("7_b1i6x")
 
 [node name="Unit10" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 1
-stats = ExtResource("7_b1i6x")
-
-[node name="Unit8" parent="Units" instance=ExtResource("4_dw4jg")]
 player = false
 amount = 1
 stats = ExtResource("7_b1i6x")
 
-[node name="Unit9" parent="Units" instance=ExtResource("4_dw4jg")]
+[node name="Unit11" parent="Units" instance=ExtResource("4_dw4jg")]
+player = false
+amount = 1
+stats = ExtResource("7_b1i6x")
+
+[node name="Unit12" parent="Units" instance=ExtResource("4_dw4jg")]
 player = false
 amount = 1
 stats = ExtResource("7_b1i6x")

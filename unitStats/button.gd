@@ -15,7 +15,3 @@ func _update_style():
 		stylebox.bg_color = color_hover
 	else:
 		stylebox.bg_color = color_normal
-
-
-func effects_list() -> void:
-	pass 

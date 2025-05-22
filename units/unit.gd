@@ -5,7 +5,7 @@ signal S_death
 
 @onready var panelStats = %UnitStats
 @onready var damage_d = %Damage
-
+@onready var damage_d2 = %Damage2
 @onready var model = %Model
 @onready var player_eye = %Eye
 
@@ -26,10 +26,13 @@ var actual_amount: int
 var d_attack: bool
 var is_moving := false
 var waited = false
+var end_self_turn = true
 var tween: Tween = null
 
 
 func _ready():
+	%UnitStats.connect("S_effect_list", Callable($EffectList, "create_list"))
+	
 	actual_amount = amount
 	actual_stats = stats.duplicate(true)
 	actual_health = stats.max_health
@@ -91,7 +94,7 @@ func calculate_attack(modificator = 1):
 	take_damage(act_damage)
 
 
-func take_damage(damage: int):
+func take_damage(damage: int, other_type := false):
 	if damage == 0: return
 	
 	var total_hp: int = (actual_amount) * actual_stats.max_health + actual_health - damage
@@ -107,10 +110,10 @@ func take_damage(damage: int):
 
 	amountLabel.text = str(actual_amount)
 	panelStats.set_info(self)
-	damage_d.visible = true
-	if self == BATTLE.active_unit: damage_d.set("theme_override_colors/font_color", Color("905ABF"))
-	else: damage_d.set("theme_override_colors/font_color", Color("a68d00"))
-	damage_d.text = "DAMAGED: %d | KILLED: %d | Left hp: %d" % [damage, amount - actual_amount, actual_health]
+	
+	var damage_label = damage_d if not other_type else damage_d2
+	damage_label.visible = true
+	damage_label.text = "DAMAGED: %d | KILLED: %d | Left hp: %d" % [damage, amount - actual_amount, actual_health]
 	
 	if actual_amount <= 0:
 		death()
@@ -130,12 +133,12 @@ func panel_view(flag:bool, right_corner:= false):
 	if right_corner:
 		panelStats.anchor_left = 1.0
 		panelStats.anchor_right = 1.0
-		panelStats.offset_left = -150
+		panelStats.offset_left = -180
 		panelStats.offset_right = 0
 	else:
 		panelStats.anchor_left = 0.0
 		panelStats.anchor_right = 0.0
 		panelStats.offset_left = 0
-		panelStats.offset_right = 150
+		panelStats.offset_right = 180
 		
 		
