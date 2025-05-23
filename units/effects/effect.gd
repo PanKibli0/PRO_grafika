@@ -5,6 +5,9 @@ var name: String = "Unnamed Effect"
 var description: String = "DESC"
 var duration: int = 1 
 
+var color_text = Color.WHITE
+var color_bg = Color.DIM_GRAY
+
 
 @warning_ignore("unused_parameter")
 func on_turn_start(unit):

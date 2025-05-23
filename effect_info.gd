@@ -6,8 +6,13 @@ extends Control
 @onready var background = %Background
 
 
-func setup(name_text: String, description_text: String, duration_text: String, color_var: bool) -> void:
-	l_name.text = name_text
-	l_description.text = description_text
-	l_duration.text = duration_text
-	background.color = Color("5B3E96") if color_var else Color("#7D63C1")
+func setup(effect: Effect) -> void:
+	l_name.text = effect.name
+	l_name.modulate = effect.color_text
+	l_description.text = effect.description
+	l_description.modulate = effect.color_text
+	var dur = effect.duration if effect.duration > 0 else "A"
+	l_duration.text = str(dur)
+	l_duration.modulate = effect.color_text
+	
+	background.color = effect.color_bg

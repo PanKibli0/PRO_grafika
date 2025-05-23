@@ -119,21 +119,23 @@ offset_left = 10.0
 offset_right = 160.0
 scale = Vector2(1.2, 1.2)
 
-[node name="EffectList" type="ScrollContainer" parent="."]
+[node name="Effects" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(165, 240)
+custom_minimum_size = Vector2(0, 240)
 offset_left = 5.0
 offset_top = 250.0
-offset_right = 170.0
+offset_right = 125.0
 offset_bottom = 490.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_33c7x")
+horizontal_scroll_mode = 0
 script = ExtResource("4_33c7x")
 
-[node name="List" type="VBoxContainer" parent="EffectList"]
+[node name="List" type="VBoxContainer" parent="Effects"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(165, 240)
+custom_minimum_size = Vector2(120, 240)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 size_flags_vertical = 3
 
 [node name="Damage" type="Label" parent="."]
@@ -168,7 +170,7 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 24
 text = "DAMAGED:"
 
-[node name="Effects" type="Node" parent="."]
+[node name="EffectsDE" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_xx66i")
 

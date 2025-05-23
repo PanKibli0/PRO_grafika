@@ -31,7 +31,7 @@ var tween: Tween = null
 
 
 func _ready():
-	%UnitStats.connect("S_effect_list", Callable($EffectList, "create_list"))
+	%UnitStats.connect("S_effect_list", Callable(%Effects, "create_list"))
 	
 	actual_amount = amount
 	actual_stats = stats.duplicate(true)
@@ -129,16 +129,26 @@ func death():
 func panel_view(flag:bool, right_corner:= false):
 	panelStats.visible = flag
 	panelStats.set_info(self)
-
+	
 	if right_corner:
 		panelStats.anchor_left = 1.0
 		panelStats.anchor_right = 1.0
 		panelStats.offset_left = -180
 		panelStats.offset_right = 0
+		
+		effects.anchor_left = 1.0
+		effects.anchor_right = 1.0
+		effects.offset_left = -180
+		effects.offset_right = 0
 	else:
 		panelStats.anchor_left = 0.0
 		panelStats.anchor_right = 0.0
 		panelStats.offset_left = 0
 		panelStats.offset_right = 180
+		
+		effects.anchor_left = 0.0
+		effects.anchor_right = 0.0
+		effects.offset_left = 0
+		effects.offset_right = 180
 		
 		

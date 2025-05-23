@@ -8,6 +8,7 @@ signal S_end_turn
 @onready var CAMERA =  %Camera
 
 
+var unit_panel: Unit = null
 var unit: Unit = null
 
 func _hover_input(event):
@@ -22,10 +23,6 @@ func _hover_input(event):
 	GRID.select_cell(cell)
 	
 	if id == GRID.cell_type.ENEMY:
-		unit = GRID.get_unit(cell)
-		unit.panel_view(true, true)
-
-		
 		var attack_direction = update_attack_direction(cell, event.position)
 		print_direction(attack_direction)
 		if attack_direction != Vector3.ZERO:
@@ -36,14 +33,9 @@ func _hover_input(event):
 				
 					
 	elif unit != null:
-		unit.panel_view(false)
 		direction.text = ""
 		
-	if id in [GRID.cell_type.INFO_ENEMY, GRID.cell_type.INFO_SELF]:
-		unit = GRID.get_unit(cell)
-		if unit:
-			unit.panel_view(true, true)
-
+	
 func print_direction(attack_direction: Vector3i):
 	match attack_direction:
 		Vector3i(-1, 0, 0):
@@ -100,7 +92,21 @@ func _input(event):
 	if event.is_action_pressed("LMB") and !BATTLE.active_unit.is_moving:
 		_click_input(event)
 		
+	if event.is_action_pressed("RMB"):
+		_click_info_input(event)
+		
 	
+func _click_info_input(event):
+	var r_cell = _get_cell_at_mouse_position(event.position)
+	if r_cell.is_empty(): return
+	var cell = r_cell[0]
+	unit = GRID.get_unit(cell)
+	if unit and unit != BATTLE.active_unit:
+		if unit_panel: unit_panel.panel_view(false)
+		
+		unit.panel_view(true, true)
+		unit_panel = unit
+
 func _raycast(mouse_position: Vector2) -> Dictionary:
 	var space_state = CAMERA.get_world_3d().direct_space_state
 	var from = CAMERA.project_ray_origin(mouse_position)

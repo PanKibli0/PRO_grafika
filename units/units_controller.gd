@@ -13,16 +13,16 @@ func _get_position(for_player: bool) -> Vector3:
 		var pos
 		
 		if for_player:
-			if position_left.z  > 10:
+			if position_left.z  > 9:
 				position_left.z = 0
-				position_left.x += 2
+				position_left.x += 1
 			pos = position_left
 			
 			position_left.z += 2
 		else:
-			if position_right.z > 10:
+			if position_right.z > 9:
 				position_right.z = 0
-				position_right.x -= 2
+				position_right.x -= 1
 			 
 			pos = position_right
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=13 format=3 uid="uid://gioqd05hgd0g"]
 
 [ext_resource type="Script" uid="uid://h4rds26ntm6g" path="res://battle.gd" id="1_ol6im"]
 [ext_resource type="Script" uid="uid://sqvwfmlbwexy" path="res://camera.gd" id="2_lcjiy"]
@@ -8,8 +8,6 @@
 [ext_resource type="Script" uid="uid://fkkqunly1lwo" path="res://grid.gd" id="5_dw4jg"]
 [ext_resource type="MeshLibrary" uid="uid://cocf8rjdcohc8" path="res://grid_mesh.tres" id="6_0npn6"]
 [ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/variants/knight.tres" id="7_b1i6x"]
-[ext_resource type="Resource" uid="uid://bs3x3pt3d36gx" path="res://units/variants/peasant.tres" id="7_sl0w2"]
-[ext_resource type="Resource" uid="uid://dqpijfwnnmhmb" path="res://units/variants/ARMORED.tres" id="8_elvfr"]
 [ext_resource type="Script" uid="uid://dxlkuybralhn1" path="res://debug.gd" id="9_lcjiy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0npn6"]
@@ -58,41 +56,6 @@ stats = ExtResource("7_b1i6x")
 player = false
 amount = 1
 stats = ExtResource("7_b1i6x")
-
-[node name="Unit13" parent="Units" instance=ExtResource("4_dw4jg")]
-player = false
-amount = 1
-stats = ExtResource("7_b1i6x")
-
-[node name="Unit14" parent="Units" instance=ExtResource("4_dw4jg")]
-player = false
-amount = 1
-stats = ExtResource("7_sl0w2")
-
-[node name="Unit15" parent="Units" instance=ExtResource("4_dw4jg")]
-player = false
-amount = 1
-stats = ExtResource("7_b1i6x")
-
-[node name="Unit16" parent="Units" instance=ExtResource("4_dw4jg")]
-player = false
-amount = 1
-stats = ExtResource("7_b1i6x")
-
-[node name="Unit17" parent="Units" instance=ExtResource("4_dw4jg")]
-player = false
-amount = 1
-stats = ExtResource("7_b1i6x")
-
-[node name="Unit18" parent="Units" instance=ExtResource("4_dw4jg")]
-player = false
-amount = 1
-stats = ExtResource("7_b1i6x")
-
-[node name="Unit19" parent="Units" instance=ExtResource("4_dw4jg")]
-player = false
-amount = 1
-stats = ExtResource("8_elvfr")
 
 [node name="Unit12" parent="Units" instance=ExtResource("4_dw4jg")]
 player = false
