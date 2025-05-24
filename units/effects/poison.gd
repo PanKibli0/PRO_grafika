@@ -1,23 +1,20 @@
 class_name EffectPoison
 extends Effect
 
-var value : int
+@export var value: int = 3
 
 
-func _init(v_value, dur=3):
+func _init(val = null, dur = null):
 	name = "Poison"
-	value = v_value 
-	description = "Deals [b]%d[/b] damage at the end of each turn." % value
-	duration = dur
-	
 	color_text = Color.LIGHT_GREEN
 	color_bg = Color.PURPLE
-	
-func on_turn_end(unit):
-	print(unit.actual_health)
-	unit.take_damage(value, true)
-	print(unit.actual_health)
-	print("DAMAGE")
-	
 
-	
+	if val != null: value = val
+	if dur != null: duration = dur
+
+	description = "Deals [b]%d[/b] damage at the end of each turn." % value
+
+
+func on_turn_end(unit):
+	unit.take_damage(value, true)
+	print("POISON")

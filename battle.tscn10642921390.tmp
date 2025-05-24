@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=13 format=3 uid="uid://gioqd05hgd0g"]
 
 [ext_resource type="Script" uid="uid://h4rds26ntm6g" path="res://battle.gd" id="1_ol6im"]
 [ext_resource type="Script" uid="uid://sqvwfmlbwexy" path="res://camera.gd" id="2_lcjiy"]
@@ -7,8 +7,6 @@
 [ext_resource type="Script" uid="uid://dp6upvyfg4eqi" path="res://mouse_controller.gd" id="4_i431l"]
 [ext_resource type="Script" uid="uid://fkkqunly1lwo" path="res://grid.gd" id="5_dw4jg"]
 [ext_resource type="MeshLibrary" uid="uid://cocf8rjdcohc8" path="res://grid_mesh.tres" id="6_0npn6"]
-[ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/variants/knight.tres" id="7_b1i6x"]
-[ext_resource type="Resource" uid="uid://bs3x3pt3d36gx" path="res://units/variants/peasant.tres" id="7_sl0w2"]
 [ext_resource type="Resource" uid="uid://dqpijfwnnmhmb" path="res://units/variants/ARMORED.tres" id="8_elvfr"]
 [ext_resource type="Script" uid="uid://dxlkuybralhn1" path="res://debug.gd" id="9_lcjiy"]
 
@@ -52,11 +50,7 @@ stats = ExtResource("8_elvfr")
 
 [node name="Unit3" parent="Units" instance=ExtResource("4_dw4jg")]
 amount = 15
-stats = ExtResource("7_b1i6x")
-
-[node name="Unit4" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 200
-stats = ExtResource("7_sl0w2")
+stats = ExtResource("8_elvfr")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true

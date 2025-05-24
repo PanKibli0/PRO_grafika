@@ -24,10 +24,16 @@ func _get_position(for_player: bool) -> Vector3:
 				position_right.z = 0
 				position_right.x -= 1
 			 
+			
+			
 			pos = position_right
 
-			print_rich()
 			position_right.z += 2
+			
+			
+		if pos.x % 2: 
+			pos.z += 1
+			print(pos)
 
 		if not GRID._is_cell_occupied(pos):
 			return GRID.local_to_map(pos)
@@ -78,7 +84,15 @@ func _compare_initiative(unit1: Node, unit2: Node):
 func _change_active_unit():
 	GRID.clear_grid()
 
+	if BATTLE.unit_panel:
+		BATTLE.unit_panel.panel_view(false)
+		BATTLE.unit_panel = null
+
 	if BATTLE.active_unit:
+		BATTLE.active_unit.panel_view(false)
+		BATTLE.active_unit.effects.visible = true
+		BATTLE.active_unit.effects.create_list()
+		
 		if BATTLE.active_unit.waited and BATTLE.active_unit.end_self_turn:
 			BATTLE.active_unit.end_self_turn = false
 		else:
@@ -86,7 +100,7 @@ func _change_active_unit():
 	
 	if BATTLE.active_unit and BATTLE.active_unit.end_self_turn: 
 		BATTLE.active_unit.effects.on_turn_end()
-		BATTLE.active_unit.panel_view(false)
+	
 	
 	
 	if active_unit_index == units_list.size()-1:
@@ -189,6 +203,7 @@ func _add_unit(DV: int = 0, player = true):
 		randi_range(1, 30),
 		randi_range(1, 20),
 		randi_range(1, 12),
+		[],
 		Color(randf(), randf(), randf())
 	)
 

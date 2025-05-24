@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c4we5ic1upvog" path="res://units/unit.gd" id="1_btf8p"]
 [ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="2_gxe1c"]
+[ext_resource type="Script" uid="uid://48arlb6fvnxm" path="res://units/effects/effect.gd" id="3_3nj72"]
 [ext_resource type="PackedScene" uid="uid://7k0iu38lngxu" path="res://unitStats/unit_stats.tscn" id="3_33c7x"]
-[ext_resource type="Script" uid="uid://c502txk62n1fe" path="res://units/effects.gd" id="3_xx66i"]
 [ext_resource type="Script" uid="uid://d16qvt06owy0l" path="res://units/effect_list.gd" id="4_33c7x"]
 
 [sub_resource type="Resource" id="Resource_xx66i"]
@@ -17,6 +17,7 @@ damage_max = 0
 ammo = 0
 initiative = 0
 movement = 0
+start_effects = Array[ExtResource("3_3nj72")]([])
 color = Color(0, 0, 0, 0.0117647)
 metadata/_custom_type_script = "uid://cukyhyanl175x"
 
@@ -125,7 +126,7 @@ visible = false
 custom_minimum_size = Vector2(0, 240)
 offset_left = 5.0
 offset_top = 250.0
-offset_right = 125.0
+offset_right = 167.0
 offset_bottom = 490.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_33c7x")
 horizontal_scroll_mode = 0
@@ -138,17 +139,40 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 
+[node name="SkillsList" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(145, 240)
+offset_left = 162.0
+offset_top = 5.0
+offset_right = 324.0
+offset_bottom = 245.0
+theme_override_constants/separation = 5
+
+[node name="DEBUG SKIIL" type="ColorRect" parent="SkillsList"]
+custom_minimum_size = Vector2(145, 80)
+layout_mode = 2
+
+[node name="DEBUG SKIIL2" type="ColorRect" parent="SkillsList"]
+custom_minimum_size = Vector2(145, 80)
+layout_mode = 2
+
+[node name="DEBUG SKIIL3" type="ColorRect" parent="SkillsList"]
+custom_minimum_size = Vector2(145, 80)
+layout_mode = 2
+
 [node name="Damage" type="Label" parent="."]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
+offset_left = -63.5
+offset_top = 34.0
+offset_right = 63.5
+offset_bottom = 68.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0.65022, 0.553229, 0, 1)
+theme_override_colors/font_color = Color(0.65098, 0.552941, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 24
@@ -164,14 +188,10 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0.65022, 0.553229, 0, 1)
+theme_override_colors/font_color = Color(0.87451, 0.454902, 0.509804, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 24
 text = "DAMAGED:"
-
-[node name="EffectsDE" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("3_xx66i")
 
 [node name="Skills" type="Node" parent="."]

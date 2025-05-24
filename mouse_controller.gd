@@ -8,7 +8,7 @@ signal S_end_turn
 @onready var CAMERA =  %Camera
 
 
-var unit_panel: Unit = null
+
 var unit: Unit = null
 
 func _hover_input(event):
@@ -93,19 +93,25 @@ func _input(event):
 		_click_input(event)
 		
 	if event.is_action_pressed("RMB"):
-		_click_info_input(event)
+		if not _click_info_input(event):
+			if BATTLE.unit_panel:
+				BATTLE.unit_panel.panel_view(false)
 		
 	
 func _click_info_input(event):
 	var r_cell = _get_cell_at_mouse_position(event.position)
-	if r_cell.is_empty(): return
+	if r_cell.is_empty(): return false
 	var cell = r_cell[0]
 	unit = GRID.get_unit(cell)
+	
 	if unit and unit != BATTLE.active_unit:
-		if unit_panel: unit_panel.panel_view(false)
+		if BATTLE.unit_panel: BATTLE.unit_panel.panel_view(false)
 		
 		unit.panel_view(true, true)
-		unit_panel = unit
+		BATTLE.unit_panel = unit
+		return true
+		
+	return false
 
 func _raycast(mouse_position: Vector2) -> Dictionary:
 	var space_state = CAMERA.get_world_3d().direct_space_state
@@ -160,19 +166,19 @@ func op_attack(cell: Vector3i, mouse_position: Vector2) -> bool:
 	var player_cell = GRID.local_to_map(BATTLE.active_unit.global_transform.origin)
 	var standing_direction = cell - player_cell
 
-
+	var damage_deal: int = 0
 	if standing_direction == -delta:
-		attacked_unit.calculate_attack()
+		damage_deal = attacked_unit.calculate_attack()
 	elif BATTLE.active_unit.actual_stats.ammo > 0 and BATTLE.active_unit.d_attack:
 		BATTLE.active_unit.actual_stats.ammo -= 1
-		attacked_unit.calculate_attack()
+		damage_deal = attacked_unit.calculate_attack(1, true)
 	elif GRID.get_cell_item(desired_cell) == GRID.cell_type.SELECT:
 		op_move(desired_cell)
-		attacked_unit.calculate_attack()
+		damage_deal = attacked_unit.calculate_attack()
 	else:
 		return false
 
-	attacked_unit.effects.on_attack(attacked_unit)
+	BATTLE.active_unit.effects.on_attack(damage_deal, attacked_unit)
 
 	return true
 

@@ -13,7 +13,6 @@ config_version=5
 config/name="game"
 run/main_scene="uid://gioqd05hgd0g"
 config/features=PackedStringArray("4.4", "Mobile")
-run/max_fps=40
 config/icon="res://icon.svg"
 
 [autoload]
