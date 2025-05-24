@@ -1,15 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://bq2ur7tssc2y3"]
+[gd_scene load_steps=17 format=3 uid="uid://bq2ur7tssc2y3"]
 
 [ext_resource type="Script" uid="uid://c4we5ic1upvog" path="res://units/unit.gd" id="1_btf8p"]
 [ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="2_gxe1c"]
 [ext_resource type="Script" uid="uid://48arlb6fvnxm" path="res://units/effects/effect.gd" id="3_3nj72"]
 [ext_resource type="PackedScene" uid="uid://7k0iu38lngxu" path="res://unitStats/unit_stats.tscn" id="3_33c7x"]
 [ext_resource type="Script" uid="uid://d16qvt06owy0l" path="res://units/effect_list.gd" id="4_33c7x"]
+[ext_resource type="Script" uid="uid://cd0ol43es7tbu" path="res://units/skills_list.gd" id="6_3nj72"]
+[ext_resource type="Script" uid="uid://c54xevjslibe5" path="res://units/button.gd" id="7_vtl0n"]
 
 [sub_resource type="Resource" id="Resource_xx66i"]
 script = ExtResource("2_gxe1c")
 name = "Unit Name"
-max_health = 0
+max_health = 1
 attack = 0
 defense = 0
 damage_min = 0
@@ -141,17 +143,26 @@ size_flags_vertical = 3
 
 [node name="SkillsList" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(145, 240)
 offset_left = 162.0
 offset_top = 5.0
 offset_right = 324.0
 offset_bottom = 245.0
 theme_override_constants/separation = 5
+script = ExtResource("6_3nj72")
 
-[node name="DEBUG SKIIL" type="ColorRect" parent="SkillsList"]
+[node name="FURY" type="ColorRect" parent="SkillsList"]
 custom_minimum_size = Vector2(145, 80)
 layout_mode = 2
+color = Color(0.799013, 0.420368, 0.414028, 1)
+
+[node name="Button" type="Button" parent="SkillsList/FURY"]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 80.0
+toggle_mode = true
+action_mode = 0
+script = ExtResource("7_vtl0n")
 
 [node name="DEBUG SKIIL2" type="ColorRect" parent="SkillsList"]
 custom_minimum_size = Vector2(145, 80)
@@ -195,3 +206,5 @@ theme_override_font_sizes/font_size = 24
 text = "DAMAGED:"
 
 [node name="Skills" type="Node" parent="."]
+
+[connection signal="pressed" from="SkillsList/FURY/Button" to="SkillsList/FURY/Button" method="_on_pressed"]

@@ -5,6 +5,7 @@ signal S_effect_list
 @onready var name_label = $VBoxContainer/Name
 @onready var amount_icon = $VBoxContainer/Amount/AmountIcon
 @onready var amount_label = $VBoxContainer/Amount/AmountLabel
+@onready var hp_bar = $VBoxContainer/HP/HPbar
 @onready var hp_label = $VBoxContainer/HP/HPbar/HPlabel
 @onready var attack_label = $"VBoxContainer/attack&defense/Attack"
 @onready var defense_label = $"VBoxContainer/attack&defense/Defense"
@@ -13,6 +14,7 @@ signal S_effect_list
 @onready var initiative_label = $"VBoxContainer/inititative&movement/Inititative"
 @onready var movement_label = $"VBoxContainer/inititative&movement/Movement"
 @onready var ammo_label = $"VBoxContainer/Ammo&ButtonEffects/Ammo"
+
 
 func _ready() -> void:
 	$"VBoxContainer/Ammo&ButtonEffects/Button".connect("pressed", func(): emit_signal("S_effect_list"))
@@ -24,7 +26,11 @@ func set_info(unit: Unit):
 	name_label.text = unit.actual_stats.name
 
 	amount_label.text = str(unit.actual_amount) + " / " + str(unit.amount)
+	
+	hp_bar.max_value = unit.actual_stats.max_health
+	hp_bar.value = unit.actual_health
 	hp_label.text = str(unit.actual_health) + " / " + str(unit.actual_stats.max_health)
+	
 	if unit.player:	
 		name_label.modulate = Color("00b3ff")
 		amount_icon.modulate = Color("00b3ff")
@@ -34,7 +40,7 @@ func set_info(unit: Unit):
 		amount_icon.modulate = Color(0.8,0,0)
 		amount_label.modulate = Color(0.8,0,0)
 		
-		
+	
 	_set_label_value(attack_label, unit.actual_stats.attack, unit.stats.attack)
 	_set_label_value(defense_label, unit.actual_stats.defense, unit.stats.defense)
 	_set_label_value(min_damage_label, unit.actual_stats.damage_min, unit.stats.damage_min)

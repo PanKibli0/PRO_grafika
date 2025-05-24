@@ -6,14 +6,14 @@
 [resource]
 script = ExtResource("1_068xi")
 name = "ARMORED"
-max_health = 1000
-attack = 0
-defense = 0
-damage_min = 100
-damage_max = 100
+max_health = 1
+attack = 1
+defense = 1
+damage_min = 1
+damage_max = 1
 ammo = 0
 initiative = 1
-movement = 12
+movement = 1
 start_effects = Array[ExtResource("2_fgt65")]([])
 color = Color(0.929412, 0, 0.45098, 0.941176)
 metadata/_custom_type_script = "uid://cukyhyanl175x"

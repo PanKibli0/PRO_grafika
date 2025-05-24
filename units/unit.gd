@@ -12,7 +12,7 @@ signal S_death
 
 @onready var amountLabel = %AmountLabel
 @onready var effects = %Effects
-@onready var skills = %SkillsList
+@onready var skillsList = %SkillsList
 
 @export var player: bool = true
 
@@ -35,7 +35,7 @@ var tween: Tween = null
 func _ready():
 	%UnitStats.connect("S_effect_list", Callable(%Effects, "create_list"))
 	
-	print(stats.start_effects)
+	
 	
 	for eff in stats.start_effects:
 		print(eff)
@@ -44,6 +44,12 @@ func _ready():
 	
 	actual_amount = amount
 	actual_stats = stats.duplicate(true)
+	actual_stats.ensure_positive_stats()
+	
+	print("=================================")
+	print(actual_stats)
+	print("=================================")
+	
 	actual_health = stats.max_health
 	d_attack = true if actual_stats.ammo > 0 else false
 	
@@ -131,7 +137,7 @@ func take_damage(damage: int, other_type := false):
 		
 	#effects.when_attacked(self, BATTLE.active_unit)
 	
-	await get_tree().create_timer(15).timeout
+	await get_tree().create_timer(1.5).timeout
 	damage_label.visible = false
 
 	
@@ -161,9 +167,8 @@ func heal(heal_amount: int, other_type := false):
 
 	if actual_health == 0:
 		actual_health = max_hp
-		# W heal nie odejmujemy actual_amount, więc nie zmieniamy actual_amount tutaj
-
-	# Ograniczamy actual_amount do max ilości jednostek w stacku
+		
+	
 	actual_amount = min(actual_amount, amount)
 
 	var revived = actual_amount - prev_actual_amount
@@ -175,7 +180,7 @@ func heal(heal_amount: int, other_type := false):
 	heal_label.visible = true
 	heal_label.text = "HEALED: %d | REVIVED: %d | Left hp: %d" % [heal_amount, max(revived, 0), actual_health]
 
-	await get_tree().create_timer(15).timeout
+	await get_tree().create_timer(1.5).timeout
 	heal_label.visible = false
 
 
@@ -199,10 +204,10 @@ func panel_view(flag:bool, right_corner:= false):
 		effects.offset_left = -167
 		effects.offset_right = 0
 
-		skills.anchor_left = 1.0
-		skills.anchor_right = 1.0
-		skills.offset_left = -339
-		skills.offset_right = -172
+		skillsList.anchor_left = 1.0
+		skillsList.anchor_right = 1.0
+		skillsList.offset_left = -339
+		skillsList.offset_right = -172
 	else:
 		panelStats.anchor_left = 0.0
 		panelStats.anchor_right = 0.0
@@ -214,7 +219,11 @@ func panel_view(flag:bool, right_corner:= false):
 		effects.offset_left = 0
 		effects.offset_right = 167
 
-		skills.anchor_left = 0.0
-		skills.anchor_right = 0.0
-		skills.offset_left = 167
-		skills.offset_right = 334
+		skillsList.anchor_left = 0.0
+		skillsList.anchor_right = 0.0
+		skillsList.offset_left = 167
+		skillsList.offset_right = 334
+
+
+func _on_button_pressed() -> void:
+	pass # Replace with function body.

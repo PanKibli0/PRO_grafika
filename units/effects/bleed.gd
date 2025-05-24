@@ -2,17 +2,18 @@ class_name EffectBleed
 extends Effect
 
 
-@export var value : int
+@export var value : int = 10
 
 
-func _init(v_value, dur=3):
+func _init(v_value = null, dur=null):
 	name = "Bleed"
-	value = v_value
-	description = "Deals [b]%d[/b] damage at the start of each turn." % value
-	duration = dur
+	if v_value != null: value = v_value
 	
-	color_text = Color.RED
-	color_bg = Color.INDIAN_RED
+	if dur != null: duration = dur
+	
+	description = "Deals [b]%d[/b] damage at the start of each turn." % value
+	color_text = Color.DARK_RED
+	color_bg = Color.PALE_VIOLET_RED
 	
 func on_turn_start(unit):
 	unit.take_damage(value, true)

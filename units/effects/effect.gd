@@ -23,7 +23,7 @@ func on_attack(damage_deal, unit, target = null):
 	print_rich("[color=yellow]on_attack:[/color] %s" % name)
 
 @warning_ignore("unused_parameter")
-func when_attacked(_unit, _target = null):
+func when_attacked(unit, target = null):
 	print_rich("[color=yellow]when_attacked:[/color] %s" % name)
 
 @warning_ignore("unused_parameter")

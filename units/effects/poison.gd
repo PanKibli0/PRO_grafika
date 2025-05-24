@@ -17,4 +17,3 @@ func _init(val = null, dur = null):
 
 func on_turn_end(unit):
 	unit.take_damage(value, true)
-	print("POISON")

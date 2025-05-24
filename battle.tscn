@@ -50,13 +50,13 @@ player = false
 amount = 15
 stats = ExtResource("8_elvfr")
 
-[node name="Unit3" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 15
-stats = ExtResource("7_b1i6x")
-
 [node name="Unit4" parent="Units" instance=ExtResource("4_dw4jg")]
 amount = 200
 stats = ExtResource("7_sl0w2")
+
+[node name="Unit5" parent="Units" instance=ExtResource("4_dw4jg")]
+amount = 200
+stats = ExtResource("7_b1i6x")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true

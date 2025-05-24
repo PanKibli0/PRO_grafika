@@ -92,6 +92,7 @@ func _change_active_unit():
 		BATTLE.active_unit.panel_view(false)
 		BATTLE.active_unit.effects.visible = true
 		BATTLE.active_unit.effects.create_list()
+		BATTLE.active_unit.actual_stats.ensure_positive_stats()
 		
 		if BATTLE.active_unit.waited and BATTLE.active_unit.end_self_turn:
 			BATTLE.active_unit.end_self_turn = false
@@ -100,6 +101,7 @@ func _change_active_unit():
 	
 	if BATTLE.active_unit and BATTLE.active_unit.end_self_turn: 
 		BATTLE.active_unit.effects.on_turn_end()
+		BATTLE.active_unit.actual_stats.ensure_positive_stats()
 	
 	
 	
@@ -116,7 +118,7 @@ func _change_active_unit():
 
 	if not BATTLE.active_unit.waited:
 		BATTLE.active_unit.effects.on_turn_start()
-	
+		BATTLE.active_unit.actual_stats.ensure_positive_stats()
 	
 	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin - Vector3(0.5,0,0.5))
 	GRID.draw_move(unit_position, BATTLE.active_unit.actual_stats.movement)	
@@ -140,6 +142,18 @@ func _input(event: InputEvent):
 		
 	if event.is_action_pressed("DISTANCE_CLOSE"):
 		_distance_close()
+		
+	if event.is_action_pressed("1"):
+		if BATTLE.active_unit.skillsList.skills.size() > 0:
+			BATTLE.active_unit.skillsList.skills[0].activate()
+	
+	if event.is_action_pressed("2"):
+		if BATTLE.active_unit.skillsList.skills.size() > 1:
+			BATTLE.active_unit.skillsList.skills[0].activate()
+		
+	if event.is_action_pressed("3"):
+		if BATTLE.active_unit.skillsList.skills.size() > 2:
+			BATTLE.active_unit.skillsList.skills[0].activate()
 	
 
 func _distance_close():
