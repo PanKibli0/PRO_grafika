@@ -8,6 +8,9 @@ var description: String = "DESC"
 var color_text = Color.WHITE
 var color_bg = Color.DIM_GRAY
 
+@warning_ignore("unused_parameter")
+func merge_with(other: Effect):
+	return false
 
 @warning_ignore("unused_parameter")
 func on_turn_start(unit):

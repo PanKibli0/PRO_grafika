@@ -47,7 +47,7 @@ script = ExtResource("4_6t8i5")
 
 [node name="Unit2" parent="Units" instance=ExtResource("4_dw4jg")]
 player = false
-amount = 15
+amount = 100000
 stats = ExtResource("8_elvfr")
 
 [node name="Unit4" parent="Units" instance=ExtResource("4_dw4jg")]

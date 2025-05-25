@@ -35,20 +35,11 @@ var tween: Tween = null
 func _ready():
 	%UnitStats.connect("S_effect_list", Callable(%Effects, "create_list"))
 	
-	
-	for eff in stats.start_effects:
-		effects.add_effect(eff)
-	
-	for sk in stats.skills:
-		skillsList.skills.append(sk)
-	
 	actual_amount = amount
 	actual_stats = stats.duplicate(true)
 	actual_stats.ensure_positive_stats()
 	
-	#print("=================================")
-	#print(actual_stats)
-	#print("=================================")
+	
 	
 	actual_health = stats.max_health
 	d_attack = true if actual_stats.ammo > 0 else false
@@ -56,6 +47,15 @@ func _ready():
 	amountLabel.text = str(actual_amount)
 	panelStats.set_info(self)
 	
+	for eff in stats.start_effects:
+		effects.add_effect(eff)
+	
+	for sk in stats.skills:
+		skillsList.skills.append(sk)
+	
+	#print("=================================")
+	#print(actual_stats)
+	#print("=================================")
 	
 	if model and model.get_active_material(0):
 		var material = model.get_active_material(0).duplicate()

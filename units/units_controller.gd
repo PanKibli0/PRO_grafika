@@ -92,6 +92,7 @@ func _change_active_unit():
 		GLOBAL.active_unit.effects.create_list()
 		GLOBAL.active_unit.skillsList.skills_list()
 		GLOBAL.active_unit.actual_stats.ensure_positive_stats()
+		GLOBAL.active_unit.skillsList.tick_cooldown()
 		
 		if GLOBAL.active_unit.waited and GLOBAL.active_unit.end_self_turn:
 			GLOBAL.active_unit.end_self_turn = false
@@ -142,17 +143,7 @@ func _input(event: InputEvent):
 	if event.is_action_pressed("DISTANCE_CLOSE"):
 		_distance_close()
 		
-	#if event.is_action_pressed("1"):
-		#if GLOBAL.active_unit.skillsList.skills.size() > 0:
-			#GLOBAL.active_unit.skillsList.skills[0].activate()
-	#
-	#if event.is_action_pressed("2"):
-		#if GLOBAL.active_unit.skillsList.skills.size() > 1:
-			#GLOBAL.active_unit.skillsList.skills[0].activate()
-		#
-	#if event.is_action_pressed("3"):
-		#if GLOBAL.active_unit.skillsList.skills.size() > 2:
-			#GLOBAL.active_unit.skillsList.skills[0].activate()
+	
 	
 
 func _distance_close():
@@ -227,3 +218,13 @@ func _add_unit(DV: int = 0, player = true):
 	add_child(unit)
 	
 	units_list.append(unit)
+
+
+func get_units(who):	
+	var list = []
+	
+	for unit in units_list:
+		if unit.player == who:
+			list.append(unit)
+			
+	return list

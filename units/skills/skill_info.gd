@@ -8,12 +8,13 @@ extends Control
 @onready var button = %Button
 
 var skill: Skill
+var active: bool 
 
-func setup(s) -> void:
-	if not s:
-		return
+func setup(s, v_active) -> void:
+	if not s: return
 	skill = s
-
+	active = v_active
+	
 	l_name.text = skill.name
 	l_name.modulate = skill.color_text
 
@@ -29,6 +30,9 @@ func setup(s) -> void:
 
 	button.disabled = skill.cant_use()
 
+	
+	if not active: return 
+	
 	if button.pressed.is_connected(try_activate):
 		button.pressed.disconnect(try_activate)
 
@@ -37,5 +41,7 @@ func setup(s) -> void:
 func try_activate() -> void:
 	if skill.cant_use(): return
 	skill.activate()
-	setup(skill)
 	button.disabled = true
+	if skill.uses != 0: setup(skill, active)
+	else: queue_free()
+	

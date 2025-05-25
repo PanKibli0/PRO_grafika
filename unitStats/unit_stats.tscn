@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://25tl511ewl2q" path="res://unitStats/initiative.png" id="5_bb7bv"]
 [ext_resource type="Texture2D" uid="uid://dh62lkfjpm078" path="res://unitStats/movement.png" id="6_0jcpq"]
 [ext_resource type="Texture2D" uid="uid://blih3sjerjofs" path="res://unitStats/ammo.png" id="7_ypn1u"]
-[ext_resource type="Script" uid="uid://cpoj2l0m150op" path="res://unitStats/button.gd" id="8_kwiap"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_880au"]
 bg_color = Color(0.984314, 0.117647, 0.0980392, 0.411765)
@@ -28,6 +27,21 @@ bg_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j3gde"]
 bg_color = Color(0.533333, 0.490196, 0.760784, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.356863, 0, 0.8, 1)
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ii6w7"]
+bg_color = Color(0.227512, 0.610217, 0.514017, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
@@ -245,15 +259,16 @@ vertical_alignment = 1
 
 [node name="Button" type="Button" parent="VBoxContainer/Ammo&ButtonEffects"]
 layout_mode = 2
+focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 14
 theme_override_styles/focus = SubResource("StyleBoxFlat_j3gde")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_j3gde")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_j3gde")
 theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_j3gde")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_j3gde")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_j3gde")
-theme_override_styles/hover = SubResource("StyleBoxFlat_j3gde")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ii6w7")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_ii6w7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ii6w7")
 theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_j3gde")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_j3gde")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_j3gde")
@@ -262,4 +277,3 @@ toggle_mode = true
 action_mode = 0
 text = "EFFECTS"
 text_direction = 3
-script = ExtResource("8_kwiap")

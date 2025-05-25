@@ -6,6 +6,7 @@ var effect_info = preload("res://units/effects/effect_info.tscn")
 
 var active_effects: Array[Effect] = []
 
+
 func create_list():
 	self.visible = !self.visible
 	if self.visible:
@@ -21,12 +22,18 @@ func create_list():
 
 
 func add_effect(effect: Effect):
+	for existing in active_effects:
+		if existing.name == effect.name:
+			if existing.merge_with(effect):
+				existing.on_apply(unit)
+			return
 	active_effects.append(effect)
 	effect.on_apply(unit)
 
 func remove_effect(effect: Effect):
 	effect.on_remove(unit)
 	active_effects.erase(effect)
+	unit.actual_stats.ensure_positive_stats()
 
 func _cleanup_expired(dead = false):
 	var to_remove: Array[Effect] = []

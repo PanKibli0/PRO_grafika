@@ -83,6 +83,12 @@ func _click_input(event):
 
 
 func _input(event):
+	if GLOBAL.active_skill:
+		print("WORK")
+		if event.is_action_pressed("LMB"):
+			_skill_input(event)
+			
+	
 	if event is InputEventMouseMotion:  
 		_hover_input(event)		
 		
@@ -93,6 +99,22 @@ func _input(event):
 		if not _click_info_input(event):
 			if GLOBAL.unit_panel:
 				GLOBAL.unit_panel.panel_view(false)
+				GLOBAL.unit_panel.skillsList.skills_list(false)
+				
+	
+		
+	
+func _skill_input(event):
+	print("WORK")
+	var r_cell = _get_cell_at_mouse_position(event.position)
+	if r_cell.is_empty(): return
+	var cell = r_cell[0]
+	var id = r_cell[1]
+
+	if id in [GLOBAL.GRID.cell_type.ENEMY, GLOBAL.GRID.cell_type.INFO_SELF]:
+		var target = GLOBAL.GRID.get_unit(cell)
+		if target:
+			GLOBAL.targets.append(target)
 		
 	
 func _click_info_input(event):
@@ -105,6 +127,7 @@ func _click_info_input(event):
 		if GLOBAL.unit_panel: GLOBAL.unit_panel.panel_view(false)
 		
 		unit.panel_view(true, true)
+		unit.skillsList.skills_list(false)
 		GLOBAL.unit_panel = unit
 		return true
 		

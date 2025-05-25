@@ -6,9 +6,14 @@ var def: float = 1.5
 var damage: int = 10
 var turns: int = 1
 
-func _calculate_var(unit = BATTLE.active_unit):
-	damage = max(1, unit.actual_amount * unit.actual_stats.attack / 10)
-	turns = max(1, unit.actual_amount / 20)
+func _calculate_var(unit = GLOBAL.active_unit):
+	if unit and unit.actual_stats:
+		damage = max(1, unit.actual_amount * unit.actual_stats.attack / 10)
+		turns = max(1, unit.actual_amount / 20)
+		
+		description = """Reduces own [b]ATTACK[/b] by [b]%d[/b].
+Applies a [b]CORRODE[/b] effect with [b]%s DEFENSE reduction[/b] and [b]%d damage[/b] for [b]%d[/b] turns.""" % [
+		attack, str(def), damage, turns]
 
 func _init(v_attack = null, v_def = null, dur = null):
 	name = "Broken Attack"
