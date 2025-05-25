@@ -15,12 +15,12 @@ metadata/_custom_type_script = "uid://bfuxi2u3hywqt"
 
 [resource]
 script = ExtResource("1_ms1d5")
-name = "Unit Name"
-max_health = 12
-attack = 17
-defense = 13
+name = "Angel"
+max_health = 50
+attack = 13
+defense = 30
 damage_min = 2
-damage_max = 12
+damage_max = 15
 ammo = 0
 initiative = 5
 movement = 7

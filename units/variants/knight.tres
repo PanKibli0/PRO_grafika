@@ -7,9 +7,9 @@
 [resource]
 script = ExtResource("1_g6a86")
 name = "Knight"
-max_health = 13
+max_health = 11
 attack = 10
-defense = 10
+defense = 9
 damage_min = 1
 damage_max = 7
 ammo = 0

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_l4t5v")
-name = "Unit Name"
+name = "HorseMan"
 max_health = 11
 attack = 14
 defense = 12

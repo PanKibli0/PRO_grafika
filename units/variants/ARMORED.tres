@@ -12,10 +12,10 @@ metadata/_custom_type_script = "uid://drx4w28v10jta"
 
 [resource]
 script = ExtResource("1_068xi")
-name = "ARMORED"
-max_health = 15
+name = "Armored"
+max_health = 10
 attack = 7
-defense = 15
+defense = 13
 damage_min = 1
 damage_max = 5
 ammo = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=17 format=3 uid="uid://gioqd05hgd0g"]
 
 [ext_resource type="Script" uid="uid://caodrrrn88q82" path="res://battle.gd" id="1_ol6im"]
 [ext_resource type="Script" uid="uid://sqvwfmlbwexy" path="res://camera.gd" id="2_lcjiy"]
@@ -9,8 +9,10 @@
 [ext_resource type="MeshLibrary" uid="uid://cocf8rjdcohc8" path="res://grid_mesh.tres" id="6_0npn6"]
 [ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/variants/knight.tres" id="7_b1i6x"]
 [ext_resource type="Resource" uid="uid://bs3x3pt3d36gx" path="res://units/variants/peasant.tres" id="7_sl0w2"]
+[ext_resource type="Resource" uid="uid://c8h6uw3e8inbh" path="res://units/variants/Angel.tres" id="8_4s0ev"]
 [ext_resource type="Resource" uid="uid://dqpijfwnnmhmb" path="res://units/variants/ARMORED.tres" id="8_elvfr"]
 [ext_resource type="Script" uid="uid://dxlkuybralhn1" path="res://debug.gd" id="9_lcjiy"]
+[ext_resource type="Resource" uid="uid://diacpu6j02erg" path="res://units/variants/BowMan.tres" id="9_pihy1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0npn6"]
 albedo_color = Color(0.454902, 0.172549, 0.0862745, 1)
@@ -45,18 +47,50 @@ script = ExtResource("4_i431l")
 unique_name_in_owner = true
 script = ExtResource("4_6t8i5")
 
-[node name="Unit2" parent="Units" instance=ExtResource("4_dw4jg")]
+[node name="Unit1" parent="Units" instance=ExtResource("4_dw4jg")]
 player = false
-amount = 100000
-stats = ExtResource("8_elvfr")
-
-[node name="Unit4" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 200
+amount = 65
 stats = ExtResource("7_sl0w2")
 
-[node name="Unit5" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 200
+[node name="Unit2" parent="Units" instance=ExtResource("4_dw4jg")]
+player = false
+amount = 35
 stats = ExtResource("7_b1i6x")
+
+[node name="Unit3" parent="Units" instance=ExtResource("4_dw4jg")]
+player = false
+amount = 7
+stats = ExtResource("8_4s0ev")
+
+[node name="Unit4" parent="Units" instance=ExtResource("4_dw4jg")]
+player = false
+amount = 40
+stats = ExtResource("9_pihy1")
+
+[node name="Unit5" parent="Units" instance=ExtResource("4_dw4jg")]
+player = false
+amount = 25
+stats = ExtResource("8_elvfr")
+
+[node name="Unit6" parent="Units" instance=ExtResource("4_dw4jg")]
+amount = 65
+stats = ExtResource("7_sl0w2")
+
+[node name="Unit7" parent="Units" instance=ExtResource("4_dw4jg")]
+amount = 35
+stats = ExtResource("7_b1i6x")
+
+[node name="Unit8" parent="Units" instance=ExtResource("4_dw4jg")]
+amount = 7
+stats = ExtResource("8_4s0ev")
+
+[node name="Unit9" parent="Units" instance=ExtResource("4_dw4jg")]
+amount = 40
+stats = ExtResource("9_pihy1")
+
+[node name="Unit10" parent="Units" instance=ExtResource("4_dw4jg")]
+amount = 25
+stats = ExtResource("8_elvfr")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true

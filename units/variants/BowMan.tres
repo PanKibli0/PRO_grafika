@@ -6,13 +6,13 @@
 
 [resource]
 script = ExtResource("1_qpjyb")
-name = "Unit Name"
-max_health = 6
-attack = 5
-defense = 3
+name = "BowMan"
+max_health = 5
+attack = 4
+defense = 2
 damage_min = 1
 damage_max = 6
-ammo = 5
+ammo = 3
 initiative = 4
 movement = 3
 start_effects = Array[ExtResource("3_t2eb7")]([])
