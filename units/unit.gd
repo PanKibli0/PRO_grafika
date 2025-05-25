@@ -39,8 +39,8 @@ func _ready():
 	for eff in stats.start_effects:
 		effects.add_effect(eff)
 	
-	#for sk in stats.skills:
-		#skillsList.skills.append(sk)
+	for sk in stats.skills:
+		skillsList.skills.append(sk)
 	
 	actual_amount = amount
 	actual_stats = stats.duplicate(true)
@@ -191,6 +191,7 @@ func heal(heal_amount: int, other_type := false):
 func panel_view(flag:bool, right_corner:= false):
 	panelStats.visible = flag
 	panelStats.set_info(self)
+	
 	
 	if right_corner:
 		

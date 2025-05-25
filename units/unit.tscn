@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://bq2ur7tssc2y3"]
+[gd_scene load_steps=17 format=3 uid="uid://bq2ur7tssc2y3"]
 
 [ext_resource type="Script" uid="uid://c4we5ic1upvog" path="res://units/unit.gd" id="1_btf8p"]
 [ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="2_gxe1c"]
 [ext_resource type="Script" uid="uid://48arlb6fvnxm" path="res://units/effects/effect.gd" id="3_3nj72"]
 [ext_resource type="PackedScene" uid="uid://7k0iu38lngxu" path="res://unitStats/unit_stats.tscn" id="3_33c7x"]
+[ext_resource type="Script" uid="uid://byykvb3ax4tv7" path="res://units/skills/skill.gd" id="3_vtl0n"]
 [ext_resource type="Script" uid="uid://d16qvt06owy0l" path="res://units/effects/effect_list.gd" id="4_33c7x"]
 [ext_resource type="Script" uid="uid://cd0ol43es7tbu" path="res://units/skills/skills_list.gd" id="6_3nj72"]
 
@@ -19,6 +20,7 @@ ammo = 0
 initiative = 0
 movement = 0
 start_effects = Array[ExtResource("3_3nj72")]([])
+skills = Array[ExtResource("3_vtl0n")]([])
 color = Color(0, 0, 0, 0.0117647)
 metadata/_custom_type_script = "uid://cukyhyanl175x"
 

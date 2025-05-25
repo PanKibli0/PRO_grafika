@@ -113,6 +113,7 @@ func _change_active_unit():
 	active_unit_index = (active_unit_index + 1) % units_list.size()
 	GLOBAL.active_unit = units_list[active_unit_index]
 	GLOBAL.active_unit.panel_view(true)
+	GLOBAL.active_unit.skillsList.skills_list()
 
 	if not GLOBAL.active_unit.waited:
 		GLOBAL.active_unit.effects.on_turn_start()
@@ -214,6 +215,7 @@ func _add_unit(DV: int = 0, player = true):
 		randi_range(1, 30),
 		randi_range(1, 20),
 		randi_range(1, 12),
+		[],
 		[],
 		Color(randf(), randf(), randf())
 	)
