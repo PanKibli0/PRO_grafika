@@ -36,19 +36,19 @@ func _ready():
 	%UnitStats.connect("S_effect_list", Callable(%Effects, "create_list"))
 	
 	
-	
 	for eff in stats.start_effects:
-		print(eff)
-		print_rich("[color=red]",eff.name,"[/color]")
 		effects.add_effect(eff)
+	
+	#for sk in stats.skills:
+		#skillsList.skills.append(sk)
 	
 	actual_amount = amount
 	actual_stats = stats.duplicate(true)
 	actual_stats.ensure_positive_stats()
 	
-	print("=================================")
-	print(actual_stats)
-	print("=================================")
+	#print("=================================")
+	#print(actual_stats)
+	#print("=================================")
 	
 	actual_health = stats.max_health
 	d_attack = true if actual_stats.ammo > 0 else false
@@ -92,7 +92,7 @@ func _movement_finished():
 
 	
 func calculate_attack(mod = 1, range_attack = false):
-	var enemy = BATTLE.active_unit
+	var enemy = GLOBAL.active_unit
 	var enemy_amount = enemy.actual_amount
 	var enemy_attack = enemy.actual_stats.attack
 	var damage = randi_range(enemy.actual_stats.damage_min, enemy.actual_stats.damage_max)
@@ -135,7 +135,7 @@ func take_damage(damage: int, other_type := false):
 	if actual_amount <= 0:
 		death()
 		
-	#effects.when_attacked(self, BATTLE.active_unit)
+	#effects.when_attacked(self, GLOBAL.active_unit)
 	
 	await get_tree().create_timer(1.5).timeout
 	damage_label.visible = false
@@ -223,7 +223,3 @@ func panel_view(flag:bool, right_corner:= false):
 		skillsList.anchor_right = 0.0
 		skillsList.offset_left = 167
 		skillsList.offset_right = 334
-
-
-func _on_button_pressed() -> void:
-	pass # Replace with function body.

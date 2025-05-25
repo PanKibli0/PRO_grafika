@@ -48,14 +48,14 @@ func draw_move(origin_cell: Vector3i, movement: int):
 
 
 func draw_all_enemies():
-	var player = BATTLE.active_unit.player
+	var player = GLOBAL.active_unit.player
 	for cell in occupied_cells.keys():
 		if occupied_cells[cell].player != player:
 			set_cell_item(cell,cell_type.ENEMY)
 		
 
 func draw_all_units():
-	var player = BATTLE.active_unit.player
+	var player = GLOBAL.active_unit.player
 	for cell in occupied_cells.keys():
 		if get_cell_item(cell) != -1: continue
 		if occupied_cells[cell].player != player:
@@ -65,7 +65,7 @@ func draw_all_units():
 			
 
 func enemy_next_to(unit_position):
-	var player = BATTLE.active_unit.player
+	var player = GLOBAL.active_unit.player
 	for i in [-1,1]:
 		for j in [-1,1]:
 			var check_cell = unit_position + Vector3i(i,0,j)
@@ -82,11 +82,11 @@ func clear_grid():
 	
 
 func _enemy_on_cell(cell: Vector3i):
-	if BATTLE.active_unit == null: return false
+	if GLOBAL.active_unit == null: return false
 	if not occupied_cells.has(cell): return false
 	var el = occupied_cells[cell]
 	if el is Unit:
-		if BATTLE.active_unit.player != el.player:
+		if GLOBAL.active_unit.player != el.player:
 			return true
 	return false
 

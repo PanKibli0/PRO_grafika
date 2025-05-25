@@ -17,10 +17,21 @@ func add_all_effects_to_unit(unit):
 
 
 func _ready() -> void:
+	
+	$"../Units/Unit5".skillsList.skills.append(SkillFury.new(3,2,5))
+	$"../Units/Unit4".skillsList.skills.append(SkillFury2.new(10,2,5))
+	#$"../Units/Unit5".skillsList.skills.append(SkillFury.new(3,2,5))
+	#$"../Units/Unit5".skillsList.skills.append(SkillFury.new(3,2,5))
+	$"../Units/Unit5".skillsList.skills_list()
+	return
+	
 	for d in %Units.get_children():
 		pass
 		d.skillsList.skills.append(SkillFury.new(3,2,5))
+		d.skillsList.skills_list()
 		print(d.skillsList.skills)
+		
+		
 		#add_all_effects_to_unit(d)
 		
 		#d.effects.add_effect(EffectPoison.new(10,3))

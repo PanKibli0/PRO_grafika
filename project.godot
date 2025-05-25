@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-BATTLE="*res://battle.gd"
+GLOBAL="*res://global.gd"
 
 [display]
 

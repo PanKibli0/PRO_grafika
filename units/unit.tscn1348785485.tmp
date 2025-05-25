@@ -142,13 +142,11 @@ size_flags_vertical = 3
 
 [node name="SkillsList" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(145, 240)
 offset_left = 162.0
 offset_top = 5.0
-offset_right = 307.0
+offset_right = 324.0
 offset_bottom = 245.0
-mouse_filter = 2
 theme_override_constants/separation = 5
 script = ExtResource("6_3nj72")
 

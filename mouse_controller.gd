@@ -3,10 +3,7 @@ extends Node
 signal S_end_turn
 
 @onready var direction = %Direction
-
-@onready var GRID = %Grid
 @onready var CAMERA =  %Camera
-
 
 
 var unit: Unit = null
@@ -20,16 +17,16 @@ func _hover_input(event):
 	var cell = r_cell[0]
 	var id = r_cell[1]
 	
-	GRID.select_cell(cell)
+	GLOBAL.GRID.select_cell(cell)
 	
-	if id == GRID.cell_type.ENEMY:
+	if id == GLOBAL.GRID.cell_type.ENEMY:
 		var attack_direction = update_attack_direction(cell, event.position)
 		print_direction(attack_direction)
 		if attack_direction != Vector3.ZERO:
 			var attack_move_cell = cell + attack_direction
 			if _can_attack_from_position(attack_move_cell):
-				GRID.select_cell(cell)
-				GRID.select_cell(attack_move_cell)
+				GLOBAL.GRID.select_cell(cell)
+				GLOBAL.GRID.select_cell(attack_move_cell)
 				
 					
 	elif unit != null:
@@ -61,12 +58,12 @@ func print_direction(attack_direction: Vector3i):
 func _can_attack_from_position(move_cell: Vector3i) -> bool:
 	
 	return (
-		GRID.get_cell_item(move_cell) in [GRID.cell_type.MOVE, GRID.cell_type.UNIT] and
-		(not GRID._is_cell_occupied(move_cell) or GRID.get_unit(move_cell) == BATTLE.active_unit) and
+		GLOBAL.GRID.get_cell_item(move_cell) in [GLOBAL.GRID.cell_type.MOVE, GLOBAL.GRID.cell_type.UNIT] and
+		(not GLOBAL.GRID._is_cell_occupied(move_cell) or GLOBAL.GRID.get_unit(move_cell) == GLOBAL.active_unit) and
 		(
-			move_cell == GRID.local_to_map(BATTLE.active_unit.global_transform.origin) or
-			not GRID._is_cell_occupied(move_cell) or
-			GRID.get_unit(move_cell) == BATTLE.active_unit
+			move_cell == GLOBAL.GRID.local_to_map(GLOBAL.active_unit.global_transform.origin) or
+			not GLOBAL.GRID._is_cell_occupied(move_cell) or
+			GLOBAL.GRID.get_unit(move_cell) == GLOBAL.active_unit
 		)
 	)
 
@@ -77,10 +74,10 @@ func _click_input(event):
 	var cell = r_cell[0]
 	var id = r_cell[1]
 
-	if id == GRID.cell_type.SELECT: 
+	if id == GLOBAL.GRID.cell_type.SELECT: 
 		op_move(cell)
 		emit_signal("S_end_turn")
-	elif id == GRID.cell_type.ENEMY:
+	elif id == GLOBAL.GRID.cell_type.ENEMY:
 		if op_attack(cell, event.position): 
 			emit_signal("S_end_turn")
 
@@ -89,26 +86,26 @@ func _input(event):
 	if event is InputEventMouseMotion:  
 		_hover_input(event)		
 		
-	if event.is_action_pressed("LMB") and !BATTLE.active_unit.is_moving:
+	if event.is_action_pressed("LMB") and !GLOBAL.active_unit.is_moving:
 		_click_input(event)
 		
 	if event.is_action_pressed("RMB"):
 		if not _click_info_input(event):
-			if BATTLE.unit_panel:
-				BATTLE.unit_panel.panel_view(false)
+			if GLOBAL.unit_panel:
+				GLOBAL.unit_panel.panel_view(false)
 		
 	
 func _click_info_input(event):
 	var r_cell = _get_cell_at_mouse_position(event.position)
 	if r_cell.is_empty(): return false
 	var cell = r_cell[0]
-	unit = GRID.get_unit(cell)
+	unit = GLOBAL.GRID.get_unit(cell)
 	
-	if unit and unit != BATTLE.active_unit:
-		if BATTLE.unit_panel: BATTLE.unit_panel.panel_view(false)
+	if unit and unit != GLOBAL.active_unit:
+		if GLOBAL.unit_panel: GLOBAL.unit_panel.panel_view(false)
 		
 		unit.panel_view(true, true)
-		BATTLE.unit_panel = unit
+		GLOBAL.unit_panel = unit
 		return true
 		
 	return false
@@ -123,7 +120,7 @@ func _raycast(mouse_position: Vector2) -> Dictionary:
 func _get_cell_at_mouse_position(mouse_position: Vector2) -> Array:
 	var result = _raycast(mouse_position)
 	if result.has("position"):
-		return [GRID.map_to_local(result.position), GRID.get_cell_item(result.position)]
+		return [GLOBAL.GRID.map_to_local(result.position), GLOBAL.GRID.get_cell_item(result.position)]
 	return []
 	
 func get_mouse_world_position(mouse_position: Vector2) -> Vector3:
@@ -134,21 +131,21 @@ func get_mouse_world_position(mouse_position: Vector2) -> Vector3:
 	return Vector3(-1,-1,-1)
 			
 func op_move(cell):
-	var world_pos = GRID.map_to_local(cell)
+	var world_pos = GLOBAL.GRID.map_to_local(cell)
 			
-	GRID.free_oc_cell(GRID.local_to_map(BATTLE.active_unit.global_transform.origin))
-	GRID.occupy_cell(cell, BATTLE.active_unit)
+	GLOBAL.GRID.free_oc_cell(GLOBAL.GRID.local_to_map(GLOBAL.active_unit.global_transform.origin))
+	GLOBAL.GRID.occupy_cell(cell, GLOBAL.active_unit)
 			
-	BATTLE.active_unit.move(world_pos)
+	GLOBAL.active_unit.move(world_pos)
 	
 
 func op_attack(cell: Vector3i, mouse_position: Vector2) -> bool:
-	var attacked_unit = GRID.get_unit(cell)
+	var attacked_unit = GLOBAL.GRID.get_unit(cell)
 	if attacked_unit == null: 
 		return false
 
 
-	var enemy_pos = GRID.map_to_local(cell)
+	var enemy_pos = GLOBAL.GRID.map_to_local(cell)
 	var mouse_world_pos = get_mouse_world_position(mouse_position)
 	if mouse_world_pos == Vector3(-1,-1,-1): return false
 	
@@ -163,28 +160,28 @@ func op_attack(cell: Vector3i, mouse_position: Vector2) -> bool:
 
 
 	var desired_cell = cell + delta
-	var player_cell = GRID.local_to_map(BATTLE.active_unit.global_transform.origin)
+	var player_cell = GLOBAL.GRID.local_to_map(GLOBAL.active_unit.global_transform.origin)
 	var standing_direction = cell - player_cell
 
 	var damage_deal: int = 0
 	if standing_direction == -delta:
 		damage_deal = attacked_unit.calculate_attack()
-	elif BATTLE.active_unit.actual_stats.ammo > 0 and BATTLE.active_unit.d_attack:
-		BATTLE.active_unit.actual_stats.ammo -= 1
+	elif GLOBAL.active_unit.actual_stats.ammo > 0 and GLOBAL.active_unit.d_attack:
+		GLOBAL.active_unit.actual_stats.ammo -= 1
 		damage_deal = attacked_unit.calculate_attack(1, true)
-	elif GRID.get_cell_item(desired_cell) == GRID.cell_type.SELECT:
+	elif GLOBAL.GRID.get_cell_item(desired_cell) == GLOBAL.GRID.cell_type.SELECT:
 		op_move(desired_cell)
 		damage_deal = attacked_unit.calculate_attack()
 	else:
 		return false
 
-	BATTLE.active_unit.effects.on_attack(damage_deal, attacked_unit)
+	GLOBAL.active_unit.effects.on_attack(damage_deal, attacked_unit)
 
 	return true
 
 
 func update_attack_direction(cell: Vector3i, mouse_position: Vector2) -> Vector3:
-	var enemy_pos = GRID.map_to_local(cell)
+	var enemy_pos = GLOBAL.GRID.map_to_local(cell)
 	var mouse_world_pos = get_mouse_world_position(mouse_position)
 	if mouse_world_pos == Vector3(-1,-1,-1): 
 		direction.text = ""

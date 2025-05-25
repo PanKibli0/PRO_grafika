@@ -2,7 +2,7 @@ extends ScrollContainer
 
 @onready var unit = $".."
 @onready var list = %List
-var effect_info = preload("res://units/effect_info.tscn")
+var effect_info = preload("res://units/effects/effect_info.tscn")
 
 var active_effects: Array[Effect] = []
 
@@ -41,24 +41,27 @@ func _cleanup_expired(dead = false):
 func on_turn_start():
 	for effect in active_effects:
 		effect.on_turn_start(unit)
+	unit.actual_stats.ensure_positive_stats()
 	_cleanup_expired()
 
 
 func on_turn_end():
 	for effect in active_effects:
 		effect.on_turn_end(unit)
-		print(effect.duration)
 		if effect.duration > 0:
 			effect.duration -= 1
+	unit.actual_stats.ensure_positive_stats()
 	_cleanup_expired()
 
 '''JHEZELI CIE ZAATAKUJE'''
 func on_attack(damage_deal,target = null): 
 	for effect in active_effects:
 		effect.on_attack(damage_deal, unit, target)
+	unit.actual_stats.ensure_positive_stats()
 	_cleanup_expired()
 	
 func when_attacked(target = null):
 	for effect in active_effects:
 		effect.when_attacked(unit, target)
+	unit.actual_stats.ensure_positive_stats()
 	_cleanup_expired()

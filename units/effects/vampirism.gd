@@ -14,6 +14,4 @@ func _init(v_value = null, dur=null):
 	
 
 func on_attack(damage_deal, unit, target = null):
-	print(damage_deal)
 	unit.heal(value*damage_deal, true)
-	print("VAMPIRE")

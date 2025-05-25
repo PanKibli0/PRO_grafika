@@ -1,6 +1,5 @@
 extends Node
 
-@onready var GRID = %Grid
 
 var active_unit_index = -1
 var units_list = []
@@ -33,35 +32,34 @@ func _get_position(for_player: bool) -> Vector3:
 			
 		if pos.x % 2: 
 			pos.z += 1
-			print(pos)
+			
 
-		if not GRID._is_cell_occupied(pos):
-			return GRID.local_to_map(pos)
+		if not GLOBAL.GRID._is_cell_occupied(pos):
+			return GLOBAL.GRID.local_to_map(pos)
 		
 	return Vector3(-1,-1,-1)
 		
 func _ready():
-	units_list = get_children()
-	
+	units_list = self.get_children()
+
+
 	#for i in range(6):
 		#_add_unit(i, i % 2 == 0)
 	
 
-	
-	
 	for unit in units_list:
 		unit.connect("S_death", Callable(self, "_unit_death").bind(unit))
-		unit.connect("S_death", Callable(GRID, "_unit_death").bind(unit))
+		unit.connect("S_death", Callable(GLOBAL.GRID, "_unit_death").bind(unit))
 		
 		
 		var r_pos: Vector3i
 		if unit.target_position != Vector3(-1, -1, -1):
-			r_pos = GRID.map_to_local(unit.target_position)
+			r_pos = GLOBAL.GRID.map_to_local(unit.target_position)
 		else: r_pos = _get_position(unit.player)
-		print(unit, r_pos)
 		
 		
-		var cell_pos = Vector3(GRID.local_to_map(r_pos)) + Vector3(0.5, 0, 0.5)
+		
+		var cell_pos = Vector3(GLOBAL.GRID.local_to_map(r_pos)) + Vector3(0.5, 0, 0.5)
 		
 		unit.global_transform.origin = Vector3(cell_pos)  
 		unit.target_position = cell_pos 
@@ -70,7 +68,7 @@ func _ready():
 		if unit.player: unit.look_at(Vector3(cell_pos.x + 1, cell_pos.y, cell_pos.z) )
 		else: unit.look_at(Vector3(cell_pos.x - 1, cell_pos.y, cell_pos.z))
 		
-		GRID.occupy_cell(r_pos, unit)
+		GLOBAL.GRID.occupy_cell(r_pos, unit)
 	
 	units_list.sort_custom(_compare_initiative)
 	print_rich("[color=red]", units_list, "[/color]")	
@@ -82,27 +80,27 @@ func _compare_initiative(unit1: Node, unit2: Node):
 
 	
 func _change_active_unit():
-	GRID.clear_grid()
+	GLOBAL.GRID.clear_grid()
 
-	if BATTLE.unit_panel:
-		BATTLE.unit_panel.panel_view(false)
-		BATTLE.unit_panel = null
+	if GLOBAL.unit_panel:
+		GLOBAL.unit_panel.panel_view(false)
+		GLOBAL.unit_panel = null
 
-	if BATTLE.active_unit:
-		BATTLE.active_unit.panel_view(false)
-		BATTLE.active_unit.effects.visible = true
-		BATTLE.active_unit.effects.create_list()
-		BATTLE.active_unit.actual_stats.ensure_positive_stats()
+	if GLOBAL.active_unit:
+		GLOBAL.active_unit.panel_view(false)
+		GLOBAL.active_unit.effects.visible = true
+		GLOBAL.active_unit.effects.create_list()
+		GLOBAL.active_unit.skillsList.skills_list()
+		GLOBAL.active_unit.actual_stats.ensure_positive_stats()
 		
-		if BATTLE.active_unit.waited and BATTLE.active_unit.end_self_turn:
-			BATTLE.active_unit.end_self_turn = false
+		if GLOBAL.active_unit.waited and GLOBAL.active_unit.end_self_turn:
+			GLOBAL.active_unit.end_self_turn = false
 		else:
-			BATTLE.active_unit.end_self_turn = true
+			GLOBAL.active_unit.end_self_turn = true
 	
-	if BATTLE.active_unit and BATTLE.active_unit.end_self_turn: 
-		BATTLE.active_unit.effects.on_turn_end()
-		BATTLE.active_unit.actual_stats.ensure_positive_stats()
-	
+	if GLOBAL.active_unit and GLOBAL.active_unit.end_self_turn: 
+		GLOBAL.active_unit.effects.on_turn_end()
+		GLOBAL.active_unit.actual_stats.ensure_positive_stats()
 	
 	
 	if active_unit_index == units_list.size()-1:
@@ -113,25 +111,25 @@ func _change_active_unit():
 	
 	'''ZMIANA GRACZA'''
 	active_unit_index = (active_unit_index + 1) % units_list.size()
-	BATTLE.active_unit = units_list[active_unit_index]
-	BATTLE.active_unit.panel_view(true)
+	GLOBAL.active_unit = units_list[active_unit_index]
+	GLOBAL.active_unit.panel_view(true)
 
-	if not BATTLE.active_unit.waited:
-		BATTLE.active_unit.effects.on_turn_start()
-		BATTLE.active_unit.actual_stats.ensure_positive_stats()
+	if not GLOBAL.active_unit.waited:
+		GLOBAL.active_unit.effects.on_turn_start()
+		GLOBAL.active_unit.actual_stats.ensure_positive_stats()
 	
-	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin - Vector3(0.5,0,0.5))
-	GRID.draw_move(unit_position, BATTLE.active_unit.actual_stats.movement)	
-	if BATTLE.active_unit.actual_stats.ammo > 0: 
-		BATTLE.active_unit.d_attack = true
+	var unit_position = GLOBAL.GRID.local_to_map(GLOBAL.active_unit.global_transform.origin - Vector3(0.5,0,0.5))
+	GLOBAL.GRID.draw_move(unit_position, GLOBAL.active_unit.actual_stats.movement)	
+	if GLOBAL.active_unit.actual_stats.ammo > 0: 
+		GLOBAL.active_unit.d_attack = true
 		%Distance.text = "DALEKO"
 		_distance_unit(unit_position)
 		
-	GRID.draw_all_units()
+	GLOBAL.GRID.draw_all_units()
 
 func _distance_unit(unit_position):
-	if BATTLE.active_unit.d_attack and not GRID.enemy_next_to(unit_position): 	
-		GRID.draw_all_enemies()
+	if GLOBAL.active_unit.d_attack and not GLOBAL.GRID.enemy_next_to(unit_position): 	
+		GLOBAL.GRID.draw_all_enemies()
 
 func _input(event: InputEvent):	
 	if event.is_action_pressed("DEFENSE"):
@@ -143,37 +141,36 @@ func _input(event: InputEvent):
 	if event.is_action_pressed("DISTANCE_CLOSE"):
 		_distance_close()
 		
-	if event.is_action_pressed("1"):
-		if BATTLE.active_unit.skillsList.skills.size() > 0:
-			BATTLE.active_unit.skillsList.skills[0].activate()
-	
-	if event.is_action_pressed("2"):
-		if BATTLE.active_unit.skillsList.skills.size() > 1:
-			BATTLE.active_unit.skillsList.skills[0].activate()
-		
-	if event.is_action_pressed("3"):
-		if BATTLE.active_unit.skillsList.skills.size() > 2:
-			BATTLE.active_unit.skillsList.skills[0].activate()
+	#if event.is_action_pressed("1"):
+		#if GLOBAL.active_unit.skillsList.skills.size() > 0:
+			#GLOBAL.active_unit.skillsList.skills[0].activate()
+	#
+	#if event.is_action_pressed("2"):
+		#if GLOBAL.active_unit.skillsList.skills.size() > 1:
+			#GLOBAL.active_unit.skillsList.skills[0].activate()
+		#
+	#if event.is_action_pressed("3"):
+		#if GLOBAL.active_unit.skillsList.skills.size() > 2:
+			#GLOBAL.active_unit.skillsList.skills[0].activate()
 	
 
 func _distance_close():
-	if BATTLE.active_unit.actual_stats.ammo <=0: return
-	BATTLE.active_unit.d_attack = !BATTLE.active_unit.d_attack
-	print(BATTLE.active_unit.d_attack)
-	%Distance.text = "DALEKO" if BATTLE.active_unit.d_attack else "BLISKO" 
+	if GLOBAL.active_unit.actual_stats.ammo <=0: return
+	GLOBAL.active_unit.d_attack = !GLOBAL.active_unit.d_attack
+	%Distance.text = "DALEKO" if GLOBAL.active_unit.d_attack else "BLISKO" 
 	
-	GRID.clear_grid()
-	var unit_position = GRID.local_to_map(BATTLE.active_unit.global_transform.origin - Vector3(0.5,0,0.5))
-	GRID.draw_move(unit_position, BATTLE.active_unit.actual_stats.movement)	
-	GRID.draw_all_units()
+	GLOBAL.GRID.clear_grid()
+	var unit_position = GLOBAL.GRID.local_to_map(GLOBAL.active_unit.global_transform.origin - Vector3(0.5,0,0.5))
+	GLOBAL.GRID.draw_move(unit_position, GLOBAL.active_unit.actual_stats.movement)	
+	GLOBAL.GRID.draw_all_units()
 	_distance_unit(unit_position)
 
 
 func _unit_wait():
-	if BATTLE.active_unit.waited: return
-	BATTLE.active_unit.waited = true
+	if GLOBAL.active_unit.waited: return
+	GLOBAL.active_unit.waited = true
 	units_list.remove_at(active_unit_index)
-	units_list.append(BATTLE.active_unit)
+	units_list.append(GLOBAL.active_unit)
 	
 	active_unit_index = active_unit_index-1
 

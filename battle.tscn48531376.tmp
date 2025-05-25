@@ -100,5 +100,3 @@ text = "BLISKO"
 
 [node name="debug" type="Node" parent="."]
 script = ExtResource("9_lcjiy")
-
-[connection signal="S_end_turn" from="Camera/MouseController" to="Units" method="_change_active_unit"]

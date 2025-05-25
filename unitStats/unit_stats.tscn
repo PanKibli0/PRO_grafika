@@ -245,6 +245,7 @@ vertical_alignment = 1
 
 [node name="Button" type="Button" parent="VBoxContainer/Ammo&ButtonEffects"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 14
 theme_override_styles/focus = SubResource("StyleBoxFlat_j3gde")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_j3gde")

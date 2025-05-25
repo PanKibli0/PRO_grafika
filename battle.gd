@@ -1,4 +1,6 @@
 extends Node3D
 
-var active_unit: Unit
-var unit_panel: Unit = null
+func _enter_tree():
+	GLOBAL.MOUSE_CONTROLLER = $Camera/MouseController
+	GLOBAL.GRID = $Grid
+	GLOBAL.UNITS = $Units
