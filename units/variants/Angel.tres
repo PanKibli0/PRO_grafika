@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=6 format=3 uid="uid://c8h6uw3e8inbh"]
+
+[ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="1_ms1d5"]
+[ext_resource type="Script" uid="uid://byykvb3ax4tv7" path="res://units/skills/skill.gd" id="2_bsxuf"]
+[ext_resource type="Script" uid="uid://48arlb6fvnxm" path="res://units/effects/effect.gd" id="3_87kff"]
+[ext_resource type="Script" uid="uid://bfuxi2u3hywqt" path="res://units/skills/massive_heal.gd" id="3_bsxuf"]
+
+[sub_resource type="Resource" id="Resource_87kff"]
+script = ExtResource("3_bsxuf")
+power = 100
+cooldown = 5
+actual_cooldown = 0
+uses = -10
+metadata/_custom_type_script = "uid://bfuxi2u3hywqt"
+
+[resource]
+script = ExtResource("1_ms1d5")
+name = "Unit Name"
+max_health = 12
+attack = 17
+defense = 13
+damage_min = 2
+damage_max = 12
+ammo = 0
+initiative = 5
+movement = 7
+start_effects = Array[ExtResource("3_87kff")]([])
+skills = Array[ExtResource("2_bsxuf")]([SubResource("Resource_87kff")])
+color = Color(1, 1, 1, 1)
+metadata/_custom_type_script = "uid://cukyhyanl175x"

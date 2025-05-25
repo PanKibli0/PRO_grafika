@@ -1,31 +1,21 @@
-[gd_resource type="Resource" script_class="UnitStats" load_steps=6 format=3 uid="uid://colnyx772mev4"]
+[gd_resource type="Resource" script_class="UnitStats" load_steps=4 format=3 uid="uid://colnyx772mev4"]
 
 [ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="1_g6a86"]
 [ext_resource type="Script" uid="uid://byykvb3ax4tv7" path="res://units/skills/skill.gd" id="2_q103p"]
 [ext_resource type="Script" uid="uid://48arlb6fvnxm" path="res://units/effects/effect.gd" id="2_td2c7"]
-[ext_resource type="Script" uid="uid://dqlettfb4a0xq" path="res://units/skills/poison.gd" id="3_q103p"]
-
-[sub_resource type="Resource" id="Resource_8ma13"]
-script = ExtResource("3_q103p")
-power = 2
-duration = 2
-cooldown = 5
-actual_cooldown = 0
-uses = -10
-metadata/_custom_type_script = "uid://dqlettfb4a0xq"
 
 [resource]
 script = ExtResource("1_g6a86")
 name = "Knight"
-max_health = 1
-attack = 1
-defense = 1
-damage_min = 100
-damage_max = 100
+max_health = 13
+attack = 10
+defense = 10
+damage_min = 1
+damage_max = 7
 ammo = 0
-initiative = 100
-movement = 12
+initiative = 6
+movement = 5
 start_effects = Array[ExtResource("2_td2c7")]([])
-skills = Array[ExtResource("2_q103p")]([SubResource("Resource_8ma13")])
-color = Color(0, 0, 0, 1)
+skills = Array[ExtResource("2_q103p")]([])
+color = Color(0.14, 0.138507, 0.1344, 1)
 metadata/_custom_type_script = "uid://cukyhyanl175x"

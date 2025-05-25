@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=4 format=3 uid="uid://cnitx7smlm13b"]
+
+[ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="1_l4t5v"]
+[ext_resource type="Script" uid="uid://byykvb3ax4tv7" path="res://units/skills/skill.gd" id="2_a0nhw"]
+[ext_resource type="Script" uid="uid://48arlb6fvnxm" path="res://units/effects/effect.gd" id="3_3f0bx"]
+
+[resource]
+script = ExtResource("1_l4t5v")
+name = "Unit Name"
+max_health = 11
+attack = 14
+defense = 12
+damage_min = 1
+damage_max = 9
+ammo = 0
+initiative = 8
+movement = 9
+start_effects = Array[ExtResource("3_3f0bx")]([])
+skills = Array[ExtResource("2_a0nhw")]([])
+color = Color(0.211765, 0, 0, 1)
+metadata/_custom_type_script = "uid://cukyhyanl175x"
