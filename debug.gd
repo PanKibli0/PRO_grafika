@@ -11,9 +11,11 @@ func add_all_effects_to_unit(unit):
 			var script = load(path + "/" + file_name)
 			if script != null:
 				var effect = script.new()
-				unit.effects.add_effect(effect)
+				if effect is Effect:
+					unit.effects.add_effect(effect)
 		file_name = dir.get_next()
 	dir.list_dir_end()
+
 
 
 func _ready() -> void:
@@ -23,16 +25,16 @@ func _ready() -> void:
 	#$"../Units/Unit5".skillsList.skills.append(SkillFury.new(3,2,5))
 	#$"../Units/Unit5".skillsList.skills.append(SkillFury.new(3,2,5))
 	#$"../Units/Unit5".skillsList.skills_list()
-	return
+	#return
 	
 	for d in %Units.get_children():
 		pass
-		d.skillsList.skills.append(SkillFury.new(3,2,5))
+		#d.skillsList.skills.append(SkillFury.new(3,2,5))
 		#d.skillsList.skills_list()
-		print(d.skillsList.skills)
+		#print(d.skillsList.skills)
 		
 		
-		#add_all_effects_to_unit(d)
+		add_all_effects_to_unit(d)
 		
 		#d.effects.add_effect(EffectPoison.new(10,3))
 		#d.effects.add_effect(EffectFury.new(1.5,3))

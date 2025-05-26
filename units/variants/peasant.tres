@@ -1,15 +1,8 @@
-[gd_resource type="Resource" script_class="UnitStats" load_steps=6 format=3 uid="uid://bs3x3pt3d36gx"]
+[gd_resource type="Resource" script_class="UnitStats" load_steps=4 format=3 uid="uid://bs3x3pt3d36gx"]
 
 [ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="1_8fl73"]
 [ext_resource type="Script" uid="uid://48arlb6fvnxm" path="res://units/effects/effect.gd" id="2_3we7r"]
 [ext_resource type="Script" uid="uid://byykvb3ax4tv7" path="res://units/skills/skill.gd" id="2_f4lrg"]
-[ext_resource type="Script" uid="uid://dgojow27bsybp" path="res://units/effects/poison.gd" id="3_3we7r"]
-
-[sub_resource type="Resource" id="Resource_f4lrg"]
-script = ExtResource("3_3we7r")
-value = 100
-duration = 10
-metadata/_custom_type_script = "uid://dgojow27bsybp"
 
 [resource]
 script = ExtResource("1_8fl73")
@@ -22,7 +15,7 @@ damage_max = 4
 ammo = 0
 initiative = 5
 movement = 3
-start_effects = Array[ExtResource("2_3we7r")]([SubResource("Resource_f4lrg")])
+start_effects = Array[ExtResource("2_3we7r")]([])
 skills = Array[ExtResource("2_f4lrg")]([])
 color = Color(1.3236e-07, 0.351551, 3.85046e-07, 1)
 metadata/_custom_type_script = "uid://cukyhyanl175x"
