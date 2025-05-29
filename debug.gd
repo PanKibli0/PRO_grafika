@@ -29,12 +29,15 @@ func _ready() -> void:
 	
 	for d in %Units.get_children():
 		pass
+		
+		add_all_effects_to_unit(d)
+		
 		#d.skillsList.skills.append(SkillFury.new(3,2,5))
 		#d.skillsList.skills_list()
 		#print(d.skillsList.skills)
 		
 		
-		add_all_effects_to_unit(d)
+		
 		
 		#d.effects.add_effect(EffectPoison.new(10,3))
 		#d.effects.add_effect(EffectFury.new(1.5,3))
