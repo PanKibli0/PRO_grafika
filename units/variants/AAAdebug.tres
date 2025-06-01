@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=4 format=3 uid="uid://ls26jp4eljiy"]
+
+[ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="1_cugnn"]
+[ext_resource type="Script" uid="uid://byykvb3ax4tv7" path="res://units/skills/skill.gd" id="2_yg0xx"]
+[ext_resource type="Script" uid="uid://48arlb6fvnxm" path="res://units/effects/effect.gd" id="4_76pwo"]
+
+[resource]
+script = ExtResource("1_cugnn")
+name = "DEBUG"
+max_health = 1000
+attack = 6
+defense = 7
+damage_min = 1
+damage_max = 4
+ammo = 0
+initiative = 5
+movement = 3
+start_effects = Array[ExtResource("4_76pwo")]([])
+skills = Array[ExtResource("2_yg0xx")]([])
+color = Color(0.803705, 0, 0.314836, 1)
+metadata/_custom_type_script = "uid://cukyhyanl175x"

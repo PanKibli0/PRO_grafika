@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=18 format=3 uid="uid://gioqd05hgd0g"]
 
 [ext_resource type="Script" uid="uid://caodrrrn88q82" path="res://battle.gd" id="1_ol6im"]
 [ext_resource type="Script" uid="uid://sqvwfmlbwexy" path="res://camera.gd" id="2_lcjiy"]
@@ -26,11 +26,6 @@ center_offset = Vector3(7, 0, 6)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ol6im"]
 data = PackedVector3Array(14, 0, 11.5, 0, 0, 11.5, 14, 0, 0.5, 0, 0, 11.5, 0, 0, 0.5, 14, 0, 0.5)
 
-[sub_resource type="LabelSettings" id="LabelSettings_4s0ev"]
-font_size = 200
-outline_size = 30
-outline_color = Color(0, 0, 0, 1)
-
 [node name="Battle" type="Node3D"]
 script = ExtResource("1_ol6im")
 
@@ -54,21 +49,11 @@ unique_name_in_owner = true
 script = ExtResource("4_6t8i5")
 
 [node name="Unit2" parent="Units" instance=ExtResource("4_dw4jg")]
-player = false
 amount = 35
 stats = ExtResource("9_pihy1")
-target_position = Vector3(0, 0, 3)
 
 [node name="Unit3" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 1
-stats = ExtResource("7_4s0ev")
-
-[node name="Unit4" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 1
-stats = ExtResource("7_4s0ev")
-
-[node name="Unit5" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 1
+amount = 35
 stats = ExtResource("7_4s0ev")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
@@ -110,23 +95,6 @@ offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
 text = "BLISKO"
-
-[node name="END" type="Label" parent="."]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "PLAYER WIN!"
-label_settings = SubResource("LabelSettings_4s0ev")
 
 [node name="debug" type="Node" parent="."]
 script = ExtResource("9_lcjiy")

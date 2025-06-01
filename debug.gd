@@ -25,7 +25,7 @@ func _ready() -> void:
 	#$"../Units/Unit5".skillsList.skills.append(SkillFury.new(3,2,5))
 	#$"../Units/Unit5".skillsList.skills.append(SkillFury.new(3,2,5))
 	#$"../Units/Unit5".skillsList.skills_list()
-	#return
+	return
 	
 	for d in %Units.get_children():
 		pass

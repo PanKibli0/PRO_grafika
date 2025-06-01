@@ -53,9 +53,6 @@ func _ready():
 	for sk in stats.skills:
 		skillsList.skills.append(sk)
 	
-	#print("=================================")
-	#print(actual_stats)
-	#print("=================================")
 	
 	if model and model.get_active_material(0):
 		var material = model.get_active_material(0).duplicate()
@@ -194,7 +191,6 @@ func panel_view(flag:bool, right_corner:= false):
 	
 	
 	if right_corner:
-		
 		panelStats.anchor_left = 1.0
 		panelStats.anchor_right = 1.0
 		panelStats.offset_left = -167

@@ -24,4 +24,4 @@ func activate() -> void:
 	for unit in GLOBAL.UNITS.get_units(GLOBAL.active_unit.player):
 		unit.heal(power)
 	
-	GLOBAL.UNITS._change_active_unit()
+	GLOBAL.UNITS.change_active_unit()

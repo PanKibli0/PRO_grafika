@@ -13,5 +13,5 @@ func _init(v_value = null, dur=null):
 	color_bg = Color.DARK_RED
 	
 
-func on_attack(damage_deal, unit, target = null):
+func on_attack(damage_deal, unit, _target = null):
 	unit.heal(value*damage_deal, true)

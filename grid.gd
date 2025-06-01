@@ -52,7 +52,12 @@ func draw_all_enemies():
 	for cell in occupied_cells.keys():
 		if occupied_cells[cell].player != player:
 			set_cell_item(cell,cell_type.ENEMY)
-		
+
+func draw_all_allies():
+	var player = GLOBAL.active_unit.player
+	for cell in occupied_cells.keys():
+		if occupied_cells[cell].player == player:
+			set_cell_item(cell,cell_type.INFO_SELF)	
 
 func draw_all_units():
 	var player = GLOBAL.active_unit.player

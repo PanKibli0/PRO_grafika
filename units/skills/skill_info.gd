@@ -7,6 +7,8 @@ extends Control
 @onready var background = %Background
 @onready var button = %Button
 
+@onready var lines = [%Line, %Line2]
+
 var skill: Skill
 var active: bool 
 
@@ -31,7 +33,13 @@ func setup(s, v_active) -> void:
 	button.disabled = skill.cant_use()
 
 	
-	if not active: return 
+	if not active: 
+		for l in lines:
+			l.visible = true
+		return 
+	else:
+		for l in lines:
+			l.visible = false
 	
 	if button.pressed.is_connected(try_activate):
 		button.pressed.disconnect(try_activate)

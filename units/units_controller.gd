@@ -72,14 +72,14 @@ func _ready():
 	
 	units_list.sort_custom(_compare_initiative)
 	print_rich("[color=red]", units_list, "[/color]")	
-	_change_active_unit()
+	change_active_unit()
 
 	
 func _compare_initiative(unit1: Node, unit2: Node):
 	return unit1.actual_stats.initiative > unit2.actual_stats.initiative
 
 	
-func _change_active_unit():
+func change_active_unit():
 	GLOBAL.GRID.clear_grid()
 
 	if GLOBAL.unit_panel:
@@ -135,7 +135,8 @@ func _distance_unit(unit_position):
 
 func _input(event: InputEvent):	
 	if event.is_action_pressed("DEFENSE"):
-		_change_active_unit()
+		GLOBAL.active_unit.effects.add_effect(EffectDefenseTurn.new())
+		change_active_unit()
 	
 	if event.is_action_pressed("WAIT"):
 		_unit_wait()
@@ -166,7 +167,7 @@ func _unit_wait():
 	
 	active_unit_index = active_unit_index-1
 
-	_change_active_unit()
+	change_active_unit()
 
 
 func _unit_death(unit):
@@ -174,8 +175,8 @@ func _unit_death(unit):
 	_end_game()
 
 func _end_game():
-	return
-	@warning_ignore("unreachable_code")
+	#return
+	
 	var player_count = 0
 	var enemy_count = 0
 
@@ -185,11 +186,21 @@ func _end_game():
 
 	if player_count == units_list.size():
 		print_rich("[color=#1984c0]PLAYER WIN![/color]")
+		%END.visible = true
+		%END.text = "PLAYER WIN!"
+		%END.modulate = Color("1984c0")
 	elif enemy_count == units_list.size():
 		print_rich("[color=#FF0000]ENEMY WIN![/color]")
+		%END.visible = true
+		%END.text = "ENEMY WIN!"
+		%END.modulate = Color("FF0000")
 	else:
 		return
-
+	
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)  
+	set_process_input(true)
+	
+	await get_tree().create_timer(3.0).timeout
 	get_tree().quit()
 
 
@@ -228,3 +239,4 @@ func get_units(who):
 			list.append(unit)
 			
 	return list
+	
