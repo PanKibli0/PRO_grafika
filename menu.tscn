@@ -1,0 +1,95 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkh3k2tecvn55"]
+
+[ext_resource type="Script" uid="uid://cdvbpvwukptbb" path="res://menu/button.gd" id="1_ouk20"]
+[ext_resource type="Script" uid="uid://2lu1306nehxs" path="res://menu/units_list.gd" id="2_mae5d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p3vqc"]
+bg_color = Color(0.918673, 0.397398, 0.561558, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.301235, 0.893489, 0.944432, 1)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+expand_margin_left = 20.0
+expand_margin_right = 20.0
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+offset_right = 318.0
+offset_bottom = 157.0
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxFlat_p3vqc")
+text = "START"
+script = ExtResource("1_ouk20")
+
+[node name="ALL" type="ScrollContainer" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(810, 700)
+layout_mode = 2
+offset_top = 200.0
+offset_right = 810.0
+offset_bottom = 900.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="units_list" type="VBoxContainer" parent="ALL"]
+clip_contents = true
+custom_minimum_size = Vector2(810, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+script = ExtResource("2_mae5d")
+
+[node name="PLAYER" type="ScrollContainer" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(810, 700)
+layout_mode = 2
+offset_top = 200.0
+offset_right = 810.0
+offset_bottom = 900.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="units_list" type="VBoxContainer" parent="PLAYER"]
+clip_contents = true
+custom_minimum_size = Vector2(810, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="ENEMY" type="ScrollContainer" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(810, 700)
+layout_mode = 2
+offset_top = 200.0
+offset_right = 810.0
+offset_bottom = 900.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="units_list" type="VBoxContainer" parent="ENEMY"]
+clip_contents = true
+custom_minimum_size = Vector2(810, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

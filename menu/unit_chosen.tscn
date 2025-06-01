@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsbkleevh8fwc"]
+
+[ext_resource type="Script" uid="uid://da1v4v2jotbgv" path="res://menu/unit_chosen.gd" id="1_1mk5g"]
+[ext_resource type="Texture2D" uid="uid://cwtyfbq4u0jqr" path="res://unitStats/amount.png" id="2_0kli2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jnjfa"]
+font_size = 23
+
+[sub_resource type="LabelSettings" id="LabelSettings_1v4fs"]
+font_size = 30
+
+[node name="UnitChosen" type="Control"]
+custom_minimum_size = Vector2(400, 45)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1200.0
+offset_bottom = -855.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1mk5g")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(400, 45)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -21.0
+offset_right = 114.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AmountIcon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("2_0kli2")
+expand_mode = 2
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "NAME"
+label_settings = SubResource("LabelSettings_jnjfa")
+
+[node name="Hash" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "    #"
+label_settings = SubResource("LabelSettings_1v4fs")
+
+[node name="Amount" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1000"
+label_settings = SubResource("LabelSettings_jnjfa")
