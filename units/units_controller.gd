@@ -84,13 +84,15 @@ func change_active_unit():
 
 	if GLOBAL.unit_panel:
 		GLOBAL.unit_panel.panel_view(false)
+		GLOBAL.unit_panel.skillsList.create_list(false)
 		GLOBAL.unit_panel = null
+		
 
 	if GLOBAL.active_unit:
 		GLOBAL.active_unit.panel_view(false)
 		GLOBAL.active_unit.effects.visible = true
 		GLOBAL.active_unit.effects.create_list()
-		GLOBAL.active_unit.skillsList.skills_list()
+		GLOBAL.active_unit.skillsList.create_list()
 		GLOBAL.active_unit.actual_stats.ensure_positive_stats()
 		GLOBAL.active_unit.skillsList.tick_cooldown()
 		
@@ -114,7 +116,7 @@ func change_active_unit():
 	active_unit_index = (active_unit_index + 1) % units_list.size()
 	GLOBAL.active_unit = units_list[active_unit_index]
 	GLOBAL.active_unit.panel_view(true)
-	GLOBAL.active_unit.skillsList.skills_list()
+	GLOBAL.active_unit.skillsList.create_list()
 
 	if not GLOBAL.active_unit.waited:
 		GLOBAL.active_unit.effects.on_turn_start()

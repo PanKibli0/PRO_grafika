@@ -98,7 +98,7 @@ func _input(event):
 		if not _click_info_input(event):
 			if GLOBAL.unit_panel:
 				GLOBAL.unit_panel.panel_view(false)
-				GLOBAL.unit_panel.skillsList.skills_list(false)
+				#GLOBAL.unit_panel.skillsList.create_list()
 				
 	
 		
@@ -131,10 +131,12 @@ func _click_info_input(event):
 	unit = GLOBAL.GRID.get_unit(cell)
 	
 	if unit and unit != GLOBAL.active_unit:
-		if GLOBAL.unit_panel: GLOBAL.unit_panel.panel_view(false)
+		if GLOBAL.unit_panel: 
+			GLOBAL.unit_panel.panel_view(false)
+			GLOBAL.unit_panel.skillsList.create_list(false)
 		
 		unit.panel_view(true, true)
-		unit.skillsList.skills_list(false)
+		unit.skillsList.create_list(false)
 		GLOBAL.unit_panel = unit
 		return true
 		

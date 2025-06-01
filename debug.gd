@@ -24,7 +24,7 @@ func _ready() -> void:
 	#$"../Units/Unit4".skillsList.skills.append(SkillFury2.new(10,2,5))
 	#$"../Units/Unit5".skillsList.skills.append(SkillFury.new(3,2,5))
 	#$"../Units/Unit5".skillsList.skills.append(SkillFury.new(3,2,5))
-	#$"../Units/Unit5".skillsList.skills_list()
+	#$"../Units/Unit5".skillsList.create_list()
 	return
 	
 	for d in %Units.get_children():
@@ -33,7 +33,7 @@ func _ready() -> void:
 		add_all_effects_to_unit(d)
 		
 		#d.skillsList.skills.append(SkillFury.new(3,2,5))
-		#d.skillsList.skills_list()
+		#d.skillsList.create_list()
 		#print(d.skillsList.skills)
 		
 		
