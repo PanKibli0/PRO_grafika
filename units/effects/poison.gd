@@ -18,7 +18,7 @@ func merge_with(other: Effect) -> bool:
 	var change = false
 
 	if other.value > value:
-		value = round(other.damage + value/2)
+		value = round(int(other.damage + value/2))
 
 
 	if other.duration > duration:

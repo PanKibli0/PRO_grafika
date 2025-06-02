@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8hbhbnw2i0dp"]
+[gd_scene load_steps=13 format=3 uid="uid://c8hbhbnw2i0dp"]
 
 [ext_resource type="Script" uid="uid://7mo3rxg1ywgq" path="res://menu/unit_menu.gd" id="1_m0cpw"]
 [ext_resource type="Texture2D" uid="uid://fb3gv1sx8a4i" path="res://unitStats/coins.png" id="2_tas3i"]
@@ -11,25 +11,53 @@
 [ext_resource type="Texture2D" uid="uid://dh62lkfjpm078" path="res://unitStats/movement.png" id="8_eq4oq"]
 [ext_resource type="Texture2D" uid="uid://blih3sjerjofs" path="res://unitStats/ammo.png" id="9_he84s"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x5a1t"]
+bg_color = Color(0.303233, 0.303233, 0.303233, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tas3i"]
+bg_color = Color(0.252028, 0.252028, 0.252028, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.249723, 0.585348, 0.416923, 1)
+
 [node name="UnitMenu" type="Control"]
 custom_minimum_size = Vector2(810, 40)
 layout_mode = 3
-anchors_preset = 10
-anchor_right = 1.0
-offset_right = -790.0
+anchors_preset = 0
+offset_right = 700.0
 offset_bottom = 40.0
-grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 1
 script = ExtResource("1_m0cpw")
 
 [node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 810.0
+offset_bottom = 40.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_x5a1t")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_x5a1t")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_x5a1t")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_tas3i")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_tas3i")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_tas3i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tas3i")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_x5a1t")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_x5a1t")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_x5a1t")
+theme_override_styles/normal = SubResource("StyleBoxFlat_x5a1t")
+toggle_mode = true
+action_mode = 0
+text_direction = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -44,18 +72,23 @@ offset_right = 365.5
 offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="stats" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CostIcon" type="TextureRect" parent="VBoxContainer/stats"]
+modulate = Color(0.905882, 0.803922, 0.470588, 1)
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_tas3i")
 expand_mode = 2
 
 [node name="Cost" type="Label" parent="VBoxContainer/stats"]
 unique_name_in_owner = true
+modulate = Color(0.905882, 0.803922, 0.470588, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "1000"
@@ -65,6 +98,7 @@ vertical_alignment = 1
 [node name="AmountIcon" type="TextureRect" parent="VBoxContainer/stats"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_x5a1t")
 expand_mode = 2
 
@@ -80,6 +114,7 @@ vertical_alignment = 1
 modulate = Color(1, 0, 0, 1)
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("3_tas3i")
 expand_mode = 2
 

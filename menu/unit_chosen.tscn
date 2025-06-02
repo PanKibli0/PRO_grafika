@@ -1,49 +1,144 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsbkleevh8fwc"]
+[gd_scene load_steps=16 format=3 uid="uid://dsbkleevh8fwc"]
 
 [ext_resource type="Script" uid="uid://da1v4v2jotbgv" path="res://menu/unit_chosen.gd" id="1_1mk5g"]
 [ext_resource type="Texture2D" uid="uid://cwtyfbq4u0jqr" path="res://unitStats/amount.png" id="2_0kli2"]
+[ext_resource type="Script" uid="uid://bssl3qmpy1b8t" path="res://menu/delete/button_delete.gd" id="2_jnjfa"]
+[ext_resource type="Script" uid="uid://dd57u6jec3o1u" path="res://menu/button_inc_1.gd" id="4_jnjfa"]
+[ext_resource type="Script" uid="uid://buhkxklf8l5wx" path="res://menu/button_inc_10.gd" id="5_1v4fs"]
+[ext_resource type="Script" uid="uid://cfnrcdo63r7ln" path="res://menu/button_dec_1.gd" id="6_ql2y6"]
+[ext_resource type="Script" uid="uid://c7m5x40ls12b1" path="res://menu/button_dec_10.gd" id="7_fmqpq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jnjfa"]
-font_size = 23
+font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_1v4fs"]
-font_size = 30
+font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0kli2"]
+bg_color = Color(1, 0.486104, 0.418607, 0.686275)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jnjfa"]
+bg_color = Color(1, 0, 0.419608, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0, 0.419608, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1v4fs"]
+bg_color = Color(0.321569, 0.631373, 0.317647, 0.341176)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.321569, 0.631373, 0.317647, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ql2y6"]
+bg_color = Color(0.901961, 0.776471, 0, 0.341176)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.901961, 0.776471, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmqpq"]
+bg_color = Color(1, 0.631373, 0.317647, 0.341176)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.631373, 0.317647, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4k5n"]
+bg_color = Color(1, 0.278431, 0.941176, 0.341176)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.278431, 0.941176, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
 
 [node name="UnitChosen" type="Control"]
-custom_minimum_size = Vector2(400, 45)
+clip_contents = true
+custom_minimum_size = Vector2(400, 40)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1200.0
-offset_bottom = -855.0
+offset_right = -1195.0
+offset_bottom = -860.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_1mk5g")
 
-[node name="Button" type="Button" parent="."]
-custom_minimum_size = Vector2(400, 45)
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(400, 40)
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 40)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -114.0
-offset_top = -21.0
-offset_right = 114.0
-offset_bottom = 21.0
+offset_left = -202.5
+offset_top = -20.0
+offset_right = 201.5
+offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="AmountIcon" type="TextureRect" parent="HBoxContainer"]
-custom_minimum_size = Vector2(20, 20)
+custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_0kli2")
 expand_mode = 2
 
@@ -56,7 +151,7 @@ label_settings = SubResource("LabelSettings_jnjfa")
 [node name="Hash" type="Label" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "    #"
+text = "  #"
 label_settings = SubResource("LabelSettings_1v4fs")
 
 [node name="Amount" type="Label" parent="HBoxContainer"]
@@ -64,3 +159,130 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "1000"
 label_settings = SubResource("LabelSettings_jnjfa")
+
+[node name="ButtonDelete" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+theme_override_colors/font_disabled_color = Color(1, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0, 0.419608, 1)
+theme_override_colors/font_hover_color = Color(1, 0, 0.419608, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_0kli2")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_0kli2")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_0kli2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_jnjfa")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_jnjfa")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_jnjfa")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jnjfa")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_0kli2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0kli2")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_0kli2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0kli2")
+toggle_mode = true
+text = "DELETE"
+script = ExtResource("2_jnjfa")
+
+[node name="ButtonInc1" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ql2y6")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1v4fs")
+action_mode = 0
+text = "+1"
+script = ExtResource("4_jnjfa")
+
+[node name="ButtonInc10" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ql2y6")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_1v4fs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1v4fs")
+text = "+10"
+script = ExtResource("5_1v4fs")
+
+[node name="ButtonDec1" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_fmqpq")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_fmqpq")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fmqpq")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_f4k5n")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_f4k5n")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_f4k5n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f4k5n")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_fmqpq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fmqpq")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_fmqpq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fmqpq")
+text = " -1"
+script = ExtResource("6_ql2y6")
+
+[node name="ButtonDec10" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_fmqpq")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_fmqpq")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fmqpq")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_f4k5n")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_f4k5n")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_f4k5n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f4k5n")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_fmqpq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fmqpq")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_fmqpq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fmqpq")
+text = "-10"
+script = ExtResource("7_fmqpq")

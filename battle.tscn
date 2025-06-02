@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://cnitx7smlm13b" path="res://units/variants/HorseMan.tres" id="7_pihy1"]
 [ext_resource type="Resource" uid="uid://bs3x3pt3d36gx" path="res://units/variants/peasant.tres" id="7_sl0w2"]
 [ext_resource type="Resource" uid="uid://c8h6uw3e8inbh" path="res://units/variants/Angel.tres" id="8_4s0ev"]
-[ext_resource type="Resource" uid="uid://dqpijfwnnmhmb" path="res://units/variants/ARMORED.tres" id="8_elvfr"]
+[ext_resource type="Resource" uid="uid://dqpijfwnnmhmb" path="res://units/variants/Armored.tres" id="8_elvfr"]
 [ext_resource type="Script" uid="uid://dxlkuybralhn1" path="res://debug.gd" id="9_lcjiy"]
 [ext_resource type="Resource" uid="uid://diacpu6j02erg" path="res://units/variants/BowMan.tres" id="9_pihy1"]
 

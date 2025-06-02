@@ -1,7 +1,7 @@
 extends Control
 
-var effect_info = preload("res://units/effects/effect_info.tscn")
-var skill_info = preload("res://units/skills/skill_info.tscn")
+signal S_add_unit_to_list(unit)
+@onready var button = %Button
 
 @onready var cost_label = %Cost
 @onready var name_label = %Name
@@ -47,4 +47,6 @@ func init_unit(u: UnitStats) -> void:
 
 	skills_label.visible = skills_count > 0
 	skills_icon.visible = skills_count > 0
+	
+	button.pressed.connect(func():emit_signal("S_add_unit_to_list", u))
 	
