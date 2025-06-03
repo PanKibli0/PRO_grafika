@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkh3k2tecvn55"]
+[gd_scene load_steps=8 format=3 uid="uid://dkh3k2tecvn55"]
 
-[ext_resource type="Script" uid="uid://cdvbpvwukptbb" path="res://menu/button.gd" id="1_ouk20"]
+[ext_resource type="Script" uid="uid://bryok86bjq1h4" path="res://menu/menu.gd" id="1_4hy44"]
+[ext_resource type="Script" uid="uid://cdvbpvwukptbb" path="res://menu/start.gd" id="1_ouk20"]
+[ext_resource type="Texture2D" uid="uid://fb3gv1sx8a4i" path="res://unitStats/coins.png" id="2_4hy44"]
 [ext_resource type="Script" uid="uid://2lu1306nehxs" path="res://menu/units_list.gd" id="2_mae5d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p3vqc"]
@@ -31,6 +33,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+script = ExtResource("1_4hy44")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -44,12 +47,62 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_p3vqc")
 text = "START"
 script = ExtResource("1_ouk20")
 
+[node name="Switch" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "PLAYER"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainerPlayer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MoneyIconPlayer" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainerPlayer"]
+modulate = Color(0.0980392, 0.517647, 0.752941, 1)
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_4hy44")
+expand_mode = 2
+
+[node name="MoneyPlayer" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainerPlayer"]
+unique_name_in_owner = true
+modulate = Color(0.0980392, 0.517647, 0.752941, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "10000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainerEnemy" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MoneyIconEnemy" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainerEnemy"]
+modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_4hy44")
+expand_mode = 2
+
+[node name="MoneyEnemy" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainerEnemy"]
+unique_name_in_owner = true
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "10000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 custom_minimum_size = Vector2(820, 600)
 layout_mode = 0
 offset_top = 200.0
 offset_right = 810.0
 offset_bottom = 500.0
+horizontal_scroll_mode = 0
 
 [node name="units_list" type="VBoxContainer" parent="ScrollContainer"]
 clip_contents = true
@@ -58,31 +111,34 @@ layout_mode = 2
 script = ExtResource("2_mae5d")
 
 [node name="PLAYER" type="ScrollContainer" parent="."]
-custom_minimum_size = Vector2(400, 400)
+custom_minimum_size = Vector2(520, 400)
 layout_mode = 0
-offset_left = 1100.0
+offset_left = 1000.0
 offset_top = 25.0
-offset_right = 1500.0
+offset_right = 1520.0
 offset_bottom = 425.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ouk20")
+horizontal_scroll_mode = 0
 
 [node name="units_list" type="VBoxContainer" parent="PLAYER"]
 clip_contents = true
-custom_minimum_size = Vector2(400, 400)
+custom_minimum_size = Vector2(520, 400)
 layout_mode = 2
 
 [node name="ENEMY" type="ScrollContainer" parent="."]
-custom_minimum_size = Vector2(400, 400)
+custom_minimum_size = Vector2(520, 400)
 layout_mode = 0
-offset_left = 1100.0
+offset_left = 1000.0
 offset_top = 475.0
-offset_right = 1500.0
+offset_right = 1520.0
 offset_bottom = 875.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_mae5d")
+horizontal_scroll_mode = 0
 
 [node name="units_list" type="VBoxContainer" parent="ENEMY"]
 clip_contents = true
-custom_minimum_size = Vector2(400, 400)
+custom_minimum_size = Vector2(520, 400)
 layout_mode = 2
 
 [connection signal="pressed" from="HBoxContainer/Start" to="HBoxContainer/Start" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Switch" to="ScrollContainer/units_list" method="_switch_list"]

@@ -2,6 +2,7 @@ class_name UnitStats
 extends Resource
 
 @export var name: String = "Unit Name"
+@export var cost: int = 10
 @export var max_health: int = 1
 @export_range(1, 100) var attack: int = 1
 @export_range(1, 100) var defense: int = 1
@@ -17,7 +18,8 @@ extends Resource
 
 
 func _init(
-	v_name: String = "Unit Name",
+	v_name: String = "Unit Name", 
+	v_cost: int = 10,
 	v_max_health: int = 1,
 	v_attack: int = 1,
 	v_defense: int = 1,
@@ -35,6 +37,7 @@ func _init(
 		v_damage_max = temp
 
 	self.name = v_name
+	self.cost = v_cost
 	self.max_health = v_max_health
 	self.attack = v_attack
 	self.defense = v_defense
@@ -75,6 +78,7 @@ func _to_string() -> String:
 
 	return """[UnitStats]
 Name: %s
+Cost: %d
 Max Health: %d
 Attack: %d
 Defense: %d
@@ -86,7 +90,7 @@ Color: %s
 Start Effects: %s
 Skills: %s
 """ % [
-		name, max_health, attack, defense,
+		name,cost, max_health, attack, defense,
 		damage_min, damage_max, ammo,
 		initiative, movement, str(color),
 		effects_text, skills_text

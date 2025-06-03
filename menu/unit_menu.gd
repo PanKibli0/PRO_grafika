@@ -22,7 +22,7 @@ signal S_add_unit_to_list(unit)
 
 
 func init_unit(u: UnitStats) -> void:
-	#cost_label.text = u.cost
+	cost_label.text = str(u.cost)
 	name_label.text = u.name
 	hp_label.text = str(u.max_health)
 	attack_label.text = str(u.attack)

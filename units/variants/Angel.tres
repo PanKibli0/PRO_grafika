@@ -16,6 +16,7 @@ metadata/_custom_type_script = "uid://bfuxi2u3hywqt"
 [resource]
 script = ExtResource("1_ms1d5")
 name = "Angel"
+cost = 10000
 max_health = 50
 attack = 13
 defense = 30
