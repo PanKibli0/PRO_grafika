@@ -17,6 +17,7 @@ metadata/_custom_type_script = "uid://cw71ws51jb5wu"
 [resource]
 script = ExtResource("1_l4t5v")
 name = "HorseMan"
+cost = 10
 max_health = 11
 attack = 14
 defense = 12

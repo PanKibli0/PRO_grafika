@@ -18,6 +18,7 @@ metadata/_custom_type_script = "uid://dqlettfb4a0xq"
 [resource]
 script = ExtResource("1_8fl73")
 name = "Peasant"
+cost = 10
 max_health = 10
 attack = 6
 defense = 7

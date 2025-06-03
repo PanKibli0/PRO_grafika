@@ -56,6 +56,8 @@ func set_amount(new_amount):
 
 
 func remove_unit():
+	GLOBAL.money[player_index] += unit.cost * amount
+	GLOBAL.MENU.update_money_label(player_index)
 	GLOBAL.players_units_list[player_index].erase(unit)
 	queue_free()
 

@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://cnitx7smlm13b" path="res://units/variants/HorseMan.tres" id="7_pihy1"]
 [ext_resource type="Resource" uid="uid://bs3x3pt3d36gx" path="res://units/variants/peasant.tres" id="7_sl0w2"]
 [ext_resource type="Resource" uid="uid://c8h6uw3e8inbh" path="res://units/variants/Angel.tres" id="8_4s0ev"]
-[ext_resource type="Resource" uid="uid://dqpijfwnnmhmb" path="res://units/variants/Armored.tres" id="8_elvfr"]
+[ext_resource type="Resource" uid="uid://dqpijfwnnmhmb" path="res://units/variants/ARMORED.tres" id="8_elvfr"]
 [ext_resource type="Script" uid="uid://dxlkuybralhn1" path="res://debug.gd" id="9_lcjiy"]
 [ext_resource type="Resource" uid="uid://diacpu6j02erg" path="res://units/variants/BowMan.tres" id="9_pihy1"]
 
@@ -53,29 +53,6 @@ script = ExtResource("4_i431l")
 [node name="Units" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("4_6t8i5")
-
-[node name="Unit2" parent="Units" instance=ExtResource("4_dw4jg")]
-player = false
-amount = 35
-stats = ExtResource("9_pihy1")
-target_position = Vector3(0, 0, 3)
-
-[node name="Unit6" parent="Units" instance=ExtResource("4_dw4jg")]
-player = false
-amount = 35
-stats = ExtResource("7_pihy1")
-
-[node name="Unit3" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 1
-stats = ExtResource("7_4s0ev")
-
-[node name="Unit4" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 1
-stats = ExtResource("7_4s0ev")
-
-[node name="Unit5" parent="Units" instance=ExtResource("4_dw4jg")]
-amount = 1
-stats = ExtResource("7_4s0ev")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
@@ -184,5 +161,31 @@ stats = ExtResource("9_pihy1")
 [node name="Unit10" parent="DEBUG_HELP" instance=ExtResource("4_dw4jg")]
 amount = 25
 stats = ExtResource("8_elvfr")
+
+[node name="DEBUG_HELP2" type="Node3D" parent="."]
+visible = false
+
+[node name="Unit2" parent="DEBUG_HELP2" instance=ExtResource("4_dw4jg")]
+player = false
+amount = 35
+stats = ExtResource("9_pihy1")
+target_position = Vector3(0, 0, 3)
+
+[node name="Unit3" parent="DEBUG_HELP2" instance=ExtResource("4_dw4jg")]
+amount = 1
+stats = ExtResource("7_4s0ev")
+
+[node name="Unit4" parent="DEBUG_HELP2" instance=ExtResource("4_dw4jg")]
+amount = 1
+stats = ExtResource("7_4s0ev")
+
+[node name="Unit5" parent="DEBUG_HELP2" instance=ExtResource("4_dw4jg")]
+amount = 1
+stats = ExtResource("7_4s0ev")
+
+[node name="Unit6" parent="DEBUG_HELP2" instance=ExtResource("4_dw4jg")]
+player = false
+amount = 35
+stats = ExtResource("7_pihy1")
 
 [connection signal="S_end_turn" from="Camera/MouseController" to="Units" method="change_active_unit"]

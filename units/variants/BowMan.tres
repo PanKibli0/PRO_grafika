@@ -18,6 +18,7 @@ metadata/_custom_type_script = "uid://dqlettfb4a0xq"
 [resource]
 script = ExtResource("1_qpjyb")
 name = "BowMan"
+cost = 10
 max_health = 5
 attack = 4
 defense = 2

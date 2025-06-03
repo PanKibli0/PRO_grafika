@@ -38,13 +38,27 @@ func _get_position(for_player: bool) -> Vector3:
 			return GLOBAL.GRID.local_to_map(pos)
 		
 	return Vector3(-1,-1,-1)
+	
+var unit_scene = preload("res://units/Unit.tscn")
 		
+func _add_unit(stats: UnitStats, amount: int, player: bool):
+	var unit = unit_scene.instantiate()
+	unit.stats = stats
+	unit.player = player
+	unit.amount = amount 
+
+	add_child(unit)
+	units_list.append(unit)
+
+
 func _ready():
+	
+	for i in range(2):
+		var units = GLOBAL.players_units_list[i]
+		for unit in units:
+			_add_unit(unit, units[unit], !i)
+	
 	units_list = self.get_children()
-
-
-	#for i in range(6):
-		#_add_unit(i, i % 2 == 0)
 	
 
 	for unit in units_list:
@@ -206,32 +220,6 @@ func _end_game():
 	get_tree().quit()
 
 
-func _add_unit(DV: int = 0, player = true):
-	var new_unit_scene = preload("res://units/Unit.tscn")  
-	var unit = new_unit_scene.instantiate()
-	
-	var stats = UnitStats.new(
-		"Debug Unit" + str(DV),
-		randi_range(5, 100),
-		randi_range(1, 10),
-		randi_range(1, 10),
-		randi_range(1, 20),
-		randi_range(1, 30),
-		randi_range(1, 20),
-		randi_range(1, 12),
-		[],
-		[],
-		Color(randf(), randf(), randf())
-	)
-
-	unit.stats = stats
-	unit.player = player
-
-	
-	add_child(unit)
-	
-	units_list.append(unit)
-
 
 func get_units(who):	
 	var list = []
@@ -242,3 +230,30 @@ func get_units(who):
 			
 	return list
 	
+	
+	
+#func _add_unit(DV: int = 0, player = true):
+	#var new_unit_scene = preload("res://units/Unit.tscn")  
+	#var unit = new_unit_scene.instantiate()
+	#
+	#var stats = UnitStats.new(
+		#"Debug Unit" + str(DV),
+		#randi_range(5, 100),
+		#randi_range(1, 10),
+		#randi_range(1, 10),
+		#randi_range(1, 20),
+		#randi_range(1, 30),
+		#randi_range(1, 20),
+		#randi_range(1, 12),
+		#[],
+		#[],
+		#Color(randf(), randf(), randf())
+	#)
+#
+	#unit.stats = stats
+	#unit.player = player
+#
+	#
+	#add_child(unit)
+	#
+	#units_list.append(unit)
