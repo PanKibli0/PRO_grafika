@@ -45,12 +45,9 @@ func activate() -> void:
 			new_unit.stats = zombie_stats
 			new_unit.player = GLOBAL.active_unit.player
 
-			var base_amount = GLOBAL.active_unit.actual_amount
-			if base_amount >= 10:
-				new_unit.amount = randi_range(3, 8) * max(1, base_amount - 10)
-			else:
-				new_unit.amount = randi_range(10, 35)
-
+			
+			new_unit.amount = randi_range(4, 10) * max(1, GLOBAL.active_unit.actual_amount)
+			
 			new_unit.visible = false
 			
 			new_unit.target_position = check_cell
