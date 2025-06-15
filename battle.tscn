@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://gioqd05hgd0g"]
+[gd_scene load_steps=23 format=3 uid="uid://gioqd05hgd0g"]
 
 [ext_resource type="Script" uid="uid://caodrrrn88q82" path="res://battle.gd" id="1_ol6im"]
 [ext_resource type="Script" uid="uid://sqvwfmlbwexy" path="res://camera.gd" id="2_lcjiy"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://dp6upvyfg4eqi" path="res://mouse_controller.gd" id="4_i431l"]
 [ext_resource type="Script" uid="uid://fkkqunly1lwo" path="res://grid.gd" id="5_dw4jg"]
 [ext_resource type="MeshLibrary" uid="uid://cocf8rjdcohc8" path="res://grid_mesh.tres" id="6_0npn6"]
-[ext_resource type="Resource" uid="uid://ls26jp4eljiy" path="res://units/variants/AAAdebug.tres" id="7_4s0ev"]
 [ext_resource type="Resource" uid="uid://colnyx772mev4" path="res://units/variants/knight.tres" id="7_b1i6x"]
 [ext_resource type="Resource" uid="uid://cnitx7smlm13b" path="res://units/variants/HorseMan.tres" id="7_pihy1"]
 [ext_resource type="Resource" uid="uid://bs3x3pt3d36gx" path="res://units/variants/peasant.tres" id="7_sl0w2"]
@@ -15,6 +14,9 @@
 [ext_resource type="Resource" uid="uid://dqpijfwnnmhmb" path="res://units/variants/ARMORED.tres" id="8_elvfr"]
 [ext_resource type="Script" uid="uid://dxlkuybralhn1" path="res://debug.gd" id="9_lcjiy"]
 [ext_resource type="Resource" uid="uid://diacpu6j02erg" path="res://units/variants/BowMan.tres" id="9_pihy1"]
+[ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="14_ix8ov"]
+[ext_resource type="Script" uid="uid://byykvb3ax4tv7" path="res://units/skills/skill.gd" id="15_bx4lf"]
+[ext_resource type="Script" uid="uid://48arlb6fvnxm" path="res://units/effects/effect.gd" id="16_22sa7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0npn6"]
 albedo_color = Color(0.454902, 0.172549, 0.0862745, 1)
@@ -31,6 +33,23 @@ data = PackedVector3Array(14, 0, 11.5, 0, 0, 11.5, 14, 0, 0.5, 0, 0, 11.5, 0, 0,
 font_size = 200
 outline_size = 30
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_aacmo"]
+script = ExtResource("14_ix8ov")
+name = "DEBUG"
+cost = 10
+max_health = 1000
+attack = 6
+defense = 7
+damage_min = 1
+damage_max = 4
+ammo = 0
+initiative = 5
+movement = 3
+start_effects = Array[ExtResource("16_22sa7")]([])
+skills = Array[ExtResource("15_bx4lf")]([])
+color = Color(0.803705, 0, 0.314836, 1)
+metadata/_custom_type_script = "uid://cukyhyanl175x"
 
 [node name="Battle" type="Node3D"]
 script = ExtResource("1_ol6im")
@@ -173,15 +192,15 @@ target_position = Vector3(0, 0, 3)
 
 [node name="Unit3" parent="DEBUG_HELP2" instance=ExtResource("4_dw4jg")]
 amount = 1
-stats = ExtResource("7_4s0ev")
+stats = SubResource("Resource_aacmo")
 
 [node name="Unit4" parent="DEBUG_HELP2" instance=ExtResource("4_dw4jg")]
 amount = 1
-stats = ExtResource("7_4s0ev")
+stats = SubResource("Resource_aacmo")
 
 [node name="Unit5" parent="DEBUG_HELP2" instance=ExtResource("4_dw4jg")]
 amount = 1
-stats = ExtResource("7_4s0ev")
+stats = SubResource("Resource_aacmo")
 
 [node name="Unit6" parent="DEBUG_HELP2" instance=ExtResource("4_dw4jg")]
 player = false

@@ -229,31 +229,3 @@ func get_units(who):
 			list.append(unit)
 			
 	return list
-	
-	
-	
-#func _add_unit(DV: int = 0, player = true):
-	#var new_unit_scene = preload("res://units/Unit.tscn")  
-	#var unit = new_unit_scene.instantiate()
-	#
-	#var stats = UnitStats.new(
-		#"Debug Unit" + str(DV),
-		#randi_range(5, 100),
-		#randi_range(1, 10),
-		#randi_range(1, 10),
-		#randi_range(1, 20),
-		#randi_range(1, 30),
-		#randi_range(1, 20),
-		#randi_range(1, 12),
-		#[],
-		#[],
-		#Color(randf(), randf(), randf())
-	#)
-#
-	#unit.stats = stats
-	#unit.player = player
-#
-	#
-	#add_child(unit)
-	#
-	#units_list.append(unit)

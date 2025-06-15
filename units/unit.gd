@@ -131,8 +131,6 @@ func take_damage(damage: int, other_type := false):
 	
 	if actual_amount <= 0:
 		death()
-		
-	#effects.when_attacked(self, GLOBAL.active_unit)
 	
 	await get_tree().create_timer(1.5).timeout
 	damage_label.visible = false
