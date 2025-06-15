@@ -13,5 +13,8 @@ func _init(v_value = null, dur=null):
 	color_bg = Color.DARK_RED
 	
 
-func on_attack(damage_deal, unit, _target = null):
+func on_attack(damage_deal, unit, target = null):
 	unit.heal(value*damage_deal, true)
+	
+	var bleed_value = max(target.actual_amount/20, 3)
+	target.effects.add_effect(EffectBleed.new(bleed_value,2))

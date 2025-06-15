@@ -48,10 +48,10 @@ func _ready():
 	panelStats.set_info(self)
 	
 	for eff in stats.start_effects:
-		effects.add_effect(eff)
+		effects.add_effect(eff.duplicate(true))
 	
 	for sk in stats.skills:
-		skillsList.skills.append(sk)
+		skillsList.skills.append(sk.duplicate(true))
 	
 	
 	if model and model.get_active_material(0):
@@ -71,7 +71,7 @@ func move(new_position: Vector3i):
 	is_moving = true
 	
 	target_position = Vector3(new_position) + Vector3(0.5, 0, 0.5)
-	target_position.y = global_transform.origin.y
+	target_position.y = 0
 	
 	look_at(Vector3(target_position.x, global_transform.origin.y, target_position.z), Vector3.UP)
 	
@@ -131,20 +131,26 @@ func take_damage(damage: int, other_type := false):
 	
 	if actual_amount <= 0:
 		death()
-	
+
 	await get_tree().create_timer(1.5).timeout
 	damage_label.visible = false
 
 	
+		
 func death():
+	self.visible = false
 	effects._cleanup_expired(true)
 	emit_signal("S_death")
+	
+	damage_d.visible = true
+	damage_d.text = self.actual_stats.name + " DIED"
+	
+	await get_tree().create_timer(1.5).timeout
+	damage_d.visible = false
+	
 	queue_free()
 	
-	
-	
-	
-	
+
 func heal(heal_amount: int, other_type := false):
 	if heal_amount <= 0:
 		return

@@ -7,25 +7,23 @@
 
 [sub_resource type="Resource" id="Resource_87kff"]
 script = ExtResource("3_bsxuf")
-power = 100
 cooldown = 5
 actual_cooldown = 0
-uses = -10
 metadata/_custom_type_script = "uid://bfuxi2u3hywqt"
 
 [resource]
 script = ExtResource("1_ms1d5")
 name = "Angel"
-cost = 10000
-max_health = 50
-attack = 13
-defense = 30
-damage_min = 2
-damage_max = 15
+cost = 1350
+max_health = 80
+attack = 12
+defense = 20
+damage_min = 8
+damage_max = 18
 ammo = 0
 initiative = 5
 movement = 7
 start_effects = Array[ExtResource("3_87kff")]([])
 skills = Array[ExtResource("2_bsxuf")]([SubResource("Resource_87kff")])
-color = Color(1, 1, 1, 1)
+color = Color(0.526942, 0.862029, 0.999999, 1)
 metadata/_custom_type_script = "uid://cukyhyanl175x"

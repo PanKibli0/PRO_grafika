@@ -9,7 +9,6 @@ var color_bg: Color = Color.DIM_GRAY
 
 @export var cooldown: int = 5
 @export var actual_cooldown: int = 0
-@export var uses: int = -10
 
 func tick_cooldown() -> void:
 	if actual_cooldown > 0:
@@ -22,4 +21,3 @@ func activate() -> void:
 	if cant_use(): return
 	print_rich("[color=pink]Activate skill: [/color] %s" % name)
 	actual_cooldown = cooldown
-	if uses > 0: uses -= 1

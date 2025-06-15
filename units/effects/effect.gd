@@ -20,14 +20,9 @@ func on_turn_start(unit):
 func on_turn_end(unit):
 	print_rich("[color=yellow]on_turn_end:[/color] %s" % name)
 
-'''JEZELI CIE ZAATAKUJE'''
 @warning_ignore("unused_parameter")
 func on_attack(damage_deal, unit, target = null):
 	print_rich("[color=yellow]on_attack:[/color] %s" % name)
-
-@warning_ignore("unused_parameter")
-func when_attacked(unit, target = null):
-	print_rich("[color=yellow]when_attacked:[/color] %s" % name)
 
 @warning_ignore("unused_parameter")
 func on_apply(unit):
