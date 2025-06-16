@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=8 format=3 uid="uid://ku1t4n2n55hp"]
+
+[ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="1_br6ly"]
+[ext_resource type="Script" uid="uid://byykvb3ax4tv7" path="res://units/skills/skill.gd" id="2_xoesy"]
+[ext_resource type="Script" uid="uid://dqlettfb4a0xq" path="res://units/skills/poison.gd" id="3_lsqgt"]
+[ext_resource type="Script" uid="uid://48arlb6fvnxm" path="res://units/effects/effect.gd" id="4_y8ied"]
+[ext_resource type="Script" uid="uid://bq1r5w7iht7mn" path="res://units/effects/plague.gd" id="5_xoesy"]
+
+[sub_resource type="Resource" id="Resource_7gshx"]
+script = ExtResource("3_lsqgt")
+targets_number = 3
+cooldown = 5
+actual_cooldown = 0
+metadata/_custom_type_script = "uid://dqlettfb4a0xq"
+
+[sub_resource type="Resource" id="Resource_lsqgt"]
+script = ExtResource("5_xoesy")
+duration = -10
+metadata/_custom_type_script = "uid://bq1r5w7iht7mn"
+
+[resource]
+script = ExtResource("1_br6ly")
+name = "Plague Bearer"
+cost = 1650
+max_health = 34
+attack = 5
+defense = 12
+damage_min = 10
+damage_max = 12
+ammo = 0
+initiative = 4
+movement = 7
+start_effects = Array[ExtResource("4_y8ied")]([SubResource("Resource_lsqgt")])
+skills = Array[ExtResource("2_xoesy")]([SubResource("Resource_7gshx")])
+color = Color(0.516829, 0.315071, 0.945619, 1)
+metadata/_custom_type_script = "uid://cukyhyanl175x"

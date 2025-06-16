@@ -94,11 +94,12 @@ func _input(event):
 	if event.is_action_pressed("LMB") and !GLOBAL.active_unit.is_moving and not GLOBAL.active_skill:
 		_click_input(event)
 		
+		
 	if event.is_action_pressed("RMB"):
 		if not _click_info_input(event):
 			if GLOBAL.unit_panel:
 				GLOBAL.unit_panel.panel_view(false)
-				#GLOBAL.unit_panel.skillsList.create_list()
+				GLOBAL.unit_panel.skillsList.create_list()
 				
 	
 		

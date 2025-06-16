@@ -9,7 +9,7 @@ var index_list := 0
 
 var unit_resources: Array[UnitStats] = []
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_pressed("SHIFT"): _switch_list()
 
 

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=4 format=3 uid="uid://cggdha2qc6i7u"]
+
+[ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="1_k0ija"]
+[ext_resource type="Script" uid="uid://byykvb3ax4tv7" path="res://units/skills/skill.gd" id="2_ldd6l"]
+[ext_resource type="Script" uid="uid://48arlb6fvnxm" path="res://units/effects/effect.gd" id="3_fpis5"]
+
+[resource]
+script = ExtResource("1_k0ija")
+name = "Zombie"
+cost = 30
+max_health = 5
+attack = 3
+defense = 8
+damage_min = 2
+damage_max = 5
+ammo = 0
+initiative = 3
+movement = 3
+start_effects = Array[ExtResource("3_fpis5")]([])
+skills = Array[ExtResource("2_ldd6l")]([])
+color = Color(0, 0.467413, 1.92523e-07, 1)
+metadata/_custom_type_script = "uid://cukyhyanl175x"

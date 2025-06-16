@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=6 format=3 uid="uid://dqhd5ol1urkxx"]
+
+[ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="1_m38ht"]
+[ext_resource type="Script" uid="uid://byykvb3ax4tv7" path="res://units/skills/skill.gd" id="2_ox65w"]
+[ext_resource type="Script" uid="uid://48arlb6fvnxm" path="res://units/effects/effect.gd" id="3_awf5a"]
+[ext_resource type="Script" uid="uid://bbokyvguxkei" path="res://units/effects/fire_bomb.gd" id="4_ox65w"]
+
+[sub_resource type="Resource" id="Resource_awf5a"]
+script = ExtResource("4_ox65w")
+duration = -10
+metadata/_custom_type_script = "uid://bbokyvguxkei"
+
+[resource]
+script = ExtResource("1_m38ht")
+name = "Demon"
+cost = 80
+max_health = 8
+attack = 20
+defense = 2
+damage_min = 5
+damage_max = 25
+ammo = 0
+initiative = 12
+movement = 5
+start_effects = Array[ExtResource("3_awf5a")]([SubResource("Resource_awf5a")])
+skills = Array[ExtResource("2_ox65w")]([])
+color = Color(1, 0.458614, 0.325367, 1)
+metadata/_custom_type_script = "uid://cukyhyanl175x"

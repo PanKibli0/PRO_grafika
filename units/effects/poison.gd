@@ -31,7 +31,17 @@ func merge_with(other: Effect) -> bool:
 
 	return change
 	
+func on_apply(unit):
+	for effect in unit.effects.active_effects:
+		if effect is EffectPlague:
+			unit.effects.remove_effect(self)
+			return
 
 
 func on_turn_end(unit):
+	for effect in unit.effects.active_effects:
+		if effect is EffectPlague:
+			unit.effects.remove_effect(self)
+			return
+			
 	unit.take_damage(value, true)

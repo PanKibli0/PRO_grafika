@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=6 format=3 uid="uid://dhhf01brexsuk"]
+
+[ext_resource type="Script" uid="uid://cukyhyanl175x" path="res://units/unit_stats.gd" id="1_la8ny"]
+[ext_resource type="Script" uid="uid://byykvb3ax4tv7" path="res://units/skills/skill.gd" id="2_2acgw"]
+[ext_resource type="Script" uid="uid://b3a3ivaigpogk" path="res://units/skills/necromancy.gd" id="3_2acgw"]
+[ext_resource type="Script" uid="uid://48arlb6fvnxm" path="res://units/effects/effect.gd" id="3_r7y2a"]
+
+[sub_resource type="Resource" id="Resource_r7y2a"]
+script = ExtResource("3_2acgw")
+cooldown = 5
+actual_cooldown = 3
+metadata/_custom_type_script = "uid://b3a3ivaigpogk"
+
+[resource]
+script = ExtResource("1_la8ny")
+name = "Necromancer"
+cost = 1600
+max_health = 25
+attack = 14
+defense = 6
+damage_min = 6
+damage_max = 10
+ammo = 5
+initiative = 2
+movement = 4
+start_effects = Array[ExtResource("3_r7y2a")]([])
+skills = Array[ExtResource("2_2acgw")]([SubResource("Resource_r7y2a")])
+color = Color(0, 0.929412, 0, 1)
+metadata/_custom_type_script = "uid://cukyhyanl175x"

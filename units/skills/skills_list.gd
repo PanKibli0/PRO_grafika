@@ -8,9 +8,6 @@ var skills : Array[Skill]
 var skill_info = preload("res://units/skills/skill_info.tscn")
 
 func create_list(active=true):
-	skills = skills.filter(func(s):
-		return s.uses != 0
-	)
 	
 	self.visible = !self.visible
 	if self.visible:

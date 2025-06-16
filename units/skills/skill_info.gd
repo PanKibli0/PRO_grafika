@@ -33,13 +33,15 @@ func setup(s, v_active) -> void:
 	button.disabled = skill.cant_use()
 
 	
-	if not active: 
+	if not active or button.disabled: 
 		for l in lines:
 			l.visible = true
 		return 
 	else:
 		for l in lines:
 			l.visible = false
+
+
 	
 	if button.pressed.is_connected(try_activate):
 		button.pressed.disconnect(try_activate)

@@ -60,15 +60,10 @@ func on_turn_end():
 	unit.actual_stats.ensure_positive_stats()
 	_cleanup_expired()
 
-'''JHEZELI CIE ZAATAKUJE'''
+
 func on_attack(damage_deal,target = null): 
 	for effect in active_effects:
 		effect.on_attack(damage_deal, unit, target)
 	unit.actual_stats.ensure_positive_stats()
 	_cleanup_expired()
 	
-func when_attacked(target = null):
-	for effect in active_effects:
-		effect.when_attacked(unit, target)
-	unit.actual_stats.ensure_positive_stats()
-	_cleanup_expired()

@@ -24,3 +24,8 @@ func reset_skill():
 func set_active_skill(skill):
 	active_skill = skill
 	if GRID: GRID.clear_grid()
+	
+	
+func _input(event):
+	if event.is_action_pressed("ESCAPE"):  
+		get_tree().quit()
