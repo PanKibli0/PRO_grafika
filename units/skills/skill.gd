@@ -6,7 +6,6 @@ var description: String = "DESC"
 var color_text: Color = Color.WHITE
 var color_bg: Color = Color.DIM_GRAY
 
-
 @export var cooldown: int = 5
 @export var actual_cooldown: int = 0
 @export var uses: int = -10

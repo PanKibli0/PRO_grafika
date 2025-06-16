@@ -142,9 +142,6 @@ func death():
 	queue_free()
 	
 	
-	
-	
-	
 func heal(heal_amount: int, other_type := false):
 	if heal_amount <= 0:
 		return
