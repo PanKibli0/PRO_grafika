@@ -105,5 +105,3 @@ label_settings = SubResource("LabelSettings_4s0ev")
 
 [node name="debug" type="Node" parent="."]
 script = ExtResource("9_lcjiy")
-
-[connection signal="S_end_turn" from="Camera/MouseController" to="Units" method="change_active_unit"]
