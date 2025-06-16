@@ -5,7 +5,6 @@ signal S_end_turn
 @onready var direction = %Direction
 @onready var CAMERA =  %Camera
 
-
 var unit: Unit = null
 
 func _hover_input(event):

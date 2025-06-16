@@ -191,8 +191,6 @@ func _unit_death(unit):
 	_end_game()
 
 func _end_game():
-	#return
-	
 	var player_count = 0
 	var enemy_count = 0
 

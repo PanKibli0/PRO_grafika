@@ -149,12 +149,8 @@ func death():
 	damage_d.visible = false
 	
 	queue_free()
-	
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> 7787c54c148a282d06316f1c9083639f7c4d6745
+
 func heal(heal_amount: int, other_type := false):
 	if heal_amount <= 0:
 		return
