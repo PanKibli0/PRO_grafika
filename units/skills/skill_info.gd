@@ -52,6 +52,4 @@ func try_activate() -> void:
 	if skill.cant_use(): return
 	skill.activate()
 	button.disabled = true
-	if skill.uses != 0: setup(skill, active)
-	else: queue_free()
 	
